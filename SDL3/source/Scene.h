@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "Object.h"
+#include "BulletSpawner.h"
 #include "RenderManager.h"
 #include "TextRenderer.h"
 
@@ -9,6 +10,7 @@ protected:
     std::vector<Object*> ui;
     TextRenderer* textRenderer;
     std::vector<Object*> objects;
+    Spawner* spawner;
 public:
     Scene() = default;
     virtual void OnEnter() = 0;

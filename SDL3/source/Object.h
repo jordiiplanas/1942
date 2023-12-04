@@ -33,6 +33,9 @@ public:
 	inline float GetRotation() { return transform->angle; }
 	inline Vector2 GetSize() { return transform->size; }
 
+	inline Vector2 GetCenteredPosition() { return transform->position + transform->size / 2; }
+
+
 	virtual void Destroy () { isPendingDestroy = true; }
 	inline bool IsPendingDestroy () { return isPendingDestroy; }
 

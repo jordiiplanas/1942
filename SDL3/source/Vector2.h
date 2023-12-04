@@ -14,7 +14,6 @@ public:
 	void Normalize()
 	{
 		float length = Magnitude();
-		std::cout << "Length: " << length << std::endl;
 		if (length < NORMALIZATION_THRESHOLD)
 		{
 			x = 0.0f;
