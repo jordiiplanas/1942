@@ -53,10 +53,7 @@ void MainMenu::OnExit()
 
 void MainMenu::Update(float dt)
 {
-    for (Object* o : objects)
-    {
-        o->Update(dt);
-    }
+    Scene::Update(dt);
 
     // Que la imatge es mogui en un cercle que
     // te en el centre al mig de la pantalla i
