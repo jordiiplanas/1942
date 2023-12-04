@@ -1,0 +1,3 @@
+D:\Universidad\Year 2\Programacio en llenguatges interpretats\Apuntes\SDL\tmp\Win32SDLDebug\SDL.vcxproj.MdMergeInputs.cache
+D:\Universidad\Year 2\Programacio en llenguatges interpretats\Apuntes\SDL\tmp\Win32SDLDebug\SDL.vcxproj.cppwinrt_plat.cache
+D:\Universidad\Year 2\Programacio en llenguatges interpretats\Apuntes\SDL\tmp\Win32SDLDebug\SDL.vcxproj.cppwinrt_comp.cache
