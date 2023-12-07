@@ -74,18 +74,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)\binaries\$(PlatformName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\tmp\$(PlatformName)$(ProjectName)$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)\dependencies\SDL2_ttf-2.0.15\include;$(SolutionDir)\dependencies\SDL2_image-2.0.5\include;$(SolutionDir)\dependencies\SDL2-2.0.16\include;$(SolutionDir)\dependencies\SDL2_mixer-2.0.4\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)\binaries\$(PlatformName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\tmp\$(PlatformName)$(ProjectName)$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)\dependencies\SDL2_ttf-2.0.15\include;$(SolutionDir)\dependencies\SDL2_image-2.0.5\include;$(SolutionDir)\dependencies\SDL2-2.0.16\include;$(SolutionDir)\dependencies\SDL2_mixer-2.0.4\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)\binaries\$(PlatformName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\tmp\$(PlatformName)$(ProjectName)$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)\dependencies\SDL2_ttf-2.0.15\include;$(SolutionDir)\dependencies\SDL2_image-2.0.5\include;$(SolutionDir)\dependencies\SDL2-2.0.16\include;$(SolutionDir)\dependencies\SDL2_mixer-2.0.4\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)\binaries\$(PlatformName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\tmp\$(PlatformName)$(ProjectName)$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)\dependencies\SDL2_ttf-2.0.15\include;$(SolutionDir)\dependencies\SDL2_image-2.0.5\include;$(SolutionDir)\dependencies\SDL2-2.0.16\include;$(SolutionDir)\dependencies\SDL2_mixer-2.0.4\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -344,6 +348,7 @@ xcopy /d /y "$(SolutionDir)\resources\*.*" "$(TargetDir)\resources\"</Command>
       <LinkCompiled>true</LinkCompiled>
       <AdditionalOptions> /bigobj /await</AdditionalOptions>
     </ClCompile>
+    <ClCompile Include="source\Player.cpp" />
     <ClCompile Include="source\Renderer.cpp">
       <CompileAsWinRT>false</CompileAsWinRT>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -498,21 +503,24 @@ xcopy /d /y "$(SolutionDir)\resources\*.*" "$(TargetDir)\resources\"</Command>
       <LinkCompiled>true</LinkCompiled>
       <AdditionalOptions> /bigobj /await</AdditionalOptions>
     </ClCompile>
+    <ClCompile Include="source\Scene.cpp" />
+    <ClCompile Include="source\Spawner.cpp" />
     <ClCompile Include="source\TextRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\AABB.h" />
     <ClInclude Include="source\Bullet.h" />
-    <ClInclude Include="source\BulletSpawner.h" />
     <ClInclude Include="source\ImageRenderer.h" />
     <ClInclude Include="source\InputManager.h" />
     <ClInclude Include="source\MainMenu.h" />
     <ClInclude Include="source\Object.h" />
+    <ClInclude Include="source\Player.h" />
     <ClInclude Include="source\Renderer.h" />
     <ClInclude Include="source\RenderManager.h" />
     <ClInclude Include="source\Rigidbody.h" />
     <ClInclude Include="source\Scene.h" />
     <ClInclude Include="source\SceneManager.h" />
+    <ClInclude Include="source\Spawner.h" />
     <ClInclude Include="source\TextRenderer.h" />
     <ClInclude Include="source\TimeManager.h" />
     <ClInclude Include="source\Transform.h" />

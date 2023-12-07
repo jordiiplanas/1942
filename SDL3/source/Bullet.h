@@ -14,6 +14,15 @@ public:
 	{
 		rigidbody->SetVelocity(direction * speed);
 	}
+
+	virtual void Update(float deltaTime) override
+	{
+		Object::Update(deltaTime);
+		if (transform->position.y <= 0)
+		{
+			Destroy();
+		}
+	}
 	
 
 };

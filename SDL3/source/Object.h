@@ -9,7 +9,7 @@ class Object
 
 protected:
 	ImageRenderer* renderer;
-
+	SDL_Renderer* sdlRenderer;
 	// Transform
 	Transform* transform;
 	Rigidbody* rigidbody;
@@ -39,7 +39,12 @@ public:
 	virtual void Destroy () { isPendingDestroy = true; }
 	inline bool IsPendingDestroy () { return isPendingDestroy; }
 
-	virtual void Update(float dt) { rigidbody->Update(dt); }
+	virtual void Update(float dt) 
+	{ 
+		if (isPendingDestroy) delete this;
+
+		rigidbody->Update(dt); 
+	}
 	Rigidbody* GetRigidbody() { return rigidbody; }
 
 

@@ -1,8 +1,8 @@
 ﻿#pragma once
 #include "Object.h"
-#include "BulletSpawner.h"
 #include "RenderManager.h"
 #include "TextRenderer.h"
+#include "Spawner.h"
 
 class Scene
 {
@@ -11,23 +11,12 @@ protected:
     TextRenderer* textRenderer;
     std::vector<Object*> objects;
     Spawner* spawner;
+
 public:
-    Scene() = default;
+    Scene();
     virtual void OnEnter() = 0;
     virtual void OnExit() = 0;
     virtual void Update(float dt) = 0;
-    virtual void Render()
-    {
-        for (Object* o : objects)
-        {
-            o->Render(RENDERMANAGER.GetRenderer());
-        }
-
-        for (Object* o : ui)
-        {
-            o->Render(RENDERMANAGER.GetRenderer());
-        }
-
-        textRenderer->Render(RENDERMANAGER.GetRenderer());
-    }
+    inline void AddObject(Object* o) {	objects.push_back(o); }
+    virtual void Render();
 };

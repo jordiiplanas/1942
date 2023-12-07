@@ -5,7 +5,8 @@ Object::Object(std::string path, Vector2 size, Vector2 sourceOffset, Vector2 sou
 
 	transform = new Transform();
 	transform->size = size;
-	renderer = new ImageRenderer(transform, path, sourceOffset, sourceSize, sdlRenderer);
+	this->sdlRenderer = sdlRenderer;
+	renderer = new ImageRenderer(transform, path, sourceOffset, sourceSize, this->sdlRenderer);
 	isPendingDestroy = false;
 
 	rigidbody = new Rigidbody(transform);
@@ -40,5 +41,4 @@ Object::~Object()
 {
 	delete renderer;
 	delete transform;
-	
 }

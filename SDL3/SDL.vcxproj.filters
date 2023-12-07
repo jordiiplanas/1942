@@ -42,6 +42,15 @@
     <ClCompile Include="source\TextRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Spawner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\InputManager.h">
@@ -86,10 +95,13 @@
     <ClInclude Include="source\TextRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\BulletSpawner.h">
+    <ClInclude Include="source\Bullet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\Bullet.h">
+    <ClInclude Include="source\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Spawner.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
