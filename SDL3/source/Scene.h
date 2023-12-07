@@ -11,6 +11,7 @@ protected:
     TextRenderer* textRenderer;
     std::vector<Object*> objects;
     Spawner* spawner;
+    SDL_Renderer* renderer;
 
 public:
     Scene();

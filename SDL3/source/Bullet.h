@@ -18,7 +18,7 @@ public:
 	virtual void Update(float deltaTime) override
 	{
 		Object::Update(deltaTime);
-		if (transform->position.y <= 0)
+		if (transform->position.y <= -transform->size.y)
 		{
 			Destroy();
 		}

@@ -11,7 +11,7 @@ MainMenu::MainMenu()
         Vector2(100, 64),
         Vector2(5, 6),
         Vector2(26, 16),
-        RENDERMANAGER.GetRenderer());
+        renderer);
     
         
     player->GetRigidbody()->SetLinearDrag(5);
@@ -44,7 +44,6 @@ void MainMenu::Update(float dt)
             objects.erase(std::remove(objects.begin(), objects.end(), o), objects.end());
 		}
     }
-
 
     player->Update(dt);
 
@@ -81,5 +80,15 @@ void MainMenu::Update(float dt)
     inputForce = inputForce * 30;
     player->GetRigidbody()->AddForce(inputForce);
 
+}
+
+void MainMenu::Render()
+{
+	for (Object* o : objects)
+	{
+		o->Render(renderer);
+	}
+
+	player->Render(renderer);
 }
 
