@@ -21,7 +21,7 @@ void RenderManager::Init()
 
 void RenderManager::InitSDL()
 {
-	int result = SDL_Init(SDL_INIT_VIDEO);
+	int result = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 
 	if (result < 0)
 	{

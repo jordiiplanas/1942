@@ -11,14 +11,16 @@
 #include "Vector2.h"
 #include "AABB.h"
 #include "MainMenu.h"
-
+#include "GameplayScene.h"
 
 int main(int argc, char* argv[])
 {
 	RENDERMANAGER.Init();
 
-	SCENEMANAGER.AddScene("Main Menu", new MainMenu());
-	SCENEMANAGER.SetCurrentScene("Main Menu");
+	SCENEMANAGER.AddScene("MainMenu", new MainMenu());
+	SCENEMANAGER.AddScene("Gameplay", new GameplayScene());
+	SCENEMANAGER.SetCurrentScene("MainMenu");
+	SCENEMANAGER.GetCurrentScene()->OnEnter();
 
 	
 	while (!inputManager.GetQuitEvent())
@@ -41,6 +43,13 @@ int main(int argc, char* argv[])
 
 			//Time control
 			TIME.ResetDeltaTime();
+		
+			//Change of scene
+			if (SCENEMANAGER.GetCurrentScene()->IsFinished())
+			{
+				SCENEMANAGER.SetCurrentScene(SCENEMANAGER.GetCurrentScene()->OnExit());
+				SCENEMANAGER.GetCurrentScene()->OnEnter();
+			}
 		}
 		//std::cout << inputManager.GetMouseX() << " " << inputManager.GetMouseY() << std::endl;
 
