@@ -6,6 +6,26 @@ Scene::Scene()
 	spawner = new Spawner();
 }
 
+std::string Scene::OnExit()
+{
+    isFinished = false;
+    return nextScene;
+}
+
+void Scene::Update(float dt)
+{
+	for (Object* o : objects)
+	{
+		o->Update(dt);
+	}
+
+	for (Object* o : ui)
+	{
+		o->Update(dt);
+	}
+
+}
+
 void Scene::Render()
 {
     for (Object* o : objects)

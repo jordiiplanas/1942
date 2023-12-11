@@ -16,6 +16,10 @@ MainMenu::MainMenu()
         
     player->GetRigidbody()->SetLinearDrag(5);
     player->SetPosition(Vector2(256, 256));
+
+    sfxID = AUDIOMANAGER.LoadClip("resources/audios/rave.wav");
+    AUDIOMANAGER.PlayClip(sfxID);
+
 }
 
 MainMenu::~MainMenu()
@@ -25,18 +29,15 @@ MainMenu::~MainMenu()
 
 void MainMenu::OnEnter()
 {
-
+    nextScene = "Gameplay";
 }
 
-void MainMenu::OnExit()
-{
-
-}
 
 void MainMenu::Update(float dt)
 {
     for (Object* o : objects)
     {
+
         o->Update(dt);
         if (o->IsPendingDestroy()) 		
         {
@@ -75,6 +76,11 @@ void MainMenu::Update(float dt)
     {
         spawner->InsertObject(player->SpawnBullet());
     }
+
+    isFinished = inputManager.CheckKeyState(SDLK_ESCAPE, KeyState::PRESSED);
+
+    sfxID = AUDIOMANAGER.LoadClip("resources/audios/rave.wav");
+    AUDIOMANAGER.FreeClip(sfxID);
 
     inputForce.Normalize();
     inputForce = inputForce * 30;
