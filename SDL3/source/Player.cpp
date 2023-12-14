@@ -7,7 +7,7 @@ Player::Player(std::string path, Vector2 size, Vector2 sourceOffset,
 Bullet* Player::SpawnBullet()
 {
 	Bullet* bullet = new Bullet(
-		200,
+		500,
 		Vector2(0, -1),
 		"resources/1942.png",
 		Vector2(5, 40),

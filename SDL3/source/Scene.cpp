@@ -3,7 +3,7 @@
 Scene::Scene()
 {
     renderer = RENDERMANAGER.GetRenderer();
-	spawner = new Spawner();
+
 }
 
 std::string Scene::OnExit()

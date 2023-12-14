@@ -19,7 +19,7 @@ int main(int argc, char* argv[])
 
 	SCENEMANAGER.AddScene("MainMenu", new MainMenu());
 	SCENEMANAGER.AddScene("Gameplay", new GameplayScene());
-	SCENEMANAGER.SetCurrentScene("MainMenu");
+	SCENEMANAGER.SetCurrentScene("Gameplay");
 	SCENEMANAGER.GetCurrentScene()->OnEnter();
 
 	

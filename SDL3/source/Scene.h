@@ -3,6 +3,8 @@
 #include "RenderManager.h"
 #include "TextRenderer.h"
 #include "Spawner.h"
+#include "InputManager.h"
+#include "AudioManager.h"
 
 class Scene
 {
@@ -13,7 +15,6 @@ protected:
     bool isFinished;
     std::string nextScene;
 
-    Spawner* spawner;
     SDL_Renderer* renderer;
 
 public:

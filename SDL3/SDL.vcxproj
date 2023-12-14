@@ -192,6 +192,8 @@ xcopy /d /y "$(SolutionDir)\resources\*.*" "$(TargetDir)\resources\"</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\AudioManager.cpp" />
+    <ClCompile Include="source\Enemy.cpp" />
+    <ClCompile Include="source\GameplayScene.cpp" />
     <ClCompile Include="source\ImageRenderer.cpp" />
     <ClCompile Include="source\InputManager.cpp">
       <CompileAsWinRT>false</CompileAsWinRT>
@@ -513,6 +515,7 @@ xcopy /d /y "$(SolutionDir)\resources\*.*" "$(TargetDir)\resources\"</Command>
     <ClInclude Include="source\AudioManager.h" />
     <ClInclude Include="source\Bullet.h" />
     <ClInclude Include="source\GameplayScene.h" />
+    <ClInclude Include="source\Enemy.h" />
     <ClInclude Include="source\ImageRenderer.h" />
     <ClInclude Include="source\InputManager.h" />
     <ClInclude Include="source\MainMenu.h" />

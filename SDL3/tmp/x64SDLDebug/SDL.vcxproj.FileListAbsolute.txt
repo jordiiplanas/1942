@@ -1,3 +1,6 @@
 D:\Universidad\Repositorios\1942\SDL3\tmp\x64SDLDebug\SDL.vcxproj.MdMergeInputs.cache
 D:\Universidad\Repositorios\1942\SDL3\tmp\x64SDLDebug\SDL.vcxproj.cppwinrt_plat.cache
 D:\Universidad\Repositorios\1942\SDL3\tmp\x64SDLDebug\SDL.vcxproj.cppwinrt_comp.cache
+C:\Users\aleja\OneDrive\Escritorio\GameJamProyect\1942\SDL3\tmp\x64SDLDebug\SDL.vcxproj.MdMergeInputs.cache
+C:\Users\aleja\OneDrive\Escritorio\GameJamProyect\1942\SDL3\tmp\x64SDLDebug\SDL.vcxproj.cppwinrt_plat.cache
+C:\Users\aleja\OneDrive\Escritorio\GameJamProyect\1942\SDL3\tmp\x64SDLDebug\SDL.vcxproj.cppwinrt_comp.cache
