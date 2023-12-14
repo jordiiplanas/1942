@@ -1,3 +1,0 @@
-O:\Universidad\Repositorios\1942\SDL3\tmp\x64SDLDebug\SDL.vcxproj.MdMergeInputs.cache
-O:\Universidad\Repositorios\1942\SDL3\tmp\x64SDLDebug\SDL.vcxproj.cppwinrt_plat.cache
-O:\Universidad\Repositorios\1942\SDL3\tmp\x64SDLDebug\SDL.vcxproj.cppwinrt_comp.cache
