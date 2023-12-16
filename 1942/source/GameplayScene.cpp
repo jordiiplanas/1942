@@ -2,7 +2,7 @@
 
 void GameplayScene::Update(float dt)
 {
-	Scene::Update(dt);
+	//Scene::Update(dt);
 	isFinished = inputManager.CheckKeyState(SDLK_ESCAPE, PRESSED);
 
     for (Object* o : objects)
@@ -11,9 +11,19 @@ void GameplayScene::Update(float dt)
         if (o->IsPendingDestroy())
         {
             objects.erase(std::remove(objects.begin(), objects.end(), o), objects.end());
-            delete o;           
+            delete o;
         }
     } 
+
+
+    for (Object* o : objects)
+    {
+        for (Object* a : objects)
+        {
+           // if (o->GetRigidbody()->CheckCollision(a->GetRigidbody()))
+              //  o->OnCollision();
+        }
+    }
 
     if (spawner.CanSpawn())
     {

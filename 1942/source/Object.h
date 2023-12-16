@@ -43,9 +43,10 @@ public:
 		if (isPendingDestroy) delete this;
 
 		rigidbody->Update(dt); 
-		renderer->Update(dt);
 	}
 	Rigidbody* GetRigidbody() { return rigidbody; }
+
+//	virtual void OnCollisionEnter(Object* other);
 
 
 };
