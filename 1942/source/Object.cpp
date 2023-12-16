@@ -34,6 +34,10 @@ void Object::SetRotation(float rotation)
 	this->transform->angle = rotation;
 }
 
+void Object::OnCollisionEnter(Object* other)
+{
+}
+
 
 
 Object::~Object()

@@ -20,8 +20,8 @@ void GameplayScene::Update(float dt)
     {
         for (Object* a : objects)
         {
-           // if (o->GetRigidbody()->CheckCollision(a->GetRigidbody()))
-              //  o->OnCollision();
+            if (o->GetRigidbody()->CheckCollision(a->GetRigidbody()))
+              o->OnCollisionEnter(a);
         }
     }
 

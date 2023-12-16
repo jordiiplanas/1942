@@ -38,6 +38,7 @@ public:
 	virtual void Destroy () { isPendingDestroy = true; }
 	inline bool IsPendingDestroy () { return isPendingDestroy; }
 
+
 	virtual void Update(float dt) 
 	{ 
 		if (isPendingDestroy) delete this;
@@ -46,7 +47,7 @@ public:
 	}
 	Rigidbody* GetRigidbody() { return rigidbody; }
 
-//	virtual void OnCollisionEnter(Object* other);
+	virtual void OnCollisionEnter(Object* other);
 
 
 };

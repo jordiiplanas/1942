@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\AudioManager.cpp" />
+    <ClCompile Include="source\Bullet.cpp" />
     <ClCompile Include="source\Enemy.cpp" />
     <ClCompile Include="source\GameplayScene.cpp" />
     <ClCompile Include="source\ImageRenderer.cpp" />

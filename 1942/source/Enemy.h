@@ -1,5 +1,7 @@
 #pragma once
 #include "Object.h"
+#include "Bullet.h"
+#include "Player.h"
 
 
 class Enemy : public Object
@@ -12,7 +14,7 @@ protected:
 public:	
 	Enemy(int health, int score,std::string path, Vector2 size, Vector2 sourceOffset, Vector2 sourceSize);
 	~Enemy();
-	//virtual void Update(float dt) override;
+	virtual void Update(float dt) override;
 	//virtual void Shoot();
-	//virtual void OnCollisionEnter(Object* other) override;
+	virtual void OnCollisionEnter(Object* other) override;
 };

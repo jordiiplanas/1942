@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Object.h"
+#include "Enemy.h"
 
 class Bullet : public Object
 {
@@ -22,7 +23,6 @@ public:
 		{
 			Destroy();
 		}
-	}
-	
-
+	}	
+	virtual void OnCollisionEnter(Object* other) override;
 };
