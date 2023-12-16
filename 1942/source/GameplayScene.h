@@ -29,10 +29,12 @@ public:
 		player->SetPosition(Vector2(250, 350));
 		objects.push_back(player);
 
-		objects.push_back(new Enemy(2, 20, "resources/1942.png",
+		objects.push_back(
+			new Enemy(2, 20, "resources/1942.png",
 			Vector2(100, 64),
 			Vector2(5, 200),
 			Vector2(15, 14)));
+		objects[1]->SetPosition(Vector2(250, 50));
 	}
 
 	void OnEnter() override {}

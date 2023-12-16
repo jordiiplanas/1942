@@ -12,7 +12,7 @@ protected:
 	// Transform
 	Transform* transform;
 	Rigidbody* rigidbody;
-	bool isPendingDestroy;
+	bool isPendingDestroy = false;
 
 public:
 	Object(std::string path, Vector2 size, Vector2 sourceOffset, Vector2 sourceSize);

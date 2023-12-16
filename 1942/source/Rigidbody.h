@@ -42,9 +42,6 @@ public:
     velocity = velocity * (1.0 / (1.0 + dt * linearDrag));
     angularVelocity = angularVelocity * (1.0 / (1.0 + dt * angularDrag));
 
-
-
-
     // other DRAG BETWEEN 0 AND 1
     // velocity = velocity * (1.0f - drag)
 

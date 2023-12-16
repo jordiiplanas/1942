@@ -2,26 +2,36 @@
 
 void GameplayScene::Update(float dt)
 {
-	//Scene::Update(dt);
 	isFinished = inputManager.CheckKeyState(SDLK_ESCAPE, PRESSED);
 
+ 
     for (Object* o : objects)
     {
-        o->Update(dt);
-        if (o->IsPendingDestroy())
+        if (!o->IsPendingDestroy())
         {
-            objects.erase(std::remove(objects.begin(), objects.end(), o), objects.end());
-            delete o;
+            o->Update(dt);
+            continue;
         }
-    } 
 
+        
+        if (dynamic_cast<Bullet*>(o))
+        {
+            int a = 2;
+        }
+        objects.erase(std::remove(objects.begin(), objects.end(), o), objects.end());
+        delete o;
+        
+        
+    }
 
     for (Object* o : objects)
     {
         for (Object* a : objects)
         {
+            if (o == a)
+				continue;
             if (o->GetRigidbody()->CheckCollision(a->GetRigidbody()))
-              o->OnCollisionEnter(a);
+                o->OnCollisionEnter(a);
         }
     }
 

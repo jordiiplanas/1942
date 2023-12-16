@@ -9,7 +9,9 @@ Object::Object(std::string path, Vector2 size, Vector2 sourceOffset, Vector2 sou
 	isPendingDestroy = false;
 
 	rigidbody = new Rigidbody(transform);
-	rigidbody->AddCollider(new AABB(transform->position, Vector2(size.x,size.y)));
+	std::cout << "TopPosition: " << transform->position.x << " " << transform->position.y
+			<< " Size: " << size.x << " " << size.y << std::endl;
+	rigidbody->AddCollider(new AABB(transform->position, Vector2(size.x, size.y)));
 
 }
 
