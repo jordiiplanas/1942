@@ -66,6 +66,7 @@ public:
   {
     colliders.push_back(collider);
   }
+
   bool CheckCollision (const Rigidbody* other)
   {
     for (AABB* collider : colliders)
