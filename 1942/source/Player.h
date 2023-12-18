@@ -9,5 +9,5 @@ public:
 	Player(std::string path, Vector2 size, Vector2 sourceOffset, Vector2 sourceSize);
 	~Player();
 
-	Object* SpawnBullet();
+	Object* SpawnBullet(Vector2 position);
 };

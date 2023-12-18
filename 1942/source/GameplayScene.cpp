@@ -61,7 +61,8 @@ void GameplayScene::Update(float dt)
 
     if (inputManager.CheckKeyState(SDLK_SPACE, PRESSED))
     {
-        spawner.InsertObject(player->SpawnBullet());
+        spawner.InsertObject(player->SpawnBullet(Vector2(8,-40)));
+        spawner.InsertObject(player->SpawnBullet(Vector2(-8,-40)));
     }
 
     isFinished = inputManager.CheckKeyState(SDLK_ESCAPE, KeyState::PRESSED);
