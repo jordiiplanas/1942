@@ -35,9 +35,9 @@ protected:
 		{
 			frameTime = 1.0f / fps;
 		}
-		void Update(float deltaTime) 
+		void Update(float dt) override
 		{
-			currentFrameTime += deltaTime;
+			currentFrameTime += dt;
 			
 			if (currentFrameTime >= frameTime)
 			{

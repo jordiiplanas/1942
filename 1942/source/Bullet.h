@@ -1,18 +1,19 @@
 #pragma once
 
-#include "Object.h"
+#include "GameObject.h"
 #include "Enemy.h"
 
-class Bullet : public Object
+class Bullet : public GameObject
 {
 private:
 	Vector2 direction = Vector2(0.0f, -1.0f);
 public:
 
-	Bullet(float speed, Vector2 direction,
-		std::string path, Vector2 size, Vector2 sourceOffset, Vector2 sourceSize)
-		: Object(path, size, sourceOffset, sourceSize), direction(direction)
+	Bullet(float speed, Vector2 direction, Vector2 size)
+		: GameObject(size), direction(direction)
 	{
+		renderers.emplace("idle", new ImageRenderer(transform, Vector2(5, 6), Vector2(25, 16)));
+		renderer = renderers["idle"];
 		rigidbody->SetVelocity(direction * speed);
 	}
 

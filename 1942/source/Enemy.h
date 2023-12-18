@@ -1,10 +1,10 @@
 #pragma once
-#include "Object.h"
+#include "GameObject.h"
 #include "Bullet.h"
 #include "Player.h"
 
 
-class Enemy : public Object
+class Enemy : public GameObject
 {
 protected:
 	int health;

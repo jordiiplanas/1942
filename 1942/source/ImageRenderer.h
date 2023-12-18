@@ -5,6 +5,7 @@ class ImageRenderer : public Renderer
 {
 
 public:
+	virtual void Update(float dt) override {}
 
 	ImageRenderer(Transform* transform, Vector2 sourceOffset, Vector2 sourceSize) 
 		: Renderer(transform) 
@@ -33,11 +34,6 @@ public:
 		destRect.y -= destRect.h / 2;
 
 		flipMode = SDL_FLIP_NONE;
-
-	}
-
-
-	
-	
+	}	
 
 };

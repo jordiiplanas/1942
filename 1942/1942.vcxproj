@@ -38,10 +38,10 @@
   <ItemGroup>
     <ClInclude Include="source\AABB.h" />
     <ClInclude Include="source\AnimatedImageRenderer.h" />
-    <ClInclude Include="source\AnimatedObject.h" />
     <ClInclude Include="source\AudioManager.h" />
     <ClInclude Include="source\Bullet.h" />
     <ClInclude Include="source\Enemy.h" />
+    <ClInclude Include="source\GameObject.h" />
     <ClInclude Include="source\GameplayScene.h" />
     <ClInclude Include="source\ImageRenderer.h" />
     <ClInclude Include="source\InputManager.h" />

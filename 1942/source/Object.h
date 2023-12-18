@@ -15,7 +15,7 @@ protected:
 	bool isPendingDestroy = false;
 
 public:
-	Object(std::string path, Vector2 size, Vector2 sourceOffset, Vector2 sourceSize);
+	Object(std::string path, Vector2 size);
 	~Object();
 
 	// Constructor
@@ -42,7 +42,7 @@ public:
 	virtual void Update(float dt) 
 	{ 
 		if (isPendingDestroy) delete this;
-
+		renderer->Update(dt);
 		rigidbody->Update(dt); 
 	}
 	Rigidbody* GetRigidbody() { return rigidbody; }

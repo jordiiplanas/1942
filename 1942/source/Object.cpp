@@ -1,11 +1,10 @@
 #include "Object.h"
 
-Object::Object(std::string path, Vector2 size, Vector2 sourceOffset, Vector2 sourceSize)
+Object::Object(std::string path, Vector2 size)
 {
-
 	transform = new Transform();
 	transform->size = size;
-	renderer = new ImageRenderer(transform, sourceOffset, sourceSize);
+	//renderer = new ImageRenderer(transform, sourceOffset, sourceSize);
 	isPendingDestroy = false;
 
 	rigidbody = new Rigidbody(transform);

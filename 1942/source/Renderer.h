@@ -31,11 +31,7 @@ public:
 		this->transform = transform;
 	}
 
-	virtual void Render(SDL_Renderer* renderer);
-
-	
-
+	virtual void Update(float dt) = 0;
+	virtual void Render(SDL_Renderer* renderer);	
 	void SetPosition(Vector2 position, bool centered = true);
-
-
 };

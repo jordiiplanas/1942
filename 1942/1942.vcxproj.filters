@@ -125,7 +125,7 @@
     <ClInclude Include="source\AnimatedImageRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\AnimatedObject.h">
+    <ClInclude Include="source\GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -14,6 +14,8 @@ protected:
 	SDL_Color color;
 
 public:
+	virtual void Update(float dt) {}
+
 	void SetText(std::string text, int pointSize, SDL_Color color);
 	TextRenderer(
 		std::string text,
