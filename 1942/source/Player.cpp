@@ -1,8 +1,12 @@
 #include "Player.h"
 
-Player::Player(std::string path, Vector2 size, Vector2 sourceOffset,
-	Vector2 sourceSize)
-	: Object(path, size, sourceOffset, sourceSize) {}
+Player::Player(Vector2 position)
+	: Object("resources/1942.png",
+		Vector2(50, 32),
+		Vector2(5, 6),
+		Vector2(26, 16)) {
+	SetPosition(position); rigidbody->SetLinearDrag(10);
+}
 
 Object* Player::SpawnBullet(Vector2 position)
 {

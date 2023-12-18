@@ -1,7 +1,11 @@
 #include "Enemy.h"
 
-Enemy::Enemy(int health, int score, std::string path, Vector2 size, Vector2 sourceOffset, Vector2 sourceSize)
-	: Object(path, size, sourceOffset, sourceSize), health(health), score(score) {}
+Enemy::Enemy(Vector2 position)
+	: Object( "resources/1942.png",
+		Vector2(50, 32),
+		Vector2(5, 200),
+		Vector2(15, 14)) {
+	SetPosition(position); health = 2; score = 100; }
 
 void Enemy::Update(float dt)
 {
