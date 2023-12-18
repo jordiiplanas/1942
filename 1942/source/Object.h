@@ -42,8 +42,8 @@ public:
 	virtual void Update(float dt) 
 	{ 
 		if (isPendingDestroy) delete this;
-		renderer->Update(dt);
 		rigidbody->Update(dt); 
+		renderer->Update(dt);
 	}
 	Rigidbody* GetRigidbody() { return rigidbody; }
 

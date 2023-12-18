@@ -20,8 +20,6 @@ protected:
 			Transform* transform,
 			Vector2 sourceOffset,
 			Vector2 sourceSize,
-			std::string path,
-			Vector2 size,
 			std::vector<Vector2> framesDelta,
 			bool looping,
 			int fps
@@ -33,7 +31,7 @@ protected:
 			currentFrameTime(0.0f),
 			initialSourceOffset(sourceOffset)
 		{
-			frameTime = 1.0f / fps;
+			frameTime = 1.0f / (float)fps;
 		}
 		void Update(float dt) override
 		{
@@ -53,7 +51,11 @@ protected:
 			}
 			sourceRect.x = initialSourceOffset.x + framesDelta[currentFrame].x;
 			sourceRect.y = initialSourceOffset.y + framesDelta[currentFrame].y;
-
 		}
 		
+		virtual void Reset() override
+		{
+			currentFrame = 0;
+			currentFrameTime = 0.0f;
+		}
 };
