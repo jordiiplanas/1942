@@ -25,7 +25,7 @@ public:
 			Vector2(5, 6),
 			Vector2(26, 16)
 		);
-		player->GetRigidbody()->SetLinearDrag(4);
+		player->GetRigidbody()->SetLinearDrag(10);
 		player->SetPosition(Vector2(250, 350));
 		objects.push_back(player);
 

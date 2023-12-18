@@ -42,21 +42,21 @@ void GameplayScene::Update(float dt)
 
     Vector2 inputForce = Vector2();
 
-    if (inputManager.CheckKeyState(SDLK_w, HOLD))
+    if (inputManager.CheckKeyState(SDLK_w, HOLD) && objects[0]->GetPosition().y > 15)
     {
-        inputForce.y -= 1;
+        inputForce.y -= 20;
     }
-    if (inputManager.CheckKeyState(SDLK_s, HOLD))
+    if (inputManager.CheckKeyState(SDLK_s, HOLD) && objects[0]->GetPosition().y < 470)
     {
-        inputForce.y += 1;
+        inputForce.y += 20;
     }
-    if (inputManager.CheckKeyState(SDLK_a, HOLD))
+    if (inputManager.CheckKeyState(SDLK_a, HOLD) && objects[0]->GetPosition().x> 15)
     {
-        inputForce.x -= 1;
+        inputForce.x -= 20;
     }
-    if (inputManager.CheckKeyState(SDLK_d, HOLD))
+    if (inputManager.CheckKeyState(SDLK_d, HOLD) && objects[0]->GetPosition().x < 450)
     {
-        inputForce.x += 1;
+        inputForce.x += 20;
     }
 
     if (inputManager.CheckKeyState(SDLK_SPACE, PRESSED))
