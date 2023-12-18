@@ -20,7 +20,7 @@ private:
 	TimeManager ()
 	{
 		deltaTime = 0.0f;
-		previousGameTimeInSeconds = (float)SDL_GetPerformanceCounter() / (float)SDL_GetPerformanceFrequency();
+		previousGameTimeInSeconds = (double)SDL_GetTicks() / 1000.0f;
 		FPS = 60;
 		frameTime = 1.f / (float)FPS;
 	}
@@ -35,7 +35,7 @@ private:
 
 void TimeManager::Update()
 {
-	float gameTime = (float)SDL_GetPerformanceCounter() / (float)SDL_GetPerformanceFrequency();
+	float gameTime = (double)SDL_GetTicks() / 1000.0f;
 
 	deltaTime += gameTime - previousGameTimeInSeconds;
 	previousGameTimeInSeconds = gameTime;
