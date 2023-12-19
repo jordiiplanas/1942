@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+<<<<<<< HEAD:SDL3/tmp/x64SDLDebug/SDL.exe.recipe
+      <FullPath>C:\Users\aleja\OneDrive\Escritorio\GameJamProyect\1942\SDL3\binaries\x64Debug\SDL.exe</FullPath>
+=======
+      <FullPath>C:\Users\aleja\OneDrive\Escritorio\GameJamProyect\1942\1942\binaries\x64Debug\1942.exe</FullPath>
+>>>>>>> main:1942/tmp/1942x64Debug/1942.exe.recipe
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles />
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>
