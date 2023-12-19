@@ -12,7 +12,7 @@ public:
 	Bullet(float speed, Vector2 direction, Vector2 size)
 		: GameObject(size), direction(direction)
 	{
-		renderers.emplace("idle", new ImageRenderer(transform, Vector2(5, 6), Vector2(25, 16)));
+		renderers.emplace("idle", new ImageRenderer(transform, Vector2(103, 84), Vector2(11, 10)));
 		renderer = renderers["idle"];
 		rigidbody->SetVelocity(direction * speed);
 	}

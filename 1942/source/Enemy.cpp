@@ -3,7 +3,7 @@
 Enemy::Enemy(Vector2 position)
 	: GameObject(Vector2(100, 64)) 
 {
-	renderers.emplace("idle", new ImageRenderer(transform, Vector2(5, 6), Vector2(25, 16)));
+	renderers.emplace("idle", new ImageRenderer(transform, Vector2(5, 200), Vector2(15, 14)));
 	renderer = renderers["idle"];
 	SetPosition(position); health = 2; score = 100; SetScale(Vector2(0.5f, 0.5f));
 }
