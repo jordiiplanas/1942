@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "Scene.h"
+#include "SceneManager.h"
 #include "Enemy.h"
 #include "Player.h"
 #include "AudioManager.h"

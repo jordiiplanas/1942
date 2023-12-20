@@ -1,5 +1,17 @@
 #include "GameplayScene.h"
 
+void GameplayScene::OnEnter()
+{
+    nextScene = "MainMenu";
+    player = new Player(Vector2(250, 350));
+    objects.push_back(new Background(Vector2(512, 512), 60));
+    objects.push_back(new Background(Vector2(512, 512), 60));
+    objects[1]->SetPosition(Vector2(0, -512));
+    objects.push_back(player);
+    objects.push_back(new Enemy(Vector2(250, 50)));
+
+}
+
 void GameplayScene::Update(float dt)
 {
 	isFinished = inputManager.CheckKeyState(SDLK_ESCAPE, PRESSED);
@@ -12,16 +24,8 @@ void GameplayScene::Update(float dt)
             o->Update(dt);
             continue;
         }
-
-        
-        if (dynamic_cast<Bullet*>(o))
-        {
-            int a = 2;
-        }
         objects.erase(std::remove(objects.begin(), objects.end(), o), objects.end());
         delete o;
-        
-        
     }
 
     for (Object* o : objects)
@@ -42,20 +46,20 @@ void GameplayScene::Update(float dt)
 
     Vector2 inputForce = Vector2();
 
-    if (inputManager.CheckKeyState(SDLK_w, HOLD) && objects[0]->GetPosition().y > 15)
+    if (inputManager.CheckKeyState(SDLK_w, HOLD) && player->GetPosition().y > 15)
     {
         inputForce.y -= 1;
     }
-    else if (inputManager.CheckKeyState(SDLK_s, HOLD) && objects[0]->GetPosition().y < 470)
+    else if (inputManager.CheckKeyState(SDLK_s, HOLD) && player->GetPosition().y < 470)
     {
         inputForce.y += 1;
     }
-     if (inputManager.CheckKeyState(SDLK_a, HOLD) && objects[0]->GetPosition().x > 15)
+     if (inputManager.CheckKeyState(SDLK_a, HOLD) && player->GetPosition().x > 15)
     {
         inputForce.x -= 1;
         player->ChangeAnimation("left");
     }
-    else if (inputManager.CheckKeyState(SDLK_d, HOLD) && objects[0]->GetPosition().x < 450)
+    else if (inputManager.CheckKeyState(SDLK_d, HOLD) && player->GetPosition().x < 450)
     {
         inputForce.x += 1;
         player->ChangeAnimation("right");
