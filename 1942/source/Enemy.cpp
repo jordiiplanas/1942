@@ -2,7 +2,7 @@
 
 Enemy::Enemy(Vector2 position)
 	: GameObject(Vector2(100, 64)) 
-{
+{	
 	renderers.emplace("idle", new ImageRenderer(transform, Vector2(5, 200), Vector2(15, 14)));
 	renderer = renderers["idle"];
 	SetPosition(position); health = 2; score = 100; SetScale(Vector2(0.5f, 0.5f));
@@ -18,15 +18,13 @@ void Enemy::Update(float dt)
 void Enemy::OnCollisionEnter(Object* other)
 {
 	std::cout << "Position:" << transform->position.x << " " << transform->position.y 
-		<< "Size: " << transform->size.x << " " << transform->size.y << std::endl;
-
-	
+		<< "Size: " << transform->size.x << " " << transform->size.y << std::endl;	
 
 	if (dynamic_cast<Bullet*>(other))
 	{
 		health--;
 		other->Destroy();
-	}
+	}	
 }
 
 

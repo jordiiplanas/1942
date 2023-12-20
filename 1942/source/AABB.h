@@ -24,7 +24,7 @@ public:
     }
 
 
-    bool intersectionX = distanceX < width1 - width2;
+    bool intersectionX = distanceX < width1 + width2;
 
     float distanceY = topLeft.y + size.y - other.topLeft.y;
     if (topLeft.y < other.topLeft.y)

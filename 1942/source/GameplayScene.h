@@ -2,7 +2,9 @@
 #include "Scene.h"
 #include "Player.h"
 #include "Enemy.h"
-
+#include "GreenPowerUp.h"
+#include "WhitePowerUp.h"
+#include "GrayPowerUp.h"
 class GameplayScene : public Scene
 {
 
@@ -22,6 +24,7 @@ public:
 		player = new Player(Vector2(250, 350));		
 		objects.push_back(player);
 		objects.push_back(new Enemy(Vector2(250, 50)));		
+		objects.push_back(new WhitePowerUp(*player));
 	}
 
 	void OnEnter() override {}

@@ -4,17 +4,15 @@ void GameplayScene::Update(float dt)
 {
 	isFinished = inputManager.CheckKeyState(SDLK_ESCAPE, PRESSED);
 
- 
+    
     for (Object* o : objects)
     {
         if (!o->IsPendingDestroy())
-        {
-            o->Update(dt);
+        {                   
+            o->Update(dt);            
             continue;
-        }
-
-        
-        if (dynamic_cast<Bullet*>(o))
+        }        
+        if (dynamic_cast<Enemy*>(o))
         {
             int a = 2;
         }
