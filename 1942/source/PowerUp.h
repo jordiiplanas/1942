@@ -18,4 +18,12 @@ public:
 		SetPosition(Vector2(100, 100));
 		rigidbody->SetVelocity(Vector2(0, 100));
 	}
+	virtual void Update(float dt) override
+	{
+		Object::Update(dt);
+		if (transform->position.y > 520)
+		{
+			Destroy();
+		}
+	}
 };

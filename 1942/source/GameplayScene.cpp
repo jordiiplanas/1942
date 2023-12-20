@@ -7,6 +7,20 @@ void GameplayScene::Update(float dt)
     
     for (Object* o : objects)
     {
+        if (dynamic_cast<WhitePowerUp*>(o))
+        {
+            if (dynamic_cast<WhitePowerUp*>(o)->isActive)
+            {
+                dynamic_cast<WhitePowerUp*>(o)->isActive = false;
+                for (Object* o : objects)
+                {
+                    if (dynamic_cast<Enemy*>(o))
+                    {
+                        o->Destroy();
+                    }
+                }
+            }                       
+        }
         if (!o->IsPendingDestroy())
         {                   
             o->Update(dt);            
