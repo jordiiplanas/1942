@@ -21,9 +21,9 @@ private:
 public:
 	GameplayScene() : Scene() {
 		nextScene = "MainMenu";		
-		player = new Player(Vector2(250, 350));		
+		player = new Player(Vector2(250, 20));		
 		objects.push_back(player);
-		objects.push_back(new Enemy(Vector2(250, 50)));		
+		objects.push_back(new Enemy(2, 400, &spawner, player->GetCenteredPosition()));		
 		objects.push_back(new WhitePowerUp(*player));
 	}
 

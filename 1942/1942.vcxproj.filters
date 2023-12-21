@@ -140,5 +140,11 @@
     <ClInclude Include="source\GreenPowerUp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source\SupportPlane.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\EnemyBullets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

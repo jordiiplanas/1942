@@ -1,18 +1,21 @@
 #include "Enemy.h"
 
-Enemy::Enemy(Vector2 position)
-	: GameObject(Vector2(100, 64)) 
-{	
-	renderers.emplace("idle", new ImageRenderer(transform, Vector2(5, 200), Vector2(15, 14)));
-	renderer = renderers["idle"];
-	SetPosition(position); health = 2; score = 100; SetScale(Vector2(0.5f, 0.5f));
-}
+
 
 void Enemy::Update(float dt)
 {
 	Object::Update(dt);
+	spawner->InsertObject(Shoot(Vector2()));
 	if (health <= 0)
 		Destroy();
+}
+
+Object* Enemy::Shoot(Vector2 position)
+{
+	EnemyBullet* bullet = new EnemyBullet(500, Vector2(16, 16), playerPosition);
+
+	bullet->SetPosition(GetCenteredPosition() + position);
+	return bullet;
 }
 
 void Enemy::OnCollisionEnter(Object* other)
