@@ -3,7 +3,6 @@
 void GameplayScene::Update(float dt)
 {
 	isFinished = inputManager.CheckKeyState(SDLK_ESCAPE, PRESSED);
-
     
     for (Object* o : objects)
     {
@@ -31,9 +30,7 @@ void GameplayScene::Update(float dt)
             int a = 2;
         }
         objects.erase(std::remove(objects.begin(), objects.end(), o), objects.end());
-        delete o;
-        
-        
+        delete o;               
     }
 
     for (Object* o : objects)

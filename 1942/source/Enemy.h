@@ -13,9 +13,9 @@ protected:
 	int movementStage = 0;
 	float movementTime = 0;	
 	Spawner* spawner;
-	Vector2 playerPosition;
+	Transform* transformPlayer;
 public:	
-	Enemy(int health, int score, Spawner* spawner, Vector2 playerPos ) : health(health), score(score), spawner(spawner), playerPosition(playerPos), GameObject(Vector2(100,64)) 
+	Enemy(int health, int score, Spawner* spawner, Transform* transformPlayer ) : health(health), score(score), spawner(spawner), transformPlayer(transformPlayer), GameObject(Vector2(100,64)) 
 	{
 		renderers.emplace("idle", new ImageRenderer(transform, Vector2(5, 200), Vector2(15, 14)));
 		renderer = renderers["idle"];

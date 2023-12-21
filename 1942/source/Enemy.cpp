@@ -5,16 +5,16 @@
 void Enemy::Update(float dt)
 {
 	Object::Update(dt);
-	spawner->InsertObject(Shoot(Vector2()));
+	spawner->InsertObject(Shoot(transformPlayer->position));
 	if (health <= 0)
 		Destroy();
 }
 
 Object* Enemy::Shoot(Vector2 position)
 {
-	EnemyBullet* bullet = new EnemyBullet(500, Vector2(16, 16), playerPosition);
+	EnemyBullet* bullet = new EnemyBullet(500, Vector2(16, 16), position);
 
-	bullet->SetPosition(GetCenteredPosition() + position);
+	bullet->SetPosition(GetCenteredPosition());
 	return bullet;
 }
 
