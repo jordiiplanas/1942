@@ -21,7 +21,8 @@ public:
 	virtual void Update(float deltaTime) override
 	{
 		Object::Update(deltaTime);
-		if (transform->position.y >= 500)
+		if (transform->position.y >= 500 ||transform->position. y <= 0 
+			|| transform->position.x> 500 || transform->position.x<0)
 		{
 			Destroy();
 		}
