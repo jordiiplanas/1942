@@ -7,12 +7,11 @@ class EnemyBullet : public GameObject
 private:
 	Vector2 direction;
 public:
-	EnemyBullet(float speed, Vector2 size, Vector2 playerPos)
+	EnemyBullet(float speed, Vector2 size, Vector2 direction)
 		: GameObject(size)
 	{		
-		Vector2 a(playerPos - GetCenteredPosition());
-		a.Normalize();
-		direction = a;
+		direction.Normalize();
+		this->direction = direction;
 		renderers.emplace("idle", new ImageRenderer(transform, Vector2(75,90), Vector2(3,3)));
 		renderer = renderers["idle"];
 		rigidbody->SetVelocity(direction * speed);

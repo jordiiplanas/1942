@@ -24,6 +24,7 @@ public:
 		renderers.emplace("idle", new ImageRenderer(transform, Vector2(5, 200), Vector2(15, 14)));
 		renderer = renderers["idle"];
 		SetScale(Vector2(0.5f, 0.5f));
+		SetPosition(Vector2(200, 300));
 	}
 	~Enemy();
 	virtual void Update(float dt) override;

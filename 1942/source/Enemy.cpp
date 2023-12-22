@@ -19,7 +19,7 @@ void Enemy::Update(float dt)
 
 Object* Enemy::Shoot(Vector2 position)
 {
-	EnemyBullet* bullet = new EnemyBullet(500, Vector2(16, 16), position);
+	EnemyBullet* bullet = new EnemyBullet(500, Vector2(16, 16), Vector2(transformPlayer->position - GetCenteredPosition()));
 
 	bullet->SetPosition(GetCenteredPosition());
 	return bullet;
