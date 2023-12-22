@@ -4,9 +4,22 @@ void GameplayScene::OnEnter()
 {
     nextScene = "MainMenu";
     player = new Player(Vector2(250, 350));
-    objects.push_back(new Background(Vector2(512, 512), 60));
-    objects.push_back(new Background(Vector2(512, 512), 60));
-    objects[1]->SetPosition(Vector2(0, -512));
+    
+    Vector2 initialPos = Vector2(0, -64);
+    Vector2 limitsPos = Vector2(512, 512);
+    int counter = 0;
+    while (initialPos.y < limitsPos.y)
+    {
+        while (initialPos.x < limitsPos.x)
+        {
+			objects.push_back(new Background(Vector2(32, 32), 10));
+			objects.back()->SetPosition(initialPos);
+			initialPos.x += 32;
+		}
+		initialPos.x = 0;
+		initialPos.y += 32;
+	}
+
     objects.push_back(player);
     objects.push_back(new Enemy(Vector2(250, 50)));
 
