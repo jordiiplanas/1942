@@ -4,11 +4,10 @@
 class SupportPlane : public GameObject
 {
 protected:
-	bool isLeft;
 	//Player* player;
 	bool isArriving = false;
 public:
-	SupportPlane(bool isLeft) : isLeft(isLeft), GameObject(Vector2(50, 32))
+	SupportPlane(bool isLeft) : GameObject(Vector2(50, 32))
 	{
 		renderer = new ImageRenderer(transform, Vector2(9, 84), Vector2(15, 9));
 	}
