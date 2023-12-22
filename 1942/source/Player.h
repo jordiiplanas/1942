@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "EnemyBullets.h"
 #include "Bullet.h"
 #include "AnimatedImageRenderer.h"
 
@@ -26,5 +27,12 @@ public:
 	}
 	~Player();
 
+	void OnCollisionEnter(Object* other) override
+	{
+		if (dynamic_cast<EnemyBullet*>(other))
+		{
+			other->Destroy();
+		}
+	}
 	Object* SpawnBullet(Vector2 position);
 };

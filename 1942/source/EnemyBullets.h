@@ -1,5 +1,4 @@
 #pragma once
-#include "Player.h"
 #include "GameObject.h"
 
 class EnemyBullet : public GameObject
@@ -28,5 +27,6 @@ public:
 	}
 	virtual void OnCollisionEnter(Object* other) override
 	{
+		
 	}
 };
