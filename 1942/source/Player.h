@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "EnemyBullets.h"
 #include "Bullet.h"
 #include "AnimatedImageRenderer.h"
 #include "InputManager.h"
@@ -19,7 +20,7 @@ private:
 	float lastShootTime = 0;
 
 public:
-	Player(Vector2 position) : GameObject(Vector2(100, 100)) {
+	Player(Vector2 position) : GameObject(Vector2(32, 32)) {
 		renderers.emplace("idle", new ImageRenderer(transform, Vector2(0,0), Vector2(32, 32)));
 		std::vector<Vector2> rightDeltas
 		{
@@ -39,13 +40,14 @@ public:
 		renderers.emplace("death", new AnimatedImageRenderer(transform, Vector2(0,112), Vector2(32, 32), deathDeltas, false, 20));
 		renderer = renderers["idle"];
 		rigidbody->SetLinearDrag(10);
-		SetScale(Vector2(0.5, 0.5));
+		SetScale(Vector2(1.5f, 1.5f));
 		SetPosition(position);
 	}
-	//~Player();
+
+	void OnCollisionEnter(Object* other) override;
 	bool IsDying() { return isDying; }
 	void PlayDeathAnimation();
-	Object* SpawnBullet(Vector2 position);
+	void Shoot();
 	
 	void Update(float deltaTime) override;
 };

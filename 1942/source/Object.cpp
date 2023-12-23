@@ -8,8 +8,6 @@ Object::Object(std::string path, Vector2 size)
 	isPendingDestroy = false;
 
 	rigidbody = new Rigidbody(transform);
-	std::cout << "TopPosition: " << transform->position.x << " " << transform->position.y
-			<< " Size: " << size.x << " " << size.y << std::endl;
 	rigidbody->AddCollider(new AABB(transform->position, Vector2(size.x, size.y)));
 
 }

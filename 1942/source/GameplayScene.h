@@ -1,9 +1,11 @@
 #pragma once
 #include "Scene.h"
 #include "Player.h"
-#include "Enemy.h"
+#include "GreenPowerUp.h"
+#include "WhitePowerUp.h"
+#include "GrayPowerUp.h"
+#include "SmallNormalPlane.h"
 #include "Background.h"
-
 class GameplayScene : public Scene
 {
 
@@ -17,9 +19,7 @@ private:
 	//ScoreManager* score
 	
 public:
-	GameplayScene() : Scene() {
-		
-	}
+	GameplayScene() : Scene() {};
 
 	void OnEnter() override;
 	void Update(float dt) override;

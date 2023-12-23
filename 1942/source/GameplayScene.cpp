@@ -21,20 +21,33 @@ void GameplayScene::OnEnter()
 	}
 
     objects.push_back(player);
-    objects.push_back(new Enemy(Vector2(250, 50)));
-
+    objects.push_back(new SmallNormalPlane(V, player->GetTransform()));
+    objects.push_back(new WhitePowerUp(*player));
 }
 
 void GameplayScene::Update(float dt)
 {
 	isFinished = inputManager.CheckKeyState(SDLK_ESCAPE, PRESSED);
-
- 
+    
     for (Object* o : objects)
     {
-        if (!o->IsPendingDestroy())
+        if (dynamic_cast<WhitePowerUp*>(o))
         {
-            o->Update(dt);
+            if (dynamic_cast<WhitePowerUp*>(o)->isActive)
+            {
+                dynamic_cast<WhitePowerUp*>(o)->isActive = false;
+                for (Object* o : objects)
+                {
+                    if (dynamic_cast<Enemy*>(o))
+                    {
+                        o->Destroy();
+                    }
+                }
+            }                       
+        }
+        if (!o->IsPendingDestroy())
+        {                   
+            o->Update(dt);            
             continue;
         }
         objects.erase(std::remove(objects.begin(), objects.end(), o), objects.end());
