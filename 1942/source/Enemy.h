@@ -15,16 +15,15 @@ protected:
 	float timeBetweenShoots = 5000;
 	float currentTime;
 	float lastShootTime;
-	Spawner* spawner;
 	Transform* transformPlayer;
 	virtual void UpdateMovementPattern(float dt) = 0;
 public:	
-	Enemy(int health, int score, Spawner* spawner, Transform* transformPlayer ) : health(health), score(score), spawner(spawner), transformPlayer(transformPlayer), GameObject(Vector2(100,64)) 
+	Enemy(int health, int score, Transform* transformPlayer ) : health(health), score(score), transformPlayer(transformPlayer), GameObject(Vector2(16,16)) 
 	{
 		lastShootTime = SDL_GetTicks();
-		renderers.emplace("idle", new ImageRenderer(transform, Vector2(5, 200), Vector2(15, 14)));
+		renderers.emplace("idle", new ImageRenderer(transform, Vector2(5, 203), Vector2(15, 14)));
 		renderer = renderers["idle"];
-		SetScale(Vector2(0.5f, 0.5f));
+		SetScale(Vector2(1, 1));
 		SetPosition(Vector2(200, 300));
 	}
 	virtual void Update(float dt) override;

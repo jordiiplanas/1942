@@ -21,8 +21,8 @@ void GameplayScene::OnEnter()
 	}
 
     objects.push_back(player);
-    objects.push_back(new Enemy(Vector2(250, 50)));
-
+    objects.push_back(new SmallNormalPlane(V, player->GetTransform()));
+    objects.push_back(new WhitePowerUp(*player));
 }
 
 void GameplayScene::Update(float dt)

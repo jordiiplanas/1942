@@ -14,7 +14,7 @@ protected:
 	MovementType movementType;
 	void UpdateMovementPattern(float dt) override {}
 public:
-	SmallNormalPlane(MovementType mT, Spawner* spawner, Transform* transformPlayer) : movementType(mT), Enemy(1, 50, spawner, transformPlayer)
+	SmallNormalPlane(MovementType mT, Transform* transformPlayer) : movementType(mT), Enemy(1, 50, transformPlayer)
 	{
 
 	}

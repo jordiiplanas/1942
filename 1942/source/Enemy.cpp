@@ -9,7 +9,7 @@ void Enemy::Update(float dt)
 
 	if (currentTime - lastShootTime > timeBetweenShoots)
 	{
-		spawner->InsertObject(Shoot(transformPlayer->position));
+		SPAWNER.InsertObject(Shoot(transformPlayer->position));
 		lastShootTime = SDL_GetTicks();
 	}
 	
@@ -27,7 +27,6 @@ Object* Enemy::Shoot(Vector2 position)
 
 void Enemy::OnCollisionEnter(Object* other)
 {
-	std::cout << "Position:" << transform->position.x << " " << transform->position.y 
 
 	if (dynamic_cast<Bullet*>(other))
 	{

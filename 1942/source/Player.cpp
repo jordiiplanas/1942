@@ -8,12 +8,14 @@ void Player::PlayDeathAnimation()
 	isDying = true;
 }
 
-Object* Player::SpawnBullet(Vector2 position)
+void Player::Shoot()
 {
-	Bullet* bullet = new Bullet(500, Vector2(0, -1), Vector2(16, 16), Vector2(103, 84), Vector2(11,10));
+	Bullet* bullet = new Bullet(500, Vector2(0, -1), Vector2(16, 16), Vector2(97, 101), Vector2(11,10));
 
+    Vector2 position = Vector2(0,-transform->size.y/2);
 	bullet->SetPosition(GetCenteredPosition() + position);
-	return bullet;
+    SPAWNER.InsertObject(bullet);
+
 }
 
 void Player::Update(float deltaTime)
@@ -59,7 +61,7 @@ void Player::Update(float deltaTime)
 
         if (inputManager.CheckKeyState(SDLK_SPACE, PRESSED))
         {
-            SPAWNER.InsertObject(SpawnBullet(Vector2(-32, -30)));
+            Shoot();
         }
         else if (inputManager.CheckKeyState(SDLK_SPACE, HOLD))
         {
@@ -67,7 +69,7 @@ void Player::Update(float deltaTime)
             if (lastShootTime > shootDelay)
 			{
 				lastShootTime = 0;
-				SPAWNER.InsertObject(SpawnBullet(Vector2(-32, -30)));
+                Shoot();
 			}
         }
         
@@ -82,3 +84,13 @@ void Player::Update(float deltaTime)
     inputForce = inputForce * 50;
     GetRigidbody()->AddForce(inputForce);
 }
+
+void Player::OnCollisionEnter(Object* other)
+{
+	if (dynamic_cast<EnemyBullet*>(other))
+	{
+		PlayDeathAnimation();
+        other->Destroy();
+	}
+}
+
