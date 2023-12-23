@@ -35,6 +35,8 @@ void SupportPlane::Update(float deltaTime)
 
 void SupportPlane::OnCollisionEnter(Object* other)
 {
+	if (isRolling || isDying) return;
+
 	if (dynamic_cast<Enemy*>(other))
 	{
 		PlayDeathAnimation();

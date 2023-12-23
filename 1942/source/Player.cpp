@@ -49,14 +49,14 @@ void Player::MoveSupportPlanes()
 
     if (leftSupportPlane != nullptr)
     {
-       
+        leftSupportPlane->isRolling = isRolling;
         leftSupportPlane->SetPosition(GetCenteredPosition() + Vector2(-transform->size.x, 0));
         if (!leftSupportPlane->isDying) leftSupportPlane->ChangeAnimation(currentAnimation);
         
     }
     if (rightSupportPlane != nullptr)
 	{
-		
+        rightSupportPlane->isRolling = isRolling;
 		rightSupportPlane->SetPosition(GetCenteredPosition() + Vector2(transform->size.x, 0));
         if (!rightSupportPlane->isDying) rightSupportPlane->ChangeAnimation(currentAnimation);
 		
@@ -91,8 +91,8 @@ void Player::Update(float deltaTime)
                 return;
             }
             timePassed = 0;
-            leftSupportPlane->PlayDeathAnimation();
-            rightSupportPlane->PlayDeathAnimation();
+            if (leftSupportPlane != nullptr) leftSupportPlane->PlayDeathAnimation();
+            if (rightSupportPlane != nullptr) rightSupportPlane->PlayDeathAnimation();
             isDying = false;
             currentAnimation = "idle";
             renderer = renderers[currentAnimation];
@@ -153,6 +153,17 @@ void Player::Update(float deltaTime)
             
         }
 
+        if (isRolling)
+        {
+            timeRolling += deltaTime;
+            if (timeRolling > timeToRoll)
+			{
+				isRolling = false;
+				timeRolling = 0;
+			}
+            currentAnimation = "roll";
+        }
+
         ChangeAnimation(currentAnimation);
 
         if (inputManager.CheckKeyState(SDLK_SPACE, HOLD))
@@ -163,6 +174,11 @@ void Player::Update(float deltaTime)
 				lastShootTime = 0;
                 Shoot();
 			}
+        }
+
+        if (inputManager.CheckKeyState(SDLK_j, PRESSED))
+        {
+            isRolling = true;
         }
         
     }
@@ -187,6 +203,7 @@ void Player::Update(float deltaTime)
 
 void Player::OnCollisionEnter(Object* other)
 {
+    if (isRolling || isDying) return;
     if (dynamic_cast<Enemy*>(other))
 	{
 		PlayDeathAnimation();
