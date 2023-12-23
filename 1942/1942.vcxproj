@@ -32,6 +32,7 @@
     <ClCompile Include="source\Renderer.cpp" />
     <ClCompile Include="source\RenderManager.cpp" />
     <ClCompile Include="source\Scene.cpp" />
+    <ClCompile Include="source\SmallNormalPlane.cpp" />
     <ClCompile Include="source\Spawner.cpp" />
     <ClCompile Include="source\TextRenderer.cpp" />
   </ItemGroup>

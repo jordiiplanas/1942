@@ -24,7 +24,7 @@ public:
 		renderers.emplace("idle", new ImageRenderer(transform, Vector2(5, 203), Vector2(15, 14)));
 		renderer = renderers["idle"];
 		SetScale(Vector2(1, 1));
-		SetPosition(Vector2(200, 300));
+		SetPosition(Vector2(200, 10));
 	}
 	virtual void Update(float dt) override;
 	virtual Object* Shoot(Vector2 position);
