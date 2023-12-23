@@ -1,10 +1,10 @@
 #pragma once
 #include "GameObject.h"
 #include "EnemyBullets.h"
-#include "Bullet.h"
 #include "AnimatedImageRenderer.h"
 #include "InputManager.h"
-#include "Spawner.h"
+#include "SupportPlane.h"
+
 
 class Player : public GameObject
 {
@@ -18,6 +18,8 @@ private:
 
 	float shootDelay = 0.1f;
 	float lastShootTime = 0;
+
+	std::vector<SupportPlane*> supportPlanes;
 
 public:
 	Player(Vector2 position) : GameObject(Vector2(32, 32)) {
@@ -48,6 +50,7 @@ public:
 	bool IsDying() { return isDying; }
 	void PlayDeathAnimation();
 	void Shoot();
-	
+	void AddSupportPlane(bool isLeft);
+	void MoveSupportPlanes();
 	void Update(float deltaTime) override;
 };

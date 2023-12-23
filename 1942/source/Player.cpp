@@ -10,12 +10,59 @@ void Player::PlayDeathAnimation()
 
 void Player::Shoot()
 {
+
+    for (auto plane : supportPlanes)
+    {
+        plane->Shoot();
+    }
+
+
 	Bullet* bullet = new Bullet(500, Vector2(0, -1), Vector2(16, 16), Vector2(97, 101), Vector2(11,10));
 
     Vector2 position = Vector2(0,-transform->size.y/2);
 	bullet->SetPosition(GetCenteredPosition() + position);
     SPAWNER.InsertObject(bullet);
 
+}
+
+void Player::AddSupportPlane(bool isLeft)
+{
+
+    for (auto plane : supportPlanes)
+	{
+		if (plane->isLeft == isLeft)
+		{
+			return;
+		}
+	}
+
+	SupportPlane* supportPlane = new SupportPlane(isLeft);
+
+    if (isLeft)
+	{
+		supportPlane->SetPosition(GetCenteredPosition() + Vector2(-transform->size.x*1.5, 0));
+	}
+	else
+	{
+		supportPlane->SetPosition(GetCenteredPosition() + Vector2(transform->size.x*0.8, 0));
+	}
+    supportPlanes.push_back(supportPlane);
+	SPAWNER.InsertObject(supportPlane);
+}
+
+void Player::MoveSupportPlanes()
+{
+    for (auto plane : supportPlanes)
+    {
+        if (plane->isLeft)
+        {
+			plane->SetPosition(GetCenteredPosition() + Vector2(-transform->size.x*1.5, 0));
+		}
+		else
+		{
+			plane->SetPosition(GetCenteredPosition() + Vector2(transform->size.x*0.8, 0));
+        }
+    }
 }
 
 void Player::Update(float deltaTime)
@@ -50,14 +97,28 @@ void Player::Update(float deltaTime)
         {
             inputForce.x -= 1;
             ChangeAnimation("left");
+            for (auto plane : supportPlanes)
+            {
+                plane->ChangeAnimation("left");
+            }
         }
         else if (inputManager.CheckKeyState(SDLK_d, HOLD) && GetPosition().x < 450)
         {
             inputForce.x += 1;
             ChangeAnimation("right");
+            for (auto plane : supportPlanes)
+			{
+				plane->ChangeAnimation("right");
+			}
         }
-        else
+        else 
+        {
             ChangeAnimation("idle");
+            for (auto plane : supportPlanes)
+            {
+                plane->ChangeAnimation("idle");
+            }
+        }
 
         if (inputManager.CheckKeyState(SDLK_SPACE, PRESSED))
         {
@@ -80,16 +141,24 @@ void Player::Update(float deltaTime)
         PlayDeathAnimation();
     }
 
+    if (inputManager.CheckKeyState(SDLK_q, PRESSED))
+	{
+		AddSupportPlane(true);
+        AddSupportPlane(false);
+	}
+
     inputForce.Normalize();
     inputForce = inputForce * 50;
     GetRigidbody()->AddForce(inputForce);
+    MoveSupportPlanes();
+    
 }
 
 void Player::OnCollisionEnter(Object* other)
 {
 	if (dynamic_cast<EnemyBullet*>(other))
 	{
-		PlayDeathAnimation();
+		//PlayDeathAnimation();
         other->Destroy();
 	}
 }

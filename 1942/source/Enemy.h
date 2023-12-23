@@ -1,9 +1,8 @@
 #pragma once
 #include "GameObject.h"
 #include "EnemyBullets.h"
-#include "Player.h"
 #include "Spawner.h"
-
+#include "Bullet.h"
 
 class Enemy : public GameObject
 {
