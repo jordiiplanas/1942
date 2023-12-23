@@ -1,10 +1,10 @@
 #pragma once
 #include "Scene.h"
 #include "Player.h"
-#include "Enemy.h"
 #include "GreenPowerUp.h"
 #include "WhitePowerUp.h"
 #include "GrayPowerUp.h"
+#include "SmallNormalPlane.h"
 class GameplayScene : public Scene
 {
 
@@ -23,7 +23,7 @@ public:
 		nextScene = "MainMenu";		
 		player = new Player(Vector2(250, 20));		
 		objects.push_back(player);
-		objects.push_back(new Enemy(2, 400, &spawner, player->GetTransform()));		
+		objects.push_back(new SmallNormalPlane(V, &spawner, player->GetTransform()));		
 		objects.push_back(new WhitePowerUp(*player));
 	}
 

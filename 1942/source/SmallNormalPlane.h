@@ -20,6 +20,6 @@ public:
 	}
 	void Update(float dt) override
 	{
-		Enemy::Update(dt)
+		Enemy::Update(dt);
 	}
 };

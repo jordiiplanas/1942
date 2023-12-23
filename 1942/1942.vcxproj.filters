@@ -146,5 +146,8 @@
     <ClInclude Include="source\EnemyBullets.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source\SmallNormalPlane.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
