@@ -21,6 +21,7 @@ void GameplayScene::OnEnter()
 	}
     objects.push_back(player);
     objects.push_back(new SmallNormalPlane(STRAIGHT, player->GetTransform(), true));
+    objects.push_back(new SmallRedPlane(player->GetTransform(), true));
     objects.push_back(new WhitePowerUp(*player));
 }
 

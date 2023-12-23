@@ -5,6 +5,7 @@
 #include "WhitePowerUp.h"
 #include "GrayPowerUp.h"
 #include "SmallNormalPlane.h"
+#include "SmallRedPlane.h"
 #include "Background.h"
 class GameplayScene : public Scene
 {

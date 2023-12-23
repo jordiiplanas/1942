@@ -57,7 +57,9 @@ public:
 			}
 		}
 		else
+		{
 			GetRigidbody()->AddForce(Vector2(0, 8));
+		}
 		Enemy::Update(dt);
 	}
 };

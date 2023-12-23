@@ -60,6 +60,7 @@
     <ClInclude Include="source\Scene.h" />
     <ClInclude Include="source\SceneManager.h" />
     <ClInclude Include="source\SmallNormalPlane.h" />
+    <ClInclude Include="source\SmallRedPlane.h" />
     <ClInclude Include="source\Spawner.h" />
     <ClInclude Include="source\SupportPlane.h" />
     <ClInclude Include="source\TextRenderer.h" />
