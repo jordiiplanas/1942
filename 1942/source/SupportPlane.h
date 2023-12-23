@@ -3,14 +3,19 @@
 #include "AnimatedImageRenderer.h"
 #include "Spawner.h"
 #include "Bullet.h"
+#include "Enemy.h"
 
 class SupportPlane : public GameObject
 {
 protected:
 	bool isArriving = false;
+	float timePassed = 0;
+	float timeToDie = 0.2f;
 public:
+	bool isDying = false;
+
 	bool isLeft = false;
-	SupportPlane(bool isLeft) : GameObject(Vector2(50, 32)), isLeft(isLeft)
+	SupportPlane(bool isLeft) : GameObject(Vector2(22, 22)), isLeft(isLeft)
 	{
 		renderers.emplace("idle", new ImageRenderer(transform, Vector2(0, 0), Vector2(32, 32)));
 		std::vector<Vector2> rightDeltas
@@ -30,7 +35,9 @@ public:
 		renderers.emplace("death", new AnimatedImageRenderer(transform, Vector2(0, 112), Vector2(32, 32), deathDeltas, false, 20));
 		renderer = renderers["idle"];
 		rigidbody->SetLinearDrag(10);
-		SetScale(Vector2(0.8f, 0.8f));
 	}
 	void Shoot();
+	void PlayDeathAnimation();
+	void Update(float deltaTime) override;
+	void OnCollisionEnter(Object* other) override;
 };

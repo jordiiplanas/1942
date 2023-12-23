@@ -10,7 +10,7 @@ class GameplayScene : public Scene
 {
 
 private:
-	//std::vector<Wave> remainingWaves;
+	std::vector<Object*> background;
 	int levelWaves;
 	Player* player;
 	float levelTime;
@@ -23,5 +23,6 @@ public:
 
 	void OnEnter() override;
 	void Update(float dt) override;
+	void Render() override;
 	
 };

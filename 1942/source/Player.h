@@ -13,13 +13,21 @@ private:
 	float fireTime = 0.2f;
 	float lastFireTime;
 	bool doubleFire;
-	float timeToDie = 3;
+	int lives = 3;
+
+	float timePassed = 0;
+	float timeToDie = 0.5f;
+	float timeToRespawn = 1;
 	bool isDying = false;
+	bool isRespawning = false;
+	std::string currentAnimation = "idle";
 
 	float shootDelay = 0.1f;
 	float lastShootTime = 0;
 
-	std::vector<SupportPlane*> supportPlanes;
+	Vector2 initialPosition;
+	SupportPlane* leftSupportPlane;
+	SupportPlane* rightSupportPlane;
 
 public:
 	Player(Vector2 position) : GameObject(Vector2(32, 32)) {
@@ -43,6 +51,7 @@ public:
 		renderer = renderers["idle"];
 		rigidbody->SetLinearDrag(10);
 		SetScale(Vector2(1.5f, 1.5f));
+		initialPosition = position;
 		SetPosition(position);
 	}
 
@@ -52,5 +61,6 @@ public:
 	void Shoot();
 	void AddSupportPlane(bool isLeft);
 	void MoveSupportPlanes();
+	void DisableSupportPlane(Object* other);
 	void Update(float deltaTime) override;
 };

@@ -10,3 +10,39 @@ void SupportPlane::Shoot()
 	bullet->SetPosition(GetCenteredPosition() + position);
 	SPAWNER.InsertObject(bullet);
 }
+
+void SupportPlane::PlayDeathAnimation()
+{
+	if (isDying) return;
+	renderer = renderers["death"];
+	isDying = true;
+}
+
+void SupportPlane::Update(float deltaTime)
+{
+	rigidbody->Update(deltaTime);
+	renderer->Update(deltaTime);
+	if (isDying)
+	{
+		timePassed += deltaTime;
+		if (timePassed >= timeToDie)
+		{
+			std::cout << "que me muelo\n";
+			Destroy();
+		}
+	}
+}
+
+void SupportPlane::OnCollisionEnter(Object* other)
+{
+	if (dynamic_cast<Enemy*>(other))
+	{
+		PlayDeathAnimation();
+	}
+	else
+	if (dynamic_cast<EnemyBullet*>(other))
+	{
+		PlayDeathAnimation();
+		other->Destroy();
+	}
+}
