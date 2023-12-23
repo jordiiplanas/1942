@@ -39,7 +39,7 @@ protected:
 			
 			if (currentFrameTime >= frameTime)
 			{
-				currentFrameTime -= frameTime + floor(currentFrameTime / frameTime);
+				currentFrameTime -= frameTime * floor(currentFrameTime / frameTime);
 				if (looping)
 				{
 					currentFrame = (currentFrame + 1) % framesDelta.size();

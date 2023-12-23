@@ -5,13 +5,13 @@
 #include "WhitePowerUp.h"
 #include "GrayPowerUp.h"
 #include "SmallNormalPlane.h"
+#include "Background.h"
 class GameplayScene : public Scene
 {
 
 private:
 	//std::vector<Wave> remainingWaves;
 	int levelWaves;
-	Spawner spawner;
 	Player* player;
 	float levelTime;
 	int rolls;
@@ -19,15 +19,9 @@ private:
 	//ScoreManager* score
 	
 public:
-	GameplayScene() : Scene() {
-		nextScene = "MainMenu";		
-		player = new Player(Vector2(250, 20));		
-		objects.push_back(player);
-		objects.push_back(new SmallNormalPlane(V, &spawner, player->GetTransform()));		
-		objects.push_back(new WhitePowerUp(*player));
-	}
+	GameplayScene() : Scene() {};
 
-	void OnEnter() override {}
+	void OnEnter() override;
 	void Update(float dt) override;
 	
 };
