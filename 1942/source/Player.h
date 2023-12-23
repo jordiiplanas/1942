@@ -2,6 +2,8 @@
 #include "GameObject.h"
 #include "Bullet.h"
 #include "AnimatedImageRenderer.h"
+#include "InputManager.h"
+#include "Spawner.h"
 
 class Player : public GameObject
 {
@@ -12,6 +14,9 @@ private:
 	bool doubleFire;
 	float timeToDie = 3;
 	bool isDying = false;
+
+	float shootDelay = 0.1f;
+	float lastShootTime = 0;
 
 public:
 	Player(Vector2 position) : GameObject(Vector2(100, 100)) {
@@ -41,5 +46,6 @@ public:
 	bool IsDying() { return isDying; }
 	void PlayDeathAnimation();
 	Object* SpawnBullet(Vector2 position);
+	
 	void Update(float deltaTime) override;
 };

@@ -10,7 +10,6 @@ class GameplayScene : public Scene
 private:
 	//std::vector<Wave> remainingWaves;
 	int levelWaves;
-	Spawner spawner;
 	Player* player;
 	float levelTime;
 	int rolls;
