@@ -17,6 +17,7 @@ protected:
 	float lastShootTime;
 	Spawner* spawner;
 	Transform* transformPlayer;
+	virtual void UpdateMovementPattern(float dt) = 0;
 public:	
 	Enemy(int health, int score, Spawner* spawner, Transform* transformPlayer ) : health(health), score(score), spawner(spawner), transformPlayer(transformPlayer), GameObject(Vector2(100,64)) 
 	{
@@ -26,7 +27,6 @@ public:
 		SetScale(Vector2(0.5f, 0.5f));
 		SetPosition(Vector2(200, 300));
 	}
-	~Enemy();
 	virtual void Update(float dt) override;
 	virtual Object* Shoot(Vector2 position);
 	virtual void OnCollisionEnter(Object* other) override;
