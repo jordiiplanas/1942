@@ -13,6 +13,7 @@ public:
 	{
 		if (dynamic_cast<Player*>(other))
 		{
+			PowerUp::OnCollisionEnter(other);
 			player->isShootingFourBullets = true;
 			Destroy();
 		}

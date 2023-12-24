@@ -14,6 +14,7 @@ public:
 	{
 		if (dynamic_cast<Player*>(other))
 		{
+			PowerUp::OnCollisionEnter(other);
 			player->AddSupportPlane();
 			Destroy();
 		}

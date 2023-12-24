@@ -2,12 +2,14 @@
 #include "GameObject.h"
 #include "Player.h"
 #include "Spawner.h"
+#include "ScoreManager.h"
 
 
 class PowerUp : public GameObject
 {
 protected:
 	Player* player;
+	
 	
 public:	
 	PowerUp(Player& p, Vector2 size) : player(&p), GameObject(Vector2(size.x,size.y))
@@ -25,10 +27,7 @@ public:
 		}
 	}
 	void OnCollisionEnter(Object* other) override
-	{
-		if (dynamic_cast<Player*>(other))
-		{
-			Destroy();
-		}
+	{	
+		SCOREMANAGER.AddScore(1000);
 	};
 };

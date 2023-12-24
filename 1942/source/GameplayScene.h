@@ -10,10 +10,11 @@
 #include "MediumYellowPlane.h"
 #include "BigGreenPlane.h"
 #include "Wave.h"
+#include "ScoreManager.h"
+#include "UiText.h"
 
 class GameplayScene : public Scene
 {
-
 private:
 	std::vector<Wave*> waves;
 	int waveIndex;
@@ -22,11 +23,12 @@ private:
 	Player* player;
 	float levelTime;
 	int rolls;
+	UiText* scoreUi = new UiText("SCORE: 0", Vector2(60, 30));
 	int lives;
-	//ScoreManager* score
-	
+	ScoreManager* score;
 public:
-	GameplayScene() : Scene() {};
+	GameplayScene() : Scene() {
+	};
 
 	void OnEnter() override;
 	void Update(float dt) override;

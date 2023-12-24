@@ -8,7 +8,10 @@ void EnemyPlane::Update(float dt)
 	Object::Update(dt);	
 	
 	if (health <= 0)
+	{
+		SCOREMANAGER.AddScore(score);
 		Destroy();
+	}
 }
 
 Object* EnemyPlane::Shoot(Vector2 position)

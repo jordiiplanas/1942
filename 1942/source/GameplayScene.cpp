@@ -27,6 +27,7 @@ void GameplayScene::OnEnter()
     Wave* wave4 = new Wave(D, 1, 1);
     Wave* wave5 = new Wave(E, 2, 3);
     
+    objects.push_back(scoreUi);
     waveIndex = 0;
     SPAWNER.InsertObject(player);
     waves.push_back(wave1);
@@ -40,7 +41,9 @@ void GameplayScene::OnEnter()
 void GameplayScene::Update(float dt)
 {
 	isFinished = inputManager.CheckKeyState(SDLK_ESCAPE, PRESSED);
-    
+  
+    scoreUi->ChangeText("SCORE: " + std::to_string(SCOREMANAGER.GetScore()));
+    std::cout << SCOREMANAGER.GetScore() << std::endl;
     for (Object* o : background)
 	{
 		o->Update(dt);

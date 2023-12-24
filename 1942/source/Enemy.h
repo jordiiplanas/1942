@@ -5,6 +5,8 @@
 #include "Bullet.h"
 #include "AudioManager.h"
 #include "AnimatedImageRenderer.h"
+#include "ScoreManager.h"
+
 class EnemyPlane : public GameObject
 {
 protected:
