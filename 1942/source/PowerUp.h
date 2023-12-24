@@ -26,8 +26,5 @@ public:
 			Destroy();
 		}
 	}
-	void OnCollisionEnter(Object* other) override
-	{	
-		SCOREMANAGER.AddScore(1000);
-	};
+	
 };
