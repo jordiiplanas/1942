@@ -12,13 +12,13 @@ protected:
 	int score;
 	int movementStage = 0;
 	float movementTime = 0;	
-	float timeBetweenShoots = 5000;
+	float timeBetweenShoots = 3000;
 	float currentTime;
 	float lastShootTime;
 	Transform* transformPlayer;
 	virtual void UpdateMovementPattern(float dt) = 0;
 public:	
-	Enemy(int health, int score, Transform* transformPlayer ) : health(health), score(score), transformPlayer(transformPlayer), GameObject(Vector2(16,16)) 
+	Enemy(int health, int score, Transform* transformPlayer, Vector2 size ) : health(health), score(score), transformPlayer(transformPlayer), GameObject(size) 
 	{
 		lastShootTime = SDL_GetTicks();
 		renderers.emplace("idle", new ImageRenderer(transform, Vector2(5, 203), Vector2(15, 14)));

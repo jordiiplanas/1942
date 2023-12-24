@@ -19,7 +19,7 @@ protected:
 	
 public:
 	SmallNormalPlane(MovementType mT, Transform* transformPlayer, bool isRight) :
-		movementType(mT), isRight(isRight), Enemy(1, 50, transformPlayer)
+		movementType(mT), isRight(isRight), Enemy(1, 50, transformPlayer, Vector2(16,16))
 	{	
 		curveMovementLimit = rand() % (400 - 200 + 1) + 200;		
 		GetRigidbody()->SetLinearDrag(2);		
@@ -27,6 +27,13 @@ public:
 	void Update(float dt) override
 	{
 		UpdateMovementPattern(dt);
+
+		if (currentTime - lastShootTime > timeBetweenShoots)
+		{
+			SPAWNER.InsertObject(Shoot(transformPlayer->position));
+			lastShootTime = SDL_GetTicks();
+		}
+
 		if (movementType == CURVE)
 		{
 			if(!changeMovement)

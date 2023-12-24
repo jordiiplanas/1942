@@ -21,8 +21,10 @@ void GameplayScene::OnEnter()
 	}
     objects.push_back(player);
     objects.push_back(new SmallNormalPlane(STRAIGHT, player->GetTransform(), true));
-    objects.push_back(new SmallRedPlane(player->GetTransform(), true));
+    objects.push_back(new SmallRedPlane(player->GetTransform(), true, true));
+    objects.push_back(new MediumYellowPlane(player->GetTransform(), false, 300));
     objects.push_back(new WhitePowerUp(*player));
+    objects.push_back(new BigGreenPlane(player->GetTransform()));
 }
 
 void GameplayScene::Update(float dt)

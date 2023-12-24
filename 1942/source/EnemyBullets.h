@@ -11,7 +11,7 @@ public:
 	{		
 		direction.Normalize();
 		this->direction = direction;
-		renderers.emplace("idle", new ImageRenderer(transform, Vector2(75,90), Vector2(3,3)));
+		renderers.emplace("idle", new ImageRenderer(transform, Vector2(69,107), Vector2(4,4)));
 		renderer = renderers["idle"];
 		rigidbody->SetVelocity(direction * speed);
 	}
