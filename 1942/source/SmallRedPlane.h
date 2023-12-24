@@ -26,9 +26,15 @@ public:
 		renderer = renderers["idle"];
 		GetRigidbody()->SetLinearDrag(2);
 		if (goesRight)
+		{
 			direction = Vector2(4, 0);
+			SetPosition(Vector2(-20, 0));
+		}
 		else
+		{
 			direction = Vector2(-4, 0);
+			SetPosition(Vector2(520, 0));
+		}
 		rigidbody->SetAngularDrag(5.3);
 	}
 

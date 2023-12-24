@@ -23,9 +23,11 @@ void GameplayScene::OnEnter()
     Wave* wave1 = new Wave(A, 0.5, 4);
     wave1->SetInitialPosition(Vector2(300, 0));
     Wave* wave2 = new Wave(B, 0.5, 4);
-    Wave* wave3 = new Wave(C, 0.5, 4);
+    wave2->SetInitialPosition(Vector2(-20, rand() % (450 - 50 + 1) + 50));
+    Wave* wave3 = new Wave(C, 0.5, 2);
     Wave* wave4 = new Wave(D, 1, 1);
     Wave* wave5 = new Wave(E, 2, 3);
+    Wave* wave6 = new Wave(F, 3, 4);
     
     objects.push_back(scoreUi);
     waveIndex = 0;
@@ -35,6 +37,7 @@ void GameplayScene::OnEnter()
     waves.push_back(wave3);
     waves.push_back(wave4);
     waves.push_back(wave5);
+    waves.push_back(wave6);
 
 }
 

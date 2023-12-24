@@ -12,7 +12,8 @@ enum WaveType
 	B,
 	C,
 	D,
-	E
+	E,
+	F
 };
 
 class Wave
@@ -27,6 +28,7 @@ private:
 	int numEnemies;
 	std::vector<EnemyPlane*> spawnedPlanes;
 	bool isFinished;
+	bool mediumSpawned = false;
 
 public:
 	Wave(WaveType type, float startTime, int numEnemies);
