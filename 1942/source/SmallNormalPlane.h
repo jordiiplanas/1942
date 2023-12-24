@@ -32,6 +32,7 @@ public:
 		Enemy::Update(dt);
 		if (isPendingDestroy && !isDying)
 		{
+			AUDIOMANAGER.PlayClip(deathSoundIndex);
 			isPendingDestroy = false;
 			isDying = true;
 			renderer = renderers["death"];

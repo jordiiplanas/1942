@@ -5,6 +5,7 @@ void GameplayScene::OnEnter()
     nextScene = "MainMenu";
     player = new Player(Vector2(250, 350));
     
+    AUDIOMANAGER.PlayMusic(AUDIOMANAGER.LoadMusic("resources/audios/musiquita.mp3"));
     Vector2 initialPos = Vector2(0, -64);
     Vector2 limitsPos = Vector2(512, 512);
     int counter = 0;
@@ -97,8 +98,7 @@ void GameplayScene::Update(float dt)
 
     isFinished = inputManager.CheckKeyState(SDLK_ESCAPE, KeyState::PRESSED);
 
-   /* sfxID = AUDIOMANAGER.LoadClip("resources/audios/rave.wav");
-   AUDIOMANAGER.FreeClip(sfxID);*/
+   
 
     
 }

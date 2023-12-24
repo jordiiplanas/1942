@@ -4,7 +4,7 @@
 #include "AnimatedImageRenderer.h"
 #include "InputManager.h"
 #include "SupportPlane.h"
-
+#include "AudioManager.h"
 
 class Player : public GameObject
 {
@@ -33,6 +33,11 @@ private:
 	SupportPlane* leftSupportPlane;
 	SupportPlane* rightSupportPlane;
 
+	int shootSoundID;
+	int deathSoundID;
+	int flipSoundID;
+	int powerUpSoundID;
+
 public:
 	Player(Vector2 position) : GameObject(Vector2(32, 32)) {
 		renderers.emplace("idle", new ImageRenderer(transform, Vector2(0,0), Vector2(32, 32)));
@@ -60,6 +65,10 @@ public:
 		renderers.emplace("roll", new AnimatedImageRenderer(transform, Vector2(0, 0), Vector2(32, 32), rollDeltas, false, 20));
 		renderer = renderers["idle"];
 		rigidbody->SetLinearDrag(10);
+		shootSoundID = AUDIOMANAGER.LoadClip("resources/audios/Piu.mp3");
+		deathSoundID = AUDIOMANAGER.LoadClip("resources/audios/puabuauauaua.mp3");
+		flipSoundID = AUDIOMANAGER.LoadClip("resources/audios/flip.mp3");
+		powerUpSoundID = AUDIOMANAGER.LoadClip("resources/audios/Chiclinn.mp3");
 		SetScale(Vector2(1.5f, 1.5f));
 		initialPosition = position;
 		SetPosition(position);
@@ -69,7 +78,7 @@ public:
 	bool IsDying() { return isDying; }
 	void PlayDeathAnimation();
 	void Shoot();
-	void AddSupportPlane(bool isLeft);
+	void AddSupportPlane();
 	void MoveSupportPlanes();
 	void DisableSupportPlane(Object* other);
 	void Update(float deltaTime) override;

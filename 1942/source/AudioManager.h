@@ -42,5 +42,7 @@ public:
 	void Mute();
 	void Unmute();
 	
+	int GetClipIndex(const std::string path);
+
 	inline bool GetMuted() { return muted; }
 };

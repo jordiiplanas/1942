@@ -5,6 +5,7 @@
 void Player::PlayDeathAnimation()
 {
     if (isDying) return;
+    AUDIOMANAGER.PlayClip(deathSoundID);
 	renderer = renderers["death"];
 	isDying = true;
 }
@@ -22,25 +23,23 @@ void Player::Shoot()
 
 }
 
-void Player::AddSupportPlane(bool isLeft)
+void Player::AddSupportPlane()
 {
-
-    if (leftSupportPlane != nullptr && isLeft ||
-    rightSupportPlane != nullptr && !isLeft) return;
-
-	SupportPlane* supportPlane = new SupportPlane(isLeft);
-
-    if (isLeft)
+    AUDIOMANAGER.PlayClip(powerUpSoundID);
+    
+    if (leftSupportPlane == nullptr)
 	{
-		supportPlane->SetPosition(GetCenteredPosition() + Vector2(-transform->size.x, 0));
-        leftSupportPlane = supportPlane;
+        leftSupportPlane = new SupportPlane(true);
+        leftSupportPlane->SetPosition(GetCenteredPosition() + Vector2(-transform->size.x, 0));
+        SPAWNER.InsertObject(leftSupportPlane);
 	}
-	else
+
+	if (rightSupportPlane == nullptr)
 	{
-		supportPlane->SetPosition(GetCenteredPosition() + Vector2(transform->size.x, 0));
-		rightSupportPlane = supportPlane;
+        rightSupportPlane = new SupportPlane(false);
+        rightSupportPlane->SetPosition(GetCenteredPosition() + Vector2(transform->size.x, 0));
+        SPAWNER.InsertObject(rightSupportPlane);
 	}
-	SPAWNER.InsertObject(supportPlane);
 }
 
 void Player::MoveSupportPlanes()
@@ -172,12 +171,14 @@ void Player::Update(float deltaTime)
             if (lastShootTime > shootDelay)
 			{
 				lastShootTime = 0;
+                AUDIOMANAGER.PlayClip(shootSoundID);
                 Shoot();
 			}
         }
 
         if (inputManager.CheckKeyState(SDLK_j, PRESSED))
         {
+            AUDIOMANAGER.PlayClip(flipSoundID);
             isRolling = true;
         }
         
@@ -190,8 +191,7 @@ void Player::Update(float deltaTime)
 
     if (inputManager.CheckKeyState(SDLK_q, PRESSED))
 	{
-		AddSupportPlane(true);
-        AddSupportPlane(false);
+		AddSupportPlane();
 	}
 
     inputForce.Normalize();
