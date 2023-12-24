@@ -91,6 +91,32 @@ void GameplayScene::Update(float dt)
         if (o == player)
 			player = nullptr;
 
+        if (dynamic_cast<EnemyPlane*>(o))
+        {
+            float randomProbability = rand() % 100;
+            if (randomProbability < 30)
+            {
+                float randomNumber = rand() % 3;
+                if (randomNumber == 0)
+                {
+                    WhitePowerUp* powerUp = new WhitePowerUp(*player);
+                    powerUp->SetPosition(o->GetPosition());
+                    SPAWNER.InsertObject(powerUp);
+                }
+                else if (randomNumber == 1)
+                {
+                    GrayPowerUp* powerUp = new GrayPowerUp(*player);
+                    powerUp->SetPosition(o->GetPosition());
+                    SPAWNER.InsertObject(powerUp);
+                }
+                else
+                {
+                    GreenPowerUp* powerUp = new GreenPowerUp(*player);
+                    powerUp->SetPosition(o->GetPosition());
+                    SPAWNER.InsertObject(powerUp);
+                }
+            }
+        }
         if (dynamic_cast<SupportPlane*>(o))
         {
             player->DisableSupportPlane(o);
