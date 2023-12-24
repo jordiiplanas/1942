@@ -4,6 +4,7 @@
 #include "Spawner.h"
 #include "Bullet.h"
 #include "AudioManager.h"
+#include "AnimatedImageRenderer.h"
 class Enemy : public GameObject
 {
 protected:
