@@ -32,6 +32,7 @@
     <ClCompile Include="source\Renderer.cpp" />
     <ClCompile Include="source\RenderManager.cpp" />
     <ClCompile Include="source\Scene.cpp" />
+    <ClCompile Include="source\SmallNormalPlane.cpp" />
     <ClCompile Include="source\Spawner.cpp" />
     <ClCompile Include="source\SupportPlane.cpp" />
     <ClCompile Include="source\TextRenderer.cpp" />
@@ -41,6 +42,7 @@
     <ClInclude Include="source\AnimatedImageRenderer.h" />
     <ClInclude Include="source\AudioManager.h" />
     <ClInclude Include="source\Background.h" />
+    <ClInclude Include="source\BigGreenPlane.h" />
     <ClInclude Include="source\Bullet.h" />
     <ClInclude Include="source\Enemy.h" />
     <ClInclude Include="source\EnemyBullets.h" />
@@ -51,6 +53,7 @@
     <ClInclude Include="source\ImageRenderer.h" />
     <ClInclude Include="source\InputManager.h" />
     <ClInclude Include="source\MainMenu.h" />
+    <ClInclude Include="source\MediumYellowPlane.h" />
     <ClInclude Include="source\Object.h" />
     <ClInclude Include="source\Player.h" />
     <ClInclude Include="source\PowerUp.h" />
@@ -60,6 +63,7 @@
     <ClInclude Include="source\Scene.h" />
     <ClInclude Include="source\SceneManager.h" />
     <ClInclude Include="source\SmallNormalPlane.h" />
+    <ClInclude Include="source\SmallRedPlane.h" />
     <ClInclude Include="source\Spawner.h" />
     <ClInclude Include="source\SupportPlane.h" />
     <ClInclude Include="source\TextRenderer.h" />

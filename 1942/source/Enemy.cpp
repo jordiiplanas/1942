@@ -5,13 +5,7 @@
 void Enemy::Update(float dt)
 {
 	currentTime = SDL_GetTicks();
-	Object::Update(dt);
-
-	if (currentTime - lastShootTime > timeBetweenShoots)
-	{
-		SPAWNER.InsertObject(Shoot(transformPlayer->position));
-		lastShootTime = SDL_GetTicks();
-	}
+	Object::Update(dt);	
 	
 	if (health <= 0)
 		Destroy();

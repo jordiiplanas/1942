@@ -1,6 +1,7 @@
 #pragma once
 #include "Enemy.h"
 
+
 enum MovementType
 {
 	V,
@@ -15,10 +16,21 @@ protected:
 	float timeToDie = 0.5f;
 	bool isDying = false;
 	MovementType movementType;
-	void UpdateMovementPattern(float dt) override {}
+	float curveMovementLimit;
+	bool changeMovement = false;
+	bool isRight;
+	void UpdateMovementPattern(float dt) override;
+	
 public:
-	SmallNormalPlane(MovementType mT, Transform* transformPlayer) : movementType(mT), Enemy(1, 50, transformPlayer)
-	{
+	
+	
+	SmallNormalPlane(MovementType mT, Transform* transformPlayer, bool isRight) :
+		movementType(mT), isRight(isRight), Enemy(1, 50, transformPlayer, Vector2(16,16))
+	{	
+		curveMovementLimit = rand() % (400 - 200 + 1) + 200;		
+		GetRigidbody()->SetLinearDrag(2);	
+
+	
 		renderers.emplace("idle", new ImageRenderer(transform, Vector2(5, 203), Vector2(15, 14)));
 		std::vector<Vector2> deathDeltas
 		{
@@ -29,6 +41,47 @@ public:
 	}
 	void Update(float dt) override
 	{
+		UpdateMovementPattern(dt);
+
+		if (currentTime - lastShootTime > timeBetweenShoots)
+		{
+			SPAWNER.InsertObject(Shoot(transformPlayer->position));
+			lastShootTime = SDL_GetTicks();
+		}
+
+		if (movementType == CURVE)
+		{
+			if(!changeMovement)
+				GetRigidbody()->AddForce(Vector2(0, 8));
+			else
+			{
+				if(isRight)
+					GetRigidbody()->AddForce(Vector2(8, 0));
+				else
+					GetRigidbody()->AddForce(Vector2(-8, 0));
+			}				
+		}
+		else if (movementType == V)
+		{
+			if (!changeMovement)
+			{
+				if (isRight)
+					GetRigidbody()->AddForce(Vector2(2, 8));
+				else
+					GetRigidbody()->AddForce(Vector2(-2, 8));
+			}
+			else
+			{
+				if (isRight)
+					GetRigidbody()->AddForce(Vector2(2, -8));
+				else
+					GetRigidbody()->AddForce(Vector2(-2, -8));
+			}
+		}
+		else
+		{
+			GetRigidbody()->AddForce(Vector2(0, 8));
+		}
 		Enemy::Update(dt);
 		if (isPendingDestroy && !isDying)
 		{
