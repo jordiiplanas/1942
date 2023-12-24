@@ -17,6 +17,9 @@ void Player::Shoot()
 
 	Bullet* bullet = new Bullet(500, Vector2(0, -1), Vector2(16, 16), Vector2(97, 101), Vector2(11,10));
 
+    if (isShootingFourBullets) 
+        bullet = new Bullet(800, Vector2(0, -1), Vector2(20, 16), Vector2(134, 99), Vector2(17, 12));
+
     Vector2 position = Vector2(0,-transform->size.y/2);
 	bullet->SetPosition(GetCenteredPosition() + position);
     SPAWNER.InsertObject(bullet);
@@ -84,15 +87,17 @@ void Player::Update(float deltaTime)
         if (timePassed > timeToDie)
         {
             lives--;
+            isShootingFourBullets = false;
+            if (leftSupportPlane != nullptr) leftSupportPlane->PlayDeathAnimation();
+            if (rightSupportPlane != nullptr) rightSupportPlane->PlayDeathAnimation();
+            isDying = false;
             if (lives == 0)
             {
 				isPendingDestroy = true;
                 return;
             }
             timePassed = 0;
-            if (leftSupportPlane != nullptr) leftSupportPlane->PlayDeathAnimation();
-            if (rightSupportPlane != nullptr) rightSupportPlane->PlayDeathAnimation();
-            isDying = false;
+            
             currentAnimation = "idle";
             renderer = renderers[currentAnimation];
             isRespawning = true;
@@ -204,7 +209,7 @@ void Player::Update(float deltaTime)
 void Player::OnCollisionEnter(Object* other)
 {
     if (isRolling || isDying) return;
-    if (dynamic_cast<Enemy*>(other))
+    if (dynamic_cast<EnemyPlane*>(other))
 	{
 		PlayDeathAnimation();
 	}

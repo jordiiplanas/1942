@@ -1,6 +1,6 @@
 #pragma once
 #include "GameObject.h"
-#include "EnemyBullets.h"
+#include "EnemyBullet.h"
 #include "AnimatedImageRenderer.h"
 #include "InputManager.h"
 #include "SupportPlane.h"
@@ -13,7 +13,8 @@ private:
 	float fireTime = 0.2f;
 	float lastFireTime;
 	bool doubleFire;
-	int lives = 3;
+	int lives = 30;
+
 
 	float timePassed = 0;
 	float timeToDie = 0.5f;
@@ -39,6 +40,8 @@ private:
 	int powerUpSoundID;
 
 public:
+	bool isShootingFourBullets = false;
+
 	Player(Vector2 position) : GameObject(Vector2(32, 32)) {
 		renderers.emplace("idle", new ImageRenderer(transform, Vector2(0,0), Vector2(32, 32)));
 		std::vector<Vector2> rightDeltas
@@ -79,6 +82,7 @@ public:
 	void PlayDeathAnimation();
 	void Shoot();
 	void AddSupportPlane();
+	void ShootFourBullets();
 	void MoveSupportPlanes();
 	void DisableSupportPlane(Object* other);
 	void Update(float deltaTime) override;

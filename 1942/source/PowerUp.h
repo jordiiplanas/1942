@@ -8,8 +8,6 @@ class PowerUp : public GameObject
 {
 protected:
 	Player* player;
-	//Spawner* spawner;
-	//ScoreManager
 	
 public:	
 	PowerUp(Player& p, Vector2 size) : player(&p), GameObject(Vector2(size.x,size.y))
@@ -26,4 +24,11 @@ public:
 			Destroy();
 		}
 	}
+	void OnCollisionEnter(Object* other) override
+	{
+		if (dynamic_cast<Player*>(other))
+		{
+			Destroy();
+		}
+	};
 };

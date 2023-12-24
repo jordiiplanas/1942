@@ -2,7 +2,7 @@
 
 
 
-void Enemy::Update(float dt)
+void EnemyPlane::Update(float dt)
 {
 	currentTime = SDL_GetTicks();
 	Object::Update(dt);	
@@ -11,15 +11,15 @@ void Enemy::Update(float dt)
 		Destroy();
 }
 
-Object* Enemy::Shoot(Vector2 position)
+Object* EnemyPlane::Shoot(Vector2 position)
 {
-	EnemyBullet* bullet = new EnemyBullet(500, Vector2(16, 16), Vector2(transformPlayer->position - GetCenteredPosition()));
+	EnemyBullet* bullet = new EnemyBullet(500, Vector2(8, 8), Vector2(transformPlayer->position - GetCenteredPosition()));
 
 	bullet->SetPosition(GetCenteredPosition());
 	return bullet;
 }
 
-void Enemy::OnCollisionEnter(Object* other)
+void EnemyPlane::OnCollisionEnter(Object* other)
 {
 
 	if (dynamic_cast<Bullet*>(other))

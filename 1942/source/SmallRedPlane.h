@@ -1,7 +1,7 @@
 #pragma once
 #include "Enemy.h"
 
-class SmallRedPlane : public Enemy
+class SmallRedPlane : public EnemyPlane
 {
 protected:
 	bool goesRight;
@@ -17,11 +17,13 @@ protected:
 	
 public:
 	SmallRedPlane(Transform* transformPlayer, bool goesRight, bool spinUp) :
-	 goesRight(goesRight), spinUp(spinUp), Enemy(1, 100, transformPlayer, Vector2(16, 16))
+	 goesRight(goesRight), spinUp(spinUp), EnemyPlane(1, 100, transformPlayer, Vector2(16, 16))
 	{ 
 		transform->angle = 90;
 		lastChangeTime = SDL_GetTicks();
 		transform->position = Vector2(0, 250);
+		renderers.emplace("idle", new ImageRenderer(transform, Vector2(305, 0), Vector2(15, 14)));
+		renderer = renderers["idle"];
 		GetRigidbody()->SetLinearDrag(2);
 		if (goesRight)
 			direction = Vector2(4, 0);
@@ -34,7 +36,7 @@ public:
 	{
 
 		actualTime = SDL_GetTicks();
-		Enemy::Update(dt);	
+		EnemyPlane::Update(dt);	
 		UpdateMovementPattern(dt);
 		if (isSpinning)
 		{

@@ -9,11 +9,14 @@
 #include "Background.h"
 #include "MediumYellowPlane.h"
 #include "BigGreenPlane.h"
+#include "Wave.h"
 
 class GameplayScene : public Scene
 {
 
 private:
+	std::vector<Wave> waves;
+	int waveIndex;
 	std::vector<Object*> background;
 	int levelWaves;
 	Player* player;
