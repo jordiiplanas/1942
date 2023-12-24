@@ -15,7 +15,7 @@ class GameplayScene : public Scene
 {
 
 private:
-	std::vector<Wave> waves;
+	std::vector<Wave*> waves;
 	int waveIndex;
 	std::vector<Object*> background;
 	int levelWaves;

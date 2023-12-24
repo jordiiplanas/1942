@@ -20,11 +20,12 @@ void GameplayScene::OnEnter()
 		initialPos.x = 0;
 		initialPos.y += 32;
 	}
-    Wave wave1 = Wave(A, 0.5, 10);
-    Wave wave2 = Wave(B, 0.3, 10);
-    Wave wave3 = Wave(C, 0.06, 10);
-    Wave wave4 = Wave(D, 1, 10);
-    Wave wave5 = Wave(E, 2, 10);
+    Wave* wave1 = new Wave(A, 0.5, 4);
+    wave1->SetInitialPosition(Vector2(300, 0));
+    Wave* wave2 = new Wave(B, 0.5, 4);
+    Wave* wave3 = new Wave(C, 0.5, 4);
+    Wave* wave4 = new Wave(D, 1, 1);
+    Wave* wave5 = new Wave(E, 2, 3);
     
     waveIndex = 0;
     SPAWNER.InsertObject(player);
@@ -45,16 +46,20 @@ void GameplayScene::Update(float dt)
 		o->Update(dt);
 	}
     
-    if (!waves[waveIndex].IsFinished())
+    if (!waves[waveIndex]->IsFinished())
 	{
-        waves[waveIndex].Update(dt, player->GetTransform());
+        waves[waveIndex]->Update(dt, player->GetTransform());
 	}
    else
     {
 	    waveIndex++;
-	    if (waveIndex >= waves.size())
-	    {
-		    waveIndex = 0;
+        if (waveIndex >= waves.size())
+        {
+            waveIndex = 0;
+            for (Wave* wave : waves)
+            {
+				wave->Reset();
+            }
 	    }
 	}
 
