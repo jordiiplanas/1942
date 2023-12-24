@@ -1,10 +1,9 @@
 #pragma once
 #include "GameObject.h"
 #include "EnemyBullets.h"
-#include "Player.h"
 #include "Spawner.h"
-
-
+#include "Bullet.h"
+#include "AudioManager.h"
 class Enemy : public GameObject
 {
 protected:
@@ -16,6 +15,8 @@ protected:
 	float currentTime;
 	float lastShootTime;
 	Transform* transformPlayer;
+	int deathSoundIndex = 0;
+
 	virtual void UpdateMovementPattern(float dt) = 0;
 public:	
 	Enemy(int health, int score, Transform* transformPlayer ) : health(health), score(score), transformPlayer(transformPlayer), GameObject(Vector2(16,16)) 
@@ -23,7 +24,8 @@ public:
 		lastShootTime = SDL_GetTicks();
 		renderers.emplace("idle", new ImageRenderer(transform, Vector2(5, 203), Vector2(15, 14)));
 		renderer = renderers["idle"];
-		SetScale(Vector2(1, 1));
+		deathSoundIndex = AUDIOMANAGER.LoadClip("resources/audios/aaaaaa.mp3");
+		SetScale(Vector2(1.2f, 1.2f));
 		SetPosition(Vector2(200, 300));
 	}
 	virtual void Update(float dt) override;

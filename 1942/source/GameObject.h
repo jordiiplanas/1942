@@ -12,6 +12,7 @@ public:
 	}	
 	void ChangeAnimation(std::string animID)
 	{
+
 		if (renderers[animID] == renderer)
 			return;
 
