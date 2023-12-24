@@ -43,28 +43,22 @@ void GameplayScene::Update(float dt)
 	isFinished = inputManager.CheckKeyState(SDLK_ESCAPE, PRESSED);
   
     scoreUi->ChangeText("SCORE: " + std::to_string(SCOREMANAGER.GetScore()));
-    std::cout << SCOREMANAGER.GetScore() << std::endl;
     for (Object* o : background)
 	{
 		o->Update(dt);
 	}
-    
-    if (!waves[waveIndex]->IsFinished())
+    if (waves.size() > waveIndex)
 	{
-        waves[waveIndex]->Update(dt, player->GetTransform());
-	}
-   else
-    {
-	    waveIndex++;
-        if (waveIndex >= waves.size())
+        if (!waves[waveIndex]->IsFinished())
         {
-            waveIndex = 0;
-            for (Wave* wave : waves)
-            {
-				wave->Reset();
-            }
-	    }
+            waves[waveIndex]->Update(dt, player->GetTransform());
+        }
+        else
+        {
+            waveIndex++;
+        }
 	}
+    
 
     for (Object* o : objects)
     {
@@ -80,52 +74,24 @@ void GameplayScene::Update(float dt)
             continue;
         }
 
-       /* if (dynamic_cast<WhitePowerUp*>(o))
+        if (dynamic_cast<WhitePowerUp*>(o))
         {
-            if (dynamic_cast<WhitePowerUp*>(o)->isActive)
+            for (Object* o : objects)
             {
-                dynamic_cast<WhitePowerUp*>(o)->isActive = false;
-                for (Object* o : objects)
+                if (dynamic_cast<EnemyPlane*>(o))
                 {
-                    if (dynamic_cast<EnemyPlane*>(o))
-                    {
-                        o->Destroy();
-                    }
+                    o->Destroy();
                 }
             }
-        }*/
+        }
         
         if (o == player)
 			player = nullptr;
 
-       if (dynamic_cast<SupportPlane*>(o))
-       {
+        if (dynamic_cast<SupportPlane*>(o))
+        {
             player->DisableSupportPlane(o);
-       }
-
-       if (dynamic_cast<EnemyPlane*>(o))
-       {
-           
-            if (rand() % 3 == 0)
-            {
-                WhitePowerUp* powerUp = new WhitePowerUp(*player);
-                powerUp->SetPosition(o->GetTransform()->position);
-                SPAWNER.InsertObject(powerUp);
-            }
-            else if (rand() % 3 == 1)
-			{
-                GrayPowerUp* powerUp = new GrayPowerUp(*player);
-                powerUp->SetPosition(o->GetTransform()->position);
-                SPAWNER.InsertObject(powerUp);
-			}
-			else if (rand() % 3 == 2)
-			{
-                GreenPowerUp* powerUp = new GreenPowerUp(*player);
-                powerUp->SetPosition(o->GetTransform()->position);
-                SPAWNER.InsertObject(powerUp);
-			}
-           
-       }
+        }
 
         objects.erase(std::remove(objects.begin(), objects.end(), o), objects.end());
         o = nullptr;
