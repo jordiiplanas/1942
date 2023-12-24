@@ -13,19 +13,27 @@ void GameplayScene::OnEnter()
     {
         while (initialPos.x < limitsPos.x)
         {
-            background.push_back(new Background(Vector2(32, 32), 10));
+            background.push_back(new Background(Vector2(32, 32), 20));
             background.back()->SetPosition(initialPos);
 			initialPos.x += 32;
 		}
 		initialPos.x = 0;
 		initialPos.y += 32;
 	}
-    objects.push_back(player);
-    objects.push_back(new SmallNormalPlane(STRAIGHT, player->GetTransform(), true));
-    objects.push_back(new SmallRedPlane(player->GetTransform(), true, true));
-    objects.push_back(new MediumYellowPlane(player->GetTransform(), false, 300));
-    objects.push_back(new WhitePowerUp(*player));
-    objects.push_back(new BigGreenPlane(player->GetTransform()));
+    Wave wave1 = Wave(A, 0.5, 10);
+    Wave wave2 = Wave(B, 0.3, 10);
+    Wave wave3 = Wave(C, 0.06, 10);
+    Wave wave4 = Wave(D, 1, 10);
+    Wave wave5 = Wave(E, 2, 10);
+    
+    waveIndex = 0;
+    SPAWNER.InsertObject(player);
+    waves.push_back(wave1);
+    waves.push_back(wave2);
+    waves.push_back(wave3);
+    waves.push_back(wave4);
+    waves.push_back(wave5);
+
 }
 
 void GameplayScene::Update(float dt)
@@ -35,6 +43,19 @@ void GameplayScene::Update(float dt)
     for (Object* o : background)
 	{
 		o->Update(dt);
+	}
+    
+    if (!waves[waveIndex].IsFinished())
+	{
+        waves[waveIndex].Update(dt, player->GetTransform());
+	}
+   else
+    {
+	    waveIndex++;
+	    if (waveIndex >= waves.size())
+	    {
+		    waveIndex = 0;
+	    }
 	}
 
     for (Object* o : objects)
@@ -51,30 +72,55 @@ void GameplayScene::Update(float dt)
             continue;
         }
 
-        if (dynamic_cast<WhitePowerUp*>(o))
+       /* if (dynamic_cast<WhitePowerUp*>(o))
         {
             if (dynamic_cast<WhitePowerUp*>(o)->isActive)
             {
                 dynamic_cast<WhitePowerUp*>(o)->isActive = false;
                 for (Object* o : objects)
                 {
-                    if (dynamic_cast<Enemy*>(o))
+                    if (dynamic_cast<EnemyPlane*>(o))
                     {
                         o->Destroy();
                     }
                 }
             }
-        }
+        }*/
         
         if (o == player)
 			player = nullptr;
 
-        if (dynamic_cast<SupportPlane*>(o))
-        {
+       if (dynamic_cast<SupportPlane*>(o))
+       {
             player->DisableSupportPlane(o);
-        }
+       }
+
+       if (dynamic_cast<EnemyPlane*>(o))
+       {
+           
+            if (rand() % 3 == 0)
+            {
+                WhitePowerUp* powerUp = new WhitePowerUp(*player);
+                powerUp->SetPosition(o->GetTransform()->position);
+                SPAWNER.InsertObject(powerUp);
+            }
+            else if (rand() % 3 == 1)
+			{
+                GrayPowerUp* powerUp = new GrayPowerUp(*player);
+                powerUp->SetPosition(o->GetTransform()->position);
+                SPAWNER.InsertObject(powerUp);
+			}
+			else if (rand() % 3 == 2)
+			{
+                GreenPowerUp* powerUp = new GreenPowerUp(*player);
+                powerUp->SetPosition(o->GetTransform()->position);
+                SPAWNER.InsertObject(powerUp);
+			}
+           
+       }
+
         objects.erase(std::remove(objects.begin(), objects.end(), o), objects.end());
-        delete o;
+        o = nullptr;
     }
 
     for (Object* o : objects)

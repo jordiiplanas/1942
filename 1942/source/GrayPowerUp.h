@@ -10,11 +10,12 @@ public:
 		renderer = new ImageRenderer(transform, Vector2(57,140), Vector2(12,9));
 	}
 
-	void OnCollisionEnter(Object* other) override 
+	void OnCollisionEnter(Object* other) override
 	{
 		if (dynamic_cast<Player*>(other))
 		{
+			player->AddSupportPlane();
 			Destroy();
 		}
-	};
+	}
 };

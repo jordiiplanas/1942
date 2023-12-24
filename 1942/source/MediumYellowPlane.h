@@ -3,7 +3,7 @@
 
 
 
-class MediumYellowPlane : public Enemy
+class MediumYellowPlane : public EnemyPlane
 {
 	
 protected:
@@ -17,10 +17,12 @@ protected:
 
 public:
 	MediumYellowPlane(Transform* transformPlayer, bool spawnLeft, float startSpin) :
-		spawnLeft(spawnLeft), startSpin(startSpin), Enemy(1, 100, transformPlayer, Vector2(32, 32))
+		spawnLeft(spawnLeft), startSpin(startSpin), EnemyPlane(1, 100, transformPlayer, Vector2(32, 32))
 	{
 		transform->position = Vector2(100, 0);
 		GetRigidbody()->SetLinearDrag(2);		
+		renderers.emplace("idle", new ImageRenderer(transform, Vector2(7, 507), Vector2(31, 30)));
+		renderer = renderers["idle"];
 		direction = Vector2(0, 4);
 		rigidbody->SetAngularDrag(5.3);
 	}
@@ -32,7 +34,7 @@ public:
 			SPAWNER.InsertObject(Shoot(transformPlayer->position));
 			lastShootTime = SDL_GetTicks();
 		}
-		Enemy::Update(dt);
+		EnemyPlane::Update(dt);
 		UpdateMovementPattern(dt);
 		if (isSpinning)
 		{
