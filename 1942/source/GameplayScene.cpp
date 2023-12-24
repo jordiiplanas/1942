@@ -21,7 +21,7 @@ void GameplayScene::OnEnter()
 		initialPos.y += 32;
 	}
     objects.push_back(player);
-    objects.push_back(new SmallNormalPlane(STRAIGHT, player->GetTransform(), true));
+     objects.push_back(new SmallNormalPlane(STRAIGHT, player->GetTransform(), true));
     objects.push_back(new SmallRedPlane(player->GetTransform(), true, true));
     objects.push_back(new MediumYellowPlane(player->GetTransform(), false, 300));
     objects.push_back(new WhitePowerUp(*player));
@@ -69,12 +69,12 @@ void GameplayScene::Update(float dt)
         if (o == player)
 			player = nullptr;
 
-        if (dynamic_cast<SupportPlane*>(o))
+       if (dynamic_cast<SupportPlane*>(o))
         {
             player->DisableSupportPlane(o);
         }
         objects.erase(std::remove(objects.begin(), objects.end(), o), objects.end());
-        delete o;
+        o = nullptr;
     }
 
     for (Object* o : objects)
