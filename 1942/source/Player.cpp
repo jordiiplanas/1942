@@ -1,15 +1,20 @@
 #include "Player.h"
+#include "Enemy.h"
 
 
 void Player::PlayDeathAnimation()
 {
+    if (isDying) return;
+    AUDIOMANAGER.PlayClip(deathSoundID);
 	renderer = renderers["death"];
-	renderers["death"]->Reset();
 	isDying = true;
 }
 
 void Player::Shoot()
 {
+    if (leftSupportPlane != nullptr) leftSupportPlane->Shoot();
+    if (rightSupportPlane != nullptr) rightSupportPlane->Shoot();
+
 	Bullet* bullet = new Bullet(500, Vector2(0, -1), Vector2(16, 16), Vector2(97, 101), Vector2(11,10));
 
     Vector2 position = Vector2(0,-transform->size.y/2);
@@ -18,9 +23,94 @@ void Player::Shoot()
 
 }
 
+void Player::AddSupportPlane()
+{
+    AUDIOMANAGER.PlayClip(powerUpSoundID);
+    
+    if (leftSupportPlane == nullptr)
+	{
+        leftSupportPlane = new SupportPlane(true);
+        leftSupportPlane->SetPosition(GetCenteredPosition() + Vector2(-transform->size.x, 0));
+        SPAWNER.InsertObject(leftSupportPlane);
+	}
+
+	if (rightSupportPlane == nullptr)
+	{
+        rightSupportPlane = new SupportPlane(false);
+        rightSupportPlane->SetPosition(GetCenteredPosition() + Vector2(transform->size.x, 0));
+        SPAWNER.InsertObject(rightSupportPlane);
+	}
+}
+
+void Player::MoveSupportPlanes()
+{
+    if (leftSupportPlane == nullptr && rightSupportPlane == nullptr) return;
+
+    if (leftSupportPlane != nullptr)
+    {
+        leftSupportPlane->isRolling = isRolling;
+        leftSupportPlane->SetPosition(GetCenteredPosition() + Vector2(-transform->size.x, 0));
+        if (!leftSupportPlane->isDying) leftSupportPlane->ChangeAnimation(currentAnimation);
+        
+    }
+    if (rightSupportPlane != nullptr)
+	{
+        rightSupportPlane->isRolling = isRolling;
+		rightSupportPlane->SetPosition(GetCenteredPosition() + Vector2(transform->size.x, 0));
+        if (!rightSupportPlane->isDying) rightSupportPlane->ChangeAnimation(currentAnimation);
+		
+	}
+}
+
+void Player::DisableSupportPlane(Object* other)
+{
+    if (leftSupportPlane == other)
+	{
+		leftSupportPlane = nullptr;
+	}
+	else if (rightSupportPlane == other)
+	{
+		rightSupportPlane = nullptr;
+	}
+}
+
 void Player::Update(float deltaTime)
 {
 	if (isPendingDestroy) delete this;
+
+    if (isDying)
+    {
+        timePassed += deltaTime;
+        if (timePassed > timeToDie)
+        {
+            lives--;
+            if (lives == 0)
+            {
+				isPendingDestroy = true;
+                return;
+            }
+            timePassed = 0;
+            if (leftSupportPlane != nullptr) leftSupportPlane->PlayDeathAnimation();
+            if (rightSupportPlane != nullptr) rightSupportPlane->PlayDeathAnimation();
+            isDying = false;
+            currentAnimation = "idle";
+            renderer = renderers[currentAnimation];
+            isRespawning = true;
+            transform->position = Vector2(2000, 2000);
+        }
+	}
+
+    if (isRespawning)
+    {
+        timePassed += deltaTime;
+        if (timePassed > timeToRespawn)
+        {
+            isRespawning = false;
+            timePassed = 0;
+            transform->position = initialPosition;
+        }
+    }
+
 	rigidbody->Update(deltaTime);
 	renderer->Update(deltaTime);
 
@@ -49,28 +139,47 @@ void Player::Update(float deltaTime)
         if (inputManager.CheckKeyState(SDLK_a, HOLD) && GetPosition().x > 15)
         {
             inputForce.x -= 1;
-            ChangeAnimation("left");
+            currentAnimation = "left";
         }
         else if (inputManager.CheckKeyState(SDLK_d, HOLD) && GetPosition().x < 450)
         {
             inputForce.x += 1;
-            ChangeAnimation("right");
+            currentAnimation = "right";
         }
-        else
-            ChangeAnimation("idle");
-
-        if (inputManager.CheckKeyState(SDLK_SPACE, PRESSED))
+        else 
         {
-            Shoot();
+            currentAnimation = "idle";
+            
         }
-        else if (inputManager.CheckKeyState(SDLK_SPACE, HOLD))
+
+        if (isRolling)
+        {
+            timeRolling += deltaTime;
+            if (timeRolling > timeToRoll)
+			{
+				isRolling = false;
+				timeRolling = 0;
+			}
+            currentAnimation = "roll";
+        }
+
+        ChangeAnimation(currentAnimation);
+
+        if (inputManager.CheckKeyState(SDLK_SPACE, HOLD))
         {
             lastShootTime += deltaTime;
             if (lastShootTime > shootDelay)
 			{
 				lastShootTime = 0;
+                AUDIOMANAGER.PlayClip(shootSoundID);
                 Shoot();
 			}
+        }
+
+        if (inputManager.CheckKeyState(SDLK_j, PRESSED))
+        {
+            AUDIOMANAGER.PlayClip(flipSoundID);
+            isRolling = true;
         }
         
     }
@@ -80,13 +189,26 @@ void Player::Update(float deltaTime)
         PlayDeathAnimation();
     }
 
+    if (inputManager.CheckKeyState(SDLK_q, PRESSED))
+	{
+		AddSupportPlane();
+	}
+
     inputForce.Normalize();
     inputForce = inputForce * 50;
     GetRigidbody()->AddForce(inputForce);
+    MoveSupportPlanes();
+    
 }
 
 void Player::OnCollisionEnter(Object* other)
 {
+    if (isRolling || isDying) return;
+    if (dynamic_cast<Enemy*>(other))
+	{
+		PlayDeathAnimation();
+	}
+	else
 	if (dynamic_cast<EnemyBullet*>(other))
 	{
 		PlayDeathAnimation();

@@ -25,6 +25,10 @@ AudioManager::~AudioManager()
 
 int AudioManager::LoadClip(const std::string path)
 {
+    if (GetClipIndex (path) != -1) {
+		return GetClipIndex(path);
+	}
+
     Mix_Chunk* sfx = Mix_LoadWAV(path.c_str());
     assert(sfx);
     
@@ -34,6 +38,16 @@ int AudioManager::LoadClip(const std::string path)
     availableIDs.pop();
 
     return id;
+}
+
+int AudioManager::GetClipIndex(const std::string path)
+{
+	for (auto clip : clips) {
+		if (clip.second == Mix_LoadWAV(path.c_str())) {
+			return clip.first;
+		}
+	}
+	return -1;
 }
 
 int AudioManager::LoadMusic(const std::string path)
@@ -56,7 +70,7 @@ void AudioManager::PlayClip(int id)
 
 void AudioManager::PlayMusic(int id)
 {
-    Mix_FadeInMusic(songs[id], id, 500);
+    Mix_FadeInMusic(songs[id], id, 1000);
 }
 
 void AudioManager::StopClip(int id)

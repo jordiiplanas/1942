@@ -25,8 +25,4 @@ public:
 			Destroy();
 		}
 	}
-	virtual void OnCollisionEnter(Object* other) override
-	{
-		
-	}
 };

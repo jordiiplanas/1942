@@ -34,6 +34,7 @@
     <ClCompile Include="source\Scene.cpp" />
     <ClCompile Include="source\SmallNormalPlane.cpp" />
     <ClCompile Include="source\Spawner.cpp" />
+    <ClCompile Include="source\SupportPlane.cpp" />
     <ClCompile Include="source\TextRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
