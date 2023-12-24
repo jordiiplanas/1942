@@ -9,7 +9,7 @@ void EnemyPlane::Update(float dt)
 	
 	if (health <= 0)
 	{
-		scoreManager->AddScore(score);
+		SCOREMANAGER.AddScore(score);
 		Destroy();
 	}
 }

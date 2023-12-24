@@ -19,7 +19,6 @@ protected:
 	float lastShootTime;
 	Transform* transformPlayer;
 	int deathSoundIndex = 0;
-	ScoreManager* scoreManager;
 
 	virtual void UpdateMovementPattern(float dt) = 0;
 public:	

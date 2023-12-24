@@ -41,7 +41,9 @@ void GameplayScene::OnEnter()
 void GameplayScene::Update(float dt)
 {
 	isFinished = inputManager.CheckKeyState(SDLK_ESCAPE, PRESSED);
-    
+  
+    scoreUi->ChangeText("SCORE: " + std::to_string(SCOREMANAGER.GetScore()));
+    std::cout << SCOREMANAGER.GetScore() << std::endl;
     for (Object* o : background)
 	{
 		o->Update(dt);
@@ -106,19 +108,19 @@ void GameplayScene::Update(float dt)
            
             if (rand() % 3 == 0)
             {
-                WhitePowerUp* powerUp = new WhitePowerUp(*player, score);
+                WhitePowerUp* powerUp = new WhitePowerUp(*player);
                 powerUp->SetPosition(o->GetTransform()->position);
                 SPAWNER.InsertObject(powerUp);
             }
             else if (rand() % 3 == 1)
 			{
-                GrayPowerUp* powerUp = new GrayPowerUp(*player, score);
+                GrayPowerUp* powerUp = new GrayPowerUp(*player);
                 powerUp->SetPosition(o->GetTransform()->position);
                 SPAWNER.InsertObject(powerUp);
 			}
 			else if (rand() % 3 == 2)
 			{
-                GreenPowerUp* powerUp = new GreenPowerUp(*player, score);
+                GreenPowerUp* powerUp = new GreenPowerUp(*player);
                 powerUp->SetPosition(o->GetTransform()->position);
                 SPAWNER.InsertObject(powerUp);
 			}

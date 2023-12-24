@@ -9,10 +9,10 @@ class PowerUp : public GameObject
 {
 protected:
 	Player* player;
-	ScoreManager* scoreManager;
+	
 	
 public:	
-	PowerUp(Player& p, Vector2 size, ScoreManager* scoreManager) : player(&p),scoreManager(scoreManager), GameObject(Vector2(size.x,size.y))
+	PowerUp(Player& p, Vector2 size) : player(&p), GameObject(Vector2(size.x,size.y))
 	{
 		renderer = new ImageRenderer(transform, Vector2(6, 140), Vector2(13, 9));
 		SetPosition(Vector2(100, 100));
@@ -28,6 +28,6 @@ public:
 	}
 	void OnCollisionEnter(Object* other) override
 	{	
-		scoreManager->AddScore(1000);		
+		SCOREMANAGER.AddScore(1000);
 	};
 };

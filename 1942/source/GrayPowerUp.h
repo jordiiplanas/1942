@@ -6,7 +6,7 @@ class GrayPowerUp : public PowerUp
 {
 public:
 
-	GrayPowerUp(Player& p, ScoreManager* scoreManager) : PowerUp(p, Vector2(30, 20), scoreManager) {
+	GrayPowerUp(Player& p) : PowerUp(p, Vector2(30, 20)) {
 		renderer = new ImageRenderer(transform, Vector2(57,140), Vector2(12,9));
 	}
 
