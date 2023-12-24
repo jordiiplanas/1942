@@ -66,6 +66,7 @@
     <ClInclude Include="source\Rigidbody.h" />
     <ClInclude Include="source\Scene.h" />
     <ClInclude Include="source\SceneManager.h" />
+    <ClInclude Include="source\ScoreManager.h" />
     <ClInclude Include="source\SmallNormalPlane.h" />
     <ClInclude Include="source\SmallRedPlane.h" />
     <ClInclude Include="source\Spawner.h" />
@@ -73,6 +74,7 @@
     <ClInclude Include="source\TextRenderer.h" />
     <ClInclude Include="source\TimeManager.h" />
     <ClInclude Include="source\Transform.h" />
+    <ClInclude Include="source\UiText.h" />
     <ClInclude Include="source\Vector2.h" />
     <ClInclude Include="source\Wave.h" />
     <ClInclude Include="source\WhitePowerUp.h" />

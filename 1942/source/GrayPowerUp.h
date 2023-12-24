@@ -6,7 +6,7 @@ class GrayPowerUp : public PowerUp
 {
 public:
 
-	GrayPowerUp(Player& p) : PowerUp(p, Vector2(30, 20)) {
+	GrayPowerUp(Player& p, ScoreManager* scoreManager) : PowerUp(p, Vector2(30, 20), scoreManager) {
 		renderer = new ImageRenderer(transform, Vector2(57,140), Vector2(12,9));
 	}
 
@@ -14,6 +14,7 @@ public:
 	{
 		if (dynamic_cast<Player*>(other))
 		{
+			PowerUp::OnCollisionEnter(other);
 			player->AddSupportPlane();
 			Destroy();
 		}

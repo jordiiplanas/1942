@@ -26,6 +26,7 @@ void GameplayScene::OnEnter()
     Wave wave4 = Wave(D, 1, 10);
     Wave wave5 = Wave(E, 2, 10);
     
+    objects.push_back(scoreUi);
     waveIndex = 0;
     SPAWNER.InsertObject(player);
     waves.push_back(wave1);
@@ -100,19 +101,19 @@ void GameplayScene::Update(float dt)
            
             if (rand() % 3 == 0)
             {
-                WhitePowerUp* powerUp = new WhitePowerUp(*player);
+                WhitePowerUp* powerUp = new WhitePowerUp(*player, score);
                 powerUp->SetPosition(o->GetTransform()->position);
                 SPAWNER.InsertObject(powerUp);
             }
             else if (rand() % 3 == 1)
 			{
-                GrayPowerUp* powerUp = new GrayPowerUp(*player);
+                GrayPowerUp* powerUp = new GrayPowerUp(*player, score);
                 powerUp->SetPosition(o->GetTransform()->position);
                 SPAWNER.InsertObject(powerUp);
 			}
 			else if (rand() % 3 == 2)
 			{
-                GreenPowerUp* powerUp = new GreenPowerUp(*player);
+                GreenPowerUp* powerUp = new GreenPowerUp(*player, score);
                 powerUp->SetPosition(o->GetTransform()->position);
                 SPAWNER.InsertObject(powerUp);
 			}

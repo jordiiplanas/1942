@@ -81,6 +81,18 @@
     <ClCompile Include="source\SmallNormalPlane.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\BigGreenPlane.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\EnemyBullet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SupportPlane.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Wave.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\SceneManager.h">
@@ -167,9 +179,6 @@
     <ClInclude Include="source\SupportPlane.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\EnemyBullets.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="source\SmallNormalPlane.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -180,6 +189,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\BigGreenPlane.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\EnemyBullet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Wave.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ScoreManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\UiText.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
