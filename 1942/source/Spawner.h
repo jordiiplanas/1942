@@ -24,5 +24,4 @@ public:
 	void InsertObject(Object* object);
 	bool CanSpawn() { return canSpawn; }
 	Object* SpawnObject();
-
 };

@@ -28,15 +28,16 @@ private:
 	int numEnemies;
 	std::vector<EnemyPlane*> spawnedPlanes;
 	bool isFinished;
+	Transform* playerTransform;
 	bool mediumSpawned = false;
 
 public:
-	Wave(WaveType type, float startTime, int numEnemies);
+	Wave(WaveType type, float startTime, int numEnemies, Transform* transform);
 
 	void SetInitialPosition(Vector2 position) { initialPosition = position; }
-	void Update(float deltaTime, Transform* transform);
+	void Update(float deltaTime);
 	void Draw();
-	void SpawnEnemy(Transform* transform);
+	void SpawnEnemy();
 	void Reset();
 	bool IsFinished() { return isFinished; }
 };

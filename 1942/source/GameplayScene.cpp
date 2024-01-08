@@ -20,24 +20,31 @@ void GameplayScene::OnEnter()
 		initialPos.x = 0;
 		initialPos.y += 32;
 	}
-    Wave* wave1 = new Wave(A, 0.5, 4);
+    /*Wave* wave1 = new Wave(A, 0.5, 4, player->GetTransform());
     wave1->SetInitialPosition(Vector2(300, 0));
-    Wave* wave2 = new Wave(B, 0.5, 4);
+    Wave* wave2 = new Wave(B, 0.5, 4, player->GetTransform());
     wave2->SetInitialPosition(Vector2(-20, rand() % (450 - 50 + 1) + 50));
-    Wave* wave3 = new Wave(C, 0.5, 2);
-    Wave* wave4 = new Wave(D, 1, 1);
-    Wave* wave5 = new Wave(E, 2, 3);
-    Wave* wave6 = new Wave(F, 3, 4);
+    Wave* wave3 = new Wave(C, 0.5, 2, player->GetTransform());
+    Wave* wave4 = new Wave(D, 1, 1, player->GetTransform());
+    Wave* wave5 = new Wave(E, 2, 3, player->GetTransform());
+    Wave* wave6 = new Wave(F, 3, 4, player->GetTransform());*/
+
+    scoreUi = new UiText("SCORE: 0", Vector2(60, 30));
     
     objects.push_back(scoreUi);
     waveIndex = 0;
     SPAWNER.InsertObject(player);
-    waves.push_back(wave1);
+    Transform* transform = player->GetTransform();
+    for (int i = 0; i < 5000; i++) {
+        //SPAWNER.InsertObject(new Bullet(1,Vector2(1,1), Vector2(1, 1), Vector2(1, 1), Vector2(1, 1)));
+        SPAWNER.InsertObject(new SmallNormalPlane(CURVE, transform, true));
+    }
+    /*waves.push_back(wave1);
     waves.push_back(wave2);
     waves.push_back(wave3);
     waves.push_back(wave4);
     waves.push_back(wave5);
-    waves.push_back(wave6);
+    waves.push_back(wave6);*/
 
 }
 
@@ -54,7 +61,7 @@ void GameplayScene::Update(float dt)
 	{
         if (!waves[waveIndex]->IsFinished())
         {
-            waves[waveIndex]->Update(dt, player->GetTransform());
+            waves[waveIndex]->Update(dt);
         }
         else
         {
@@ -121,9 +128,8 @@ void GameplayScene::Update(float dt)
         {
             player->DisableSupportPlane(o);
         }
-
+        delete o;
         objects.erase(std::remove(objects.begin(), objects.end(), o), objects.end());
-        o = nullptr;
     }
 
     for (Object* o : objects)
@@ -150,7 +156,6 @@ void GameplayScene::Update(float dt)
 
     isFinished = inputManager.CheckKeyState(SDLK_ESCAPE, KeyState::PRESSED);
 
-   
 
     
 }
@@ -159,15 +164,15 @@ void GameplayScene::Render()
 {
 	for (Object* o : background)
 	{
-		o->Render(renderer);
+		o->Render();
 	}
 	for (Object* o : objects)
 	{
-		o->Render(renderer);
+		o->Render();
 	}
     for (Object* o : ui)
 	{
-        o->Render(renderer);
+        o->Render();
 	}
 
 }

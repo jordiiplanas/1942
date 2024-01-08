@@ -19,7 +19,7 @@ public:
 	~Object();
 
 	// Constructor
-	void Render(SDL_Renderer* renderer);
+	void Render();
 
 	// Setters
 	void SetPosition(Vector2 position);

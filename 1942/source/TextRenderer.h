@@ -32,6 +32,7 @@ public:
         surfaceWeight = surface->w;
         surfaceHeight = surface->h;
 
+        TTF_CloseFont(font);
         SDL_FreeSurface(surface);
 
         sourceRect = { 0, 0, surfaceWeight, surfaceHeight };

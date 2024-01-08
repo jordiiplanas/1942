@@ -7,6 +7,7 @@ class UiText : public GameObject {
 protected:
     std::string text;
     SDL_Color color;
+    TextRenderer* textRend;
 
 public:
 
@@ -17,7 +18,8 @@ public:
         transform->scale = Vector2(1.f, 1.f);
         transform->size = Vector2(60.0f, 60.0f);
         color = { 255, 255, 0 };
-        renderer = new TextRenderer(text, 10, color, new Transform(position, 0, Vector2(1.0f, 1.0f), Vector2(30.0f, 30.0f), true), "resources/Monocraft.ttf");
+        textRend = new TextRenderer(text, 10, color, new Transform(position, 0, Vector2(1.0f, 1.0f), Vector2(30.0f, 30.0f), true), "resources/Monocraft.ttf");
+        renderer = textRend;
     }
 
     void Update(float dt) {
@@ -25,7 +27,6 @@ public:
     }
 
     void ChangeText(std::string text) {
-
-        renderer = new TextRenderer(text, 10, color, new Transform(transform->position, 0, Vector2(1.0f, 1.0f), Vector2(30.0f, 30.0f), true), "resources/Monocraft.ttf");
+        textRend->SetText(text, 10, color);
     }
 };
