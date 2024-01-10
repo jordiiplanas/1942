@@ -12,7 +12,6 @@ Object* Spawner::SpawnObject()
 	{
 		Object* object = objectsToSpawn.front();
 		objectsToSpawn.pop();	
-		
 		if (objectsToSpawn.size() <= 0) canSpawn = false;
 
 		return object;

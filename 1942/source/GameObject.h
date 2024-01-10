@@ -12,12 +12,14 @@ public:
 	}	
 	void ChangeAnimation(std::string animID)
 	{
+
 		if (renderers[animID] == renderer)
 			return;
 
 		renderers[animID]->Reset();
 		renderer = renderers[animID];
 	}
+	
 protected:
 	std::unordered_map<std::string, ImageRenderer*> renderers;
 };

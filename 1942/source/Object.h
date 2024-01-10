@@ -19,7 +19,7 @@ public:
 	~Object();
 
 	// Constructor
-	void Render(SDL_Renderer* renderer);
+	void Render();
 
 	// Setters
 	void SetPosition(Vector2 position);
@@ -31,6 +31,7 @@ public:
 	inline Vector2 GetScale() { return transform->scale; }
 	inline float GetRotation() { return transform->angle; }
 	inline Vector2 GetSize() { return transform->size; }
+	inline Transform* GetTransform() { return transform; }
 
 	inline Vector2 GetCenteredPosition() { return transform->position + transform->size / 2; }
 

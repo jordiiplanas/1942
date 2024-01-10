@@ -1,42 +1,137 @@
 #include "GameplayScene.h"
 
+void GameplayScene::OnEnter()
+{
+    nextScene = "MainMenu";
+    player = new Player(Vector2(250, 350));
+    
+    AUDIOMANAGER.PlayMusic(AUDIOMANAGER.LoadMusic("resources/audios/musiquita.mp3"));
+    Vector2 initialPos = Vector2(0, -64);
+    Vector2 limitsPos = Vector2(512, 512);
+    int counter = 0;
+    while (initialPos.y < limitsPos.y)
+    {
+        while (initialPos.x < limitsPos.x)
+        {
+            background.push_back(new Background(Vector2(32, 32), 20));
+            background.back()->SetPosition(initialPos);
+			initialPos.x += 32;
+		}
+		initialPos.x = 0;
+		initialPos.y += 32;
+	}
+    /*Wave* wave1 = new Wave(A, 0.5, 4, player->GetTransform());
+    wave1->SetInitialPosition(Vector2(300, 0));
+    Wave* wave2 = new Wave(B, 0.5, 4, player->GetTransform());
+    wave2->SetInitialPosition(Vector2(-20, rand() % (450 - 50 + 1) + 50));
+    Wave* wave3 = new Wave(C, 0.5, 2, player->GetTransform());
+    Wave* wave4 = new Wave(D, 1, 1, player->GetTransform());
+    Wave* wave5 = new Wave(E, 2, 3, player->GetTransform());
+    Wave* wave6 = new Wave(F, 3, 4, player->GetTransform());*/
+
+    scoreUi = new UiText("SCORE: 0", Vector2(60, 30));
+    
+    objects.push_back(scoreUi);
+    waveIndex = 0;
+    SPAWNER.InsertObject(player);
+    Transform* transform = player->GetTransform();
+    for (int i = 0; i < 5000; i++) {
+        //SPAWNER.InsertObject(new Bullet(1,Vector2(1,1), Vector2(1, 1), Vector2(1, 1), Vector2(1, 1)));
+        SPAWNER.InsertObject(new SmallNormalPlane(CURVE, transform, true));
+    }
+    /*waves.push_back(wave1);
+    waves.push_back(wave2);
+    waves.push_back(wave3);
+    waves.push_back(wave4);
+    waves.push_back(wave5);
+    waves.push_back(wave6);*/
+
+}
+
 void GameplayScene::Update(float dt)
 {
 <<<<<<< HEAD:SDL3/source/GameplayScene.cpp
 	Scene::Update(dt);
 	isFinished = inputManager.CheckKeyState(SDLK_ESCAPE, PRESSED);
-
-    for (Object* o : objects)
-    {
-
-        o->Update(dt);
-        if (o->IsPendingDestroy())
+  
+    scoreUi->ChangeText("SCORE: " + std::to_string(SCOREMANAGER.GetScore()));
+    for (Object* o : background)
+	{
+		o->Update(dt);
+	}
+    if (waves.size() > waveIndex)
+	{
+        if (!waves[waveIndex]->IsFinished())
         {
-            delete o;
-            objects.erase(std::remove(objects.begin(), objects.end(), o), objects.end());
+            waves[waveIndex]->Update(dt);
         }
-    } 
-=======
-	isFinished = inputManager.CheckKeyState(SDLK_ESCAPE, PRESSED);
+        else
+        {
+            waveIndex++;
+        }
+	}
+    
 
- 
     for (Object* o : objects)
     {
-        if (!o->IsPendingDestroy())
+        if (o == nullptr)
         {
-            o->Update(dt);
+            objects.erase(std::remove(objects.begin(), objects.end(), o), objects.end());
+			continue;
+        }
+
+        if (!o->IsPendingDestroy())
+        {                   
+            o->Update(dt);            
             continue;
         }
 
-        
-        if (dynamic_cast<Bullet*>(o))
+        if (dynamic_cast<WhitePowerUp*>(o))
         {
-            int a = 2;
+            for (Object* o : objects)
+            {
+                if (dynamic_cast<EnemyPlane*>(o))
+                {
+                    o->Destroy();
+                }
+            }
         }
-        objects.erase(std::remove(objects.begin(), objects.end(), o), objects.end());
+        
+        if (o == player)
+			player = nullptr;
+
+        if (dynamic_cast<EnemyPlane*>(o))
+        {
+            float randomProbability = rand() % 100;
+            if (randomProbability < 30)
+            {
+                float randomNumber = rand() % 3;
+                if (randomNumber == 0)
+                {
+                    WhitePowerUp* powerUp = new WhitePowerUp(*player);
+                    powerUp->SetPosition(o->GetPosition());
+                    SPAWNER.InsertObject(powerUp);
+                }
+                else if (randomNumber == 1)
+                {
+                    GrayPowerUp* powerUp = new GrayPowerUp(*player);
+                    powerUp->SetPosition(o->GetPosition());
+                    SPAWNER.InsertObject(powerUp);
+                }
+                else
+                {
+                    GreenPowerUp* powerUp = new GreenPowerUp(*player);
+                    powerUp->SetPosition(o->GetPosition());
+                    SPAWNER.InsertObject(powerUp);
+                }
+            }
+        }
+        if (dynamic_cast<SupportPlane*>(o))
+        {
+            player->DisableSupportPlane(o);
+        }
         delete o;
-        
-        
+        objects.erase(std::remove(objects.begin(), objects.end(), o), objects.end());
     }
 
     for (Object* o : objects)
@@ -44,81 +139,42 @@ void GameplayScene::Update(float dt)
         for (Object* a : objects)
         {
             if (o == a)
-				continue;
+                continue;
+            if (dynamic_cast<Player*>(o) && dynamic_cast<SupportPlane*>(a) ||
+                dynamic_cast<Player*>(a) && dynamic_cast<SupportPlane*>(o) ||
+                dynamic_cast<SupportPlane*>(o) && dynamic_cast<SupportPlane*>(a)
+                )
+                continue;
+
             if (o->GetRigidbody()->CheckCollision(a->GetRigidbody()))
                 o->OnCollisionEnter(a);
         }
     }
->>>>>>> main:1942/source/GameplayScene.cpp
 
-    if (spawner.CanSpawn())
+    if (SPAWNER.CanSpawn())
     {
-        objects.push_back(spawner.SpawnObject());
+        objects.push_back(SPAWNER.SpawnObject());
     }
-
-    Vector2 inputForce = Vector2();
-
-<<<<<<< HEAD:SDL3/source/GameplayScene.cpp
-    if (inputManager.CheckKeyState(SDLK_w, HOLD))
-    {
-        inputForce.y -= 1;
-    }
-    if (inputManager.CheckKeyState(SDLK_s, HOLD))
-    {
-        inputForce.y += 1;
-    }
-    if (inputManager.CheckKeyState(SDLK_a, HOLD))
-    {
-        inputForce.x -= 1;
-    }
-    if (inputManager.CheckKeyState(SDLK_d, HOLD))
-    {
-        inputForce.x += 1;
-    }
-
-    if (inputManager.CheckKeyState(SDLK_SPACE, PRESSED))
-    {
-        spawner.InsertObject(player->SpawnBullet());
-    }
-=======
-    if (inputManager.CheckKeyState(SDLK_w, HOLD) && objects[0]->GetPosition().y > 15)
-    {
-        inputForce.y -= 1;
-    }
-    else if (inputManager.CheckKeyState(SDLK_s, HOLD) && objects[0]->GetPosition().y < 470)
-    {
-        inputForce.y += 1;
-    }
-     if (inputManager.CheckKeyState(SDLK_a, HOLD) && objects[0]->GetPosition().x > 15)
-    {
-        inputForce.x -= 1;
-        player->ChangeAnimation("left");
-    }
-    else if (inputManager.CheckKeyState(SDLK_d, HOLD) && objects[0]->GetPosition().x < 450)
-    {
-        inputForce.x += 1;
-        player->ChangeAnimation("right");
-    }
-    else
-         player->ChangeAnimation("idle");
-
-     if (inputManager.CheckKeyState(SDLK_SPACE, PRESSED))
-    {
-        spawner.InsertObject(player->SpawnBullet(Vector2(-30, -30)));
-    }
-    
->>>>>>> main:1942/source/GameplayScene.cpp
 
     isFinished = inputManager.CheckKeyState(SDLK_ESCAPE, KeyState::PRESSED);
 
-   /* sfxID = AUDIOMANAGER.LoadClip("resources/audios/rave.wav");
-    AUDIOMANAGER.FreeClip(sfxID);*/
 
-    inputForce.Normalize();
-<<<<<<< HEAD:SDL3/source/GameplayScene.cpp
-    inputForce = inputForce * 30;
-=======
-    inputForce = inputForce * 50;
->>>>>>> main:1942/source/GameplayScene.cpp
-    player->GetRigidbody()->AddForce(inputForce);
+    
+}
+
+void GameplayScene::Render()
+{
+	for (Object* o : background)
+	{
+		o->Render();
+	}
+	for (Object* o : objects)
+	{
+		o->Render();
+	}
+    for (Object* o : ui)
+	{
+        o->Render();
+	}
+
 }

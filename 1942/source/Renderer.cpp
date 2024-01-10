@@ -12,7 +12,7 @@ void Renderer::SetPosition(Vector2 position, bool centered)
     }
   }
 
-void Renderer::Render(SDL_Renderer* renderer)
+void Renderer::Render()
 {
 	SDL_Rect scaledDestRect = destRect;
 
@@ -29,7 +29,7 @@ void Renderer::Render(SDL_Renderer* renderer)
 	}
 
 	SDL_RenderCopyEx(
-		renderer,
+		RENDERMANAGER.GetRenderer(),
 		texture,
 		&sourceRect,
 		&scaledDestRect,

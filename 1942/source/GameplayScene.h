@@ -1,43 +1,37 @@
 #pragma once
 #include "Scene.h"
 #include "Player.h"
-<<<<<<< HEAD:SDL3/source/GameplayScene.h
-=======
-#include "Enemy.h"
->>>>>>> main:1942/source/GameplayScene.h
+#include "GreenPowerUp.h"
+#include "WhitePowerUp.h"
+#include "GrayPowerUp.h"
+#include "SmallNormalPlane.h"
+#include "SmallRedPlane.h"
+#include "Background.h"
+#include "MediumYellowPlane.h"
+#include "BigGreenPlane.h"
+#include "Wave.h"
+#include "ScoreManager.h"
+#include "UiText.h"
 
 class GameplayScene : public Scene
 {
-
 private:
-	//std::vector<Wave> remainingWaves;
+	std::vector<Wave*> waves;
+	int waveIndex;
+	std::vector<Object*> background;
 	int levelWaves;
-	Spawner spawner;
 	Player* player;
 	float levelTime;
 	int rolls;
+	UiText* scoreUi;
 	int lives;
-	//ScoreManager* score
-	
+	ScoreManager* score;
 public:
 	GameplayScene() : Scene() {
-<<<<<<< HEAD:SDL3/source/GameplayScene.h
-		nextScene = "MainMenu";
-		player = new Player("resources/1942.png",
-			Vector2(100, 64),
-			Vector2(5, 6),
-			Vector2(26, 16),
-			renderer);
-		objects.push_back(player);
-=======
-		nextScene = "MainMenu";		
-		player = new Player(Vector2(250, 350));		
-		objects.push_back(player);
-		objects.push_back(new Enemy(Vector2(250, 50)));		
->>>>>>> main:1942/source/GameplayScene.h
-	}
+	};
 
-	void OnEnter() override {}
+	void OnEnter() override;
 	void Update(float dt) override;
+	void Render() override;
 	
 };

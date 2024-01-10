@@ -55,6 +55,10 @@ std::string Scene::OnExit()
 
 void Scene::Update(float dt)
 {
+    //Spawning
+
+    //Destroying
+
 	for (Object* o : objects)
 	{
 		o->Update(dt);
@@ -71,12 +75,12 @@ void Scene::Render()
 {
     for (Object* o : objects)
     {
-        o->Render(renderer);
+        o->Render();
     }
 
     for (Object* o : ui)
     {
-        o->Render(renderer);
+        o->Render();
     }
 >>>>>>> main:1942/source/Scene.cpp
 }

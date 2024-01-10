@@ -32,6 +32,6 @@ public:
 	}
 
 	virtual void Update(float dt) = 0;
-	virtual void Render(SDL_Renderer* renderer);	
+	virtual void Render();	
 	void SetPosition(Vector2 position, bool centered = true);
 };

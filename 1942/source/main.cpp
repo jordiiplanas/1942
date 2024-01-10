@@ -15,11 +15,12 @@
 
 int main(int argc, char* argv[])
 {
+	srand(time(NULL));
 	RENDERMANAGER.Init();
 
 	SCENEMANAGER.AddScene("MainMenu", new MainMenu());
 	SCENEMANAGER.AddScene("Gameplay", new GameplayScene());
-	SCENEMANAGER.SetCurrentScene("Gameplay");
+	SCENEMANAGER.SetCurrentScene("MainMenu");
 	SCENEMANAGER.GetCurrentScene()->OnEnter();
 
 	
