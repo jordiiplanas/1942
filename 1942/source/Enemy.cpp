@@ -5,7 +5,7 @@
 void EnemyPlane::Update(float dt)
 {
 	currentTime = SDL_GetTicks();
-	Object::Update(dt);	
+	GameObject::Update(dt);	
 	
 	if (health <= 0)
 	{

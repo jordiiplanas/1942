@@ -86,4 +86,7 @@ public:
 	void MoveSupportPlanes();
 	void DisableSupportPlane(Object* other);
 	void Update(float deltaTime) override;
+	void DieTimer(float deltaTime);
+	void ApplyInput(float deltaTime);
+	void RollTimer(float deltaTime);
 };

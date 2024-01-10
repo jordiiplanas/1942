@@ -21,7 +21,7 @@ void Wave::Update(float deltaTime)
 	{
 		timePassed = 0;
 		spawnedEnemies++;
-		//SpawnEnemy();
+		SpawnEnemy();
 	}
 }
 void Wave::SpawnEnemy()

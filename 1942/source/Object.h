@@ -42,7 +42,10 @@ public:
 
 	virtual void Update(float dt) 
 	{ 
-		if (isPendingDestroy) delete this;
+		if (isPendingDestroy) {
+  			delete this;
+			return;
+		}
 		rigidbody->Update(dt); 
 		renderer->Update(dt);
 	}

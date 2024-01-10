@@ -4,7 +4,6 @@ Object::Object(std::string path, Vector2 size)
 {
 	transform = new Transform();
 	transform->size = size;
-	//renderer = new ImageRenderer(transform, sourceOffset, sourceSize);
 	isPendingDestroy = false;
 
 	rigidbody = new Rigidbody(transform);

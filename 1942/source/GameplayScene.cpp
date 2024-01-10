@@ -3,11 +3,16 @@
 void GameplayScene::OnEnter()
 {
     nextScene = "MainMenu";
-    player = new Player(Vector2(250, 350));
     
+    player = new Player(Vector2(250, 350));
+    SPAWNER.InsertObject(player);
+
     AUDIOMANAGER.PlayMusic(AUDIOMANAGER.LoadMusic("resources/audios/musiquita.mp3"));
+    
     Vector2 initialPos = Vector2(0, -64);
     Vector2 limitsPos = Vector2(512, 512);
+
+    //BACKGROUND
     int counter = 0;
     while (initialPos.y < limitsPos.y)
     {
@@ -20,25 +25,18 @@ void GameplayScene::OnEnter()
 		initialPos.x = 0;
 		initialPos.y += 32;
 	}
-    /*Wave* wave1 = new Wave(A, 0.5, 4, player->GetTransform());
-    wave1->SetInitialPosition(Vector2(300, 0));
-    Wave* wave2 = new Wave(B, 0.5, 4, player->GetTransform());
-    wave2->SetInitialPosition(Vector2(-20, rand() % (450 - 50 + 1) + 50));
-    Wave* wave3 = new Wave(C, 0.5, 2, player->GetTransform());
-    Wave* wave4 = new Wave(D, 1, 1, player->GetTransform());
-    Wave* wave5 = new Wave(E, 2, 3, player->GetTransform());
-    Wave* wave6 = new Wave(F, 3, 4, player->GetTransform());*/
 
-    scoreUi = new UiText("SCORE: 0", Vector2(60, 30));
-    
-    objects.push_back(scoreUi);
-    waveIndex = 0;
-    SPAWNER.InsertObject(player);
+    // WAVES
     Transform* transform = player->GetTransform();
-    for (int i = 0; i < 5000; i++) {
-        //SPAWNER.InsertObject(new Bullet(1,Vector2(1,1), Vector2(1, 1), Vector2(1, 1), Vector2(1, 1)));
-        SPAWNER.InsertObject(new SmallNormalPlane(CURVE, transform, true));
-    }
+    Wave* wave1 = new Wave(A, 0.5, 4, transform);
+    wave1->SetInitialPosition(Vector2(300, 0));
+    Wave* wave2 = new Wave(B, 0.5, 4, transform);
+    wave2->SetInitialPosition(Vector2(-20, rand() % (450 - 50 + 1) + 50));
+    Wave* wave3 = new Wave(C, 0.5, 2, transform);
+    Wave* wave4 = new Wave(D, 1, 1, transform);
+    Wave* wave5 = new Wave(E, 2, 3, transform);
+    Wave* wave6 = new Wave(F, 3, 4, transform);
+    waveIndex = 0;
     /*waves.push_back(wave1);
     waves.push_back(wave2);
     waves.push_back(wave3);
@@ -46,19 +44,22 @@ void GameplayScene::OnEnter()
     waves.push_back(wave5);
     waves.push_back(wave6);*/
 
+    // UI
+    scoreUi = new UiText("SCORE: 0", Vector2(60, 30));
+    //ui.push_back(scoreUi);
 }
 
 void GameplayScene::Update(float dt)
 {
+    // INPUTS
+
+    //TODO : Pause
 	isFinished = inputManager.CheckKeyState(SDLK_ESCAPE, PRESSED);
   
-    scoreUi->ChangeText("SCORE: " + std::to_string(SCOREMANAGER.GetScore()));
-    for (Object* o : background)
-	{
-		o->Update(dt);
-	}
+    // WAVES
+
     if (waves.size() > waveIndex)
-	{
+    {
         if (!waves[waveIndex]->IsFinished())
         {
             waves[waveIndex]->Update(dt);
@@ -67,70 +68,35 @@ void GameplayScene::Update(float dt)
         {
             waveIndex++;
         }
+    }
+
+    // UPDATE OBJECTS
+
+    for (Object* o : background)
+	{
+		o->Update(dt);
 	}
-    
 
     for (Object* o : objects)
     {
-        if (o == nullptr)
+        if (o->IsPendingDestroy())
         {
+            o->Update(dt);
             objects.erase(std::remove(objects.begin(), objects.end(), o), objects.end());
-			continue;
-        }
-
-        if (!o->IsPendingDestroy())
-        {                   
-            o->Update(dt);            
             continue;
         }
-
-        if (dynamic_cast<WhitePowerUp*>(o))
-        {
-            for (Object* o : objects)
-            {
-                if (dynamic_cast<EnemyPlane*>(o))
-                {
-                    o->Destroy();
-                }
-            }
-        }
+        o->Update(dt);
         
-        if (o == player)
-			player = nullptr;
 
-        if (dynamic_cast<EnemyPlane*>(o))
-        {
-            float randomProbability = rand() % 100;
-            if (randomProbability < 30)
-            {
-                float randomNumber = rand() % 3;
-                if (randomNumber == 0)
-                {
-                    WhitePowerUp* powerUp = new WhitePowerUp(*player);
-                    powerUp->SetPosition(o->GetPosition());
-                    SPAWNER.InsertObject(powerUp);
-                }
-                else if (randomNumber == 1)
-                {
-                    GrayPowerUp* powerUp = new GrayPowerUp(*player);
-                    powerUp->SetPosition(o->GetPosition());
-                    SPAWNER.InsertObject(powerUp);
-                }
-                else
-                {
-                    GreenPowerUp* powerUp = new GreenPowerUp(*player);
-                    powerUp->SetPosition(o->GetPosition());
-                    SPAWNER.InsertObject(powerUp);
-                }
-            }
-        }
-        if (dynamic_cast<SupportPlane*>(o))
-        {
-            player->DisableSupportPlane(o);
-        }
-        delete o;
-        objects.erase(std::remove(objects.begin(), objects.end(), o), objects.end());
     }
+
+    for (Object* o : ui)
+    {
+        o->Update(dt);
+    }
+    scoreUi->ChangeText("SCORE: " + std::to_string(SCOREMANAGER.GetScore()));
+
+    // COLLISIONS
 
     for (Object* o : objects)
     {
@@ -138,26 +104,18 @@ void GameplayScene::Update(float dt)
         {
             if (o == a)
                 continue;
-            if (dynamic_cast<Player*>(o) && dynamic_cast<SupportPlane*>(a) ||
-                dynamic_cast<Player*>(a) && dynamic_cast<SupportPlane*>(o) ||
-                dynamic_cast<SupportPlane*>(o) && dynamic_cast<SupportPlane*>(a)
-                )
-                continue;
 
             if (o->GetRigidbody()->CheckCollision(a->GetRigidbody()))
                 o->OnCollisionEnter(a);
         }
     }
 
+    // SPAWN ELEMENTS
+
     if (SPAWNER.CanSpawn())
     {
         objects.push_back(SPAWNER.SpawnObject());
     }
-
-    isFinished = inputManager.CheckKeyState(SDLK_ESCAPE, KeyState::PRESSED);
-
-
-    
 }
 
 void GameplayScene::Render()
