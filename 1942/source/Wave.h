@@ -8,12 +8,12 @@
 
 enum WaveType
 {
-	A,
-	B,
-	C,
-	D,
-	E,
-	F
+	NORMAL,
+	SMALLRED,
+	MEDIUMYELLOW,
+	BIGGREEN,
+	NORMAL_V,
+	NORMAL_CURVE
 };
 
 class Wave
