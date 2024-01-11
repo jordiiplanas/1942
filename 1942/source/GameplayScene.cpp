@@ -46,7 +46,8 @@ void GameplayScene::OnEnter()
 
     // UI
     scoreUi = new UiText("SCORE: 0", Vector2(60, 30));
-    
+    ui.push_back(new UiText("Lifes:", Vector2(40, 480)));
+    ui.push_back(new UiText("Rolls:", Vector2(310, 480)));
     //ui.push_back(scoreUi);
 }
 

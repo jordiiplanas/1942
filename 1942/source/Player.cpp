@@ -84,7 +84,10 @@ void Player::Update(float deltaTime)
         DieTimer(deltaTime);
         if (isDying) return;
 	}
-
+    if (isRolling)
+    {
+        RollTimer(deltaTime);
+    }
     if (isRespawning)
     {
         timePassed += deltaTime;
@@ -156,6 +159,7 @@ void Player::ApplyInput(float deltaTime)
     GetRigidbody()->AddForce(inputForce);
     MoveSupportPlanes();
 }
+
 void Player::RollTimer(float deltaTime)
 {
     if (isRolling)
@@ -164,11 +168,14 @@ void Player::RollTimer(float deltaTime)
         if (timeRolling > timeToRoll)
         {
             isRolling = false;
+            RollsUi.top()->Destroy();
+            RollsUi.pop();
             timeRolling = 0;
         }
         currentAnimation = "roll";
     }
 }
+
 void Player::DieTimer(float deltaTime)
 {
     timePassed += deltaTime;
@@ -195,6 +202,7 @@ void Player::DieTimer(float deltaTime)
         transform->position = Vector2(2000, 2000);
     }
 }
+
 void Player::OnCollisionEnter(Object* other)
 {
     if (isRolling || isDying) return;

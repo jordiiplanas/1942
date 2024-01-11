@@ -16,7 +16,9 @@ private:
 	float lastFireTime;
 	bool doubleFire;
 	int lives = 3;
+	int rolls = 3;
 	std::stack<Object*> LifesUi;
+	std::stack<Object*> RollsUi;
 
 	float timePassed = 0;
 	float timeToDie = 0.5f;
@@ -67,17 +69,32 @@ public:
 		{
 			if (i == 0)
 			{
-				Object* a = new Lifes(Vector2(32, 25));
+				Object* a = new Lifes(Vector2(70, 475));
 				LifesUi.push(a);
 				SPAWNER.InsertObject(LifesUi.top());
 			}
 			else
 			{
-				Object* b = new Lifes(Vector2(LifesUi.top()->GetPosition() + Vector2(40, 0)));
+				Object* b = new Lifes(Vector2(LifesUi.top()->GetPosition() + Vector2(20, 0)));
 				LifesUi.push(b);
 				SPAWNER.InsertObject(LifesUi.top());
+			}				
+		}
+
+		for (int i = 0; i < rolls; i++)
+		{
+			if (i == 0)
+			{
+				Object* a = new Lifes(Vector2(350, 475));
+				RollsUi.push(a);
+				SPAWNER.InsertObject(RollsUi.top());
 			}
-				
+			else
+			{
+				Object* b = new Lifes(Vector2(RollsUi.top()->GetPosition() + Vector2(20, 0)));
+				RollsUi.push(b);
+				SPAWNER.InsertObject(RollsUi.top());
+			}
 		}
 		renderers.emplace("right", new AnimatedImageRenderer(transform, Vector2(0, 0), Vector2(32, 32), rightDeltas, false, 20));
 		renderers.emplace("left", new AnimatedImageRenderer(transform, Vector2(0, 0), Vector2(32, 32), leftDeltas, false, 20));
