@@ -174,6 +174,8 @@ void Player::DieTimer(float deltaTime)
     timePassed += deltaTime;
     if (timePassed > timeToDie)
     {
+        LifesUi.top()->Destroy();
+        LifesUi.pop();
         lives--;
         isShootingFourBullets = false;
         if (leftSupportPlane != nullptr) leftSupportPlane->PlayDeathAnimation();

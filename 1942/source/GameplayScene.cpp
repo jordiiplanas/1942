@@ -37,15 +37,16 @@ void GameplayScene::OnEnter()
     Wave* wave5 = new Wave(E, 2, 3, transform);
     Wave* wave6 = new Wave(F, 3, 4, transform);
     waveIndex = 0;
-    /*waves.push_back(wave1);
+    waves.push_back(wave1);
     waves.push_back(wave2);
     waves.push_back(wave3);
     waves.push_back(wave4);
     waves.push_back(wave5);
-    waves.push_back(wave6);*/
+    waves.push_back(wave6);
 
     // UI
     scoreUi = new UiText("SCORE: 0", Vector2(60, 30));
+    
     //ui.push_back(scoreUi);
 }
 
