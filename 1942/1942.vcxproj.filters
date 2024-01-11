@@ -206,5 +206,8 @@
     <ClInclude Include="source\UiText.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source\Lifes.h">
+      <Filter>Header Files\View</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

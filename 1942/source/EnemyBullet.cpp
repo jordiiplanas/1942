@@ -12,10 +12,11 @@ EnemyBullet::EnemyBullet(float speed, Vector2 size, Vector2 direction)
 
 void EnemyBullet::Update(float deltaTime)
 {
-	Object::Update(deltaTime);
 	if (transform->position.y >= 500 || transform->position.y <= 0
 		|| transform->position.x > 500 || transform->position.x < 0)
 	{
 		Destroy();
+		return;
 	}
+	Object::Update(deltaTime);
 }

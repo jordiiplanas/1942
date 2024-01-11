@@ -23,7 +23,7 @@ private:
 	Player* player;
 	float levelTime;
 	int rolls;
-	UiText* scoreUi = new UiText("SCORE: 0", Vector2(60, 30));
+	UiText* scoreUi;
 	int lives;
 	ScoreManager* score;
 public:

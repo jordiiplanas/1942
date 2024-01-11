@@ -4,7 +4,6 @@ Object::Object(std::string path, Vector2 size)
 {
 	transform = new Transform();
 	transform->size = size;
-	//renderer = new ImageRenderer(transform, sourceOffset, sourceSize);
 	isPendingDestroy = false;
 
 	rigidbody = new Rigidbody(transform);
@@ -12,9 +11,9 @@ Object::Object(std::string path, Vector2 size)
 
 }
 
-void Object::Render(SDL_Renderer* renderer)
+void Object::Render()
 {
-	this->renderer->Render(renderer);
+	this->renderer->Render();
 }
 
 void Object::SetPosition(Vector2 position)

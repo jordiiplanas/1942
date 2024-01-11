@@ -11,7 +11,6 @@ public:
 	ImageRenderer(Transform* transform, Vector2 sourceOffset, Vector2 sourceSize) 
 		: Renderer(transform) 
 	{
-
 		texture = RENDERMANAGER.GetGameTexture();
 
 		sourceRect = SDL_Rect

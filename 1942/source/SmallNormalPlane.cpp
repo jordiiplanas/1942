@@ -3,6 +3,7 @@
 SmallNormalPlane::SmallNormalPlane(MovementType mT, Transform* transformPlayer, bool isRight) :
 	movementType(mT), isRight(isRight), EnemyPlane(1, 50, transformPlayer, Vector2(16, 16))
 {
+	SetRotation(180);
 	curveMovementLimit = rand() % (400 - 200 + 1) + 200;
 	GetRigidbody()->SetLinearDrag(2);
 	renderers.emplace("idle", new ImageRenderer(transform, Vector2(5, 203), Vector2(15, 14)));

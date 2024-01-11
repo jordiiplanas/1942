@@ -19,7 +19,7 @@ public:
 	~Object();
 
 	// Constructor
-	void Render(SDL_Renderer* renderer);
+	void Render();
 
 	// Setters
 	void SetPosition(Vector2 position);
@@ -42,7 +42,10 @@ public:
 
 	virtual void Update(float dt) 
 	{ 
-		if (isPendingDestroy) delete this;
+		if (isPendingDestroy) {
+  			delete this;
+			return;
+		}
 		rigidbody->Update(dt); 
 		renderer->Update(dt);
 	}
