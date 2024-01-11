@@ -18,7 +18,7 @@ class GameplayScene : public Scene
 private:
 	std::vector<Wave*> waves;
 	int waveIndex;
-	std::vector<Object*> background;
+	std::vector<GameObject*> background;
 	int levelWaves;
 	Player* player;
 	float levelTime;

@@ -14,17 +14,10 @@ void GameplayScene::OnEnter()
 
     //BACKGROUND
     int counter = 0;
-    while (initialPos.y < limitsPos.y)
-    {
-        while (initialPos.x < limitsPos.x)
-        {
-            background.push_back(new Background(Vector2(32, 32), 20));
-            background.back()->SetPosition(initialPos);
-			initialPos.x += 32;
-		}
-		initialPos.x = 0;
-		initialPos.y += 32;
-	}
+    background.push_back(new Background(Vector2(512, 512), 60));
+    background.push_back(new Background(Vector2(512, 512), 60));
+    background[0]->ChangeAnimation("initial");
+    background[1]->SetPosition(Vector2(0, -512));
 
     // WAVES
     Transform* transform = player->GetTransform();
