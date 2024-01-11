@@ -94,6 +94,7 @@ void Player::Update(float deltaTime)
         if (timePassed > timeToRespawn)
         {
             isRespawning = false;
+            rolls--;
             timePassed = 0;
             transform->position = initialPosition;
         }
@@ -141,8 +142,11 @@ void Player::ApplyInput(float deltaTime)
     }
     if (inputManager.CheckKeyState(SDLK_j, PRESSED))
     {
-        AUDIOMANAGER.PlayClip(flipSoundID);
-        isRolling = true;
+        if (rolls > 0)
+        {
+            AUDIOMANAGER.PlayClip(flipSoundID);
+            isRolling = true;
+        }       
     }
     if (inputManager.CheckKeyState(SDLK_SPACE, HOLD))
     {
@@ -167,6 +171,7 @@ void Player::RollTimer(float deltaTime)
         timeRolling += deltaTime;
         if (timeRolling > timeToRoll)
         {
+            rolls--;
             isRolling = false;
             RollsUi.top()->Destroy();
             RollsUi.pop();
