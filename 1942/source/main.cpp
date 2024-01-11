@@ -27,7 +27,8 @@ int main(int argc, char* argv[])
 	while (!inputManager.GetQuitEvent())
 	{
 		TIME.Update();
-
+		if (inputManager.mousePressed)
+			std::cout << "escapaditaRural" << std::endl;
 		if (TIME.ShouldUpdateGame())
 		{
 			inputManager.Listen();

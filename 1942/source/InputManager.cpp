@@ -34,6 +34,14 @@ void InputManager::Listen()
     case SDL_QUIT:
       quitEvent = true;
       break;
+    case SDL_MOUSEBUTTONDOWN:
+        if(sdl_event.button.button)
+        mousePressed = true;
+        break;
+    case SDL_MOUSEBUTTONUP:
+        if (sdl_event.button.button)
+        mousePressed = false;
+        break;
     }
   }
   SDL_GetMouseState(&mouseX, &mouseY);

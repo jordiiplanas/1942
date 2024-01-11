@@ -53,8 +53,28 @@ void GameplayScene::OnEnter()
 
 void GameplayScene::Update(float dt)
 {
+    bool mousePressed = false;
+    if (mousePressed)
+    {
+        std::cout << "Casa Casita" << std::endl;
+    }
     // INPUTS
+    while (SDL_PollEvent(&event))
+    {
+        if (SDL_MOUSEBUTTONDOWN == event.type)
+        {
+            if (SDL_BUTTON_LEFT == event.button.button)
+            {
+                mousePressed = true;
+                std::cout << "Casa Casita" << std::endl;
+            }
+        }
+        if (event.type == SDL_MOUSEMOTION)
+        {
+            std::cout << "Casa Casita" << std::endl;
 
+        }
+    }
     //TODO : Pause
 	isFinished = inputManager.CheckKeyState(SDLK_ESCAPE, PRESSED);
   
