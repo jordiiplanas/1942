@@ -6,7 +6,14 @@
 
 MainMenu::MainMenu()
 {
-   
+    Object* playButton = new Button(Vector2(155, 50));
+    Object* rankButton = new Button(Vector2(155, 150));
+    Object* exitButton = new Button(Vector2(155, 250));
+    Object* muteButton = new Button(Vector2(155, 350));
+    ui.push_back(playButton);
+    ui.push_back(rankButton);
+    ui.push_back(exitButton);
+    ui.push_back(muteButton);
 }
 
 MainMenu::~MainMenu()
@@ -27,10 +34,18 @@ void MainMenu::Update(float dt)
         isFinished = true;
     }
 
+    for (Object* o : ui)
+    {
+        o->Update(dt);
+    }
+
 }
 
 void MainMenu::Render()
 {
-	
+    for (Object* o : ui)
+    {
+        o->Render();
+    }
 }
 

@@ -209,5 +209,8 @@
     <ClInclude Include="source\Lifes.h">
       <Filter>Header Files\View</Filter>
     </ClInclude>
+    <ClInclude Include="source\Button.h">
+      <Filter>Header Files\View</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

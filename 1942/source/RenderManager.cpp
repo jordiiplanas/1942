@@ -50,7 +50,7 @@ void RenderManager::CreateWindowAndRenderer()
 	{
 		throw SDL_GetError();
 	}
-	SDL_SetRenderDrawColor(renderer, 50, 50, 255, 255);
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
 }
 
