@@ -83,7 +83,6 @@ void Wave::SpawnEnemy()
 	//spawnedPlanes.push_back(enemy);
 	SPAWNER.InsertObject(enemy);
 }
-
 void Wave::Reset()
 {
 	spawnedPlanes.clear();

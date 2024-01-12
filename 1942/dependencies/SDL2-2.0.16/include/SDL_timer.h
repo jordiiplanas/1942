@@ -61,7 +61,7 @@ extern DECLSPEC Uint32 SDLCALL SDL_GetTicks(void);
  * }
  * ```
  */
-#define SDL_TICKS_PASSED(A, B)  ((Sint32)((SMALLRED) - (NORMAL)) <= 0)
+#define SDL_TICKS_PASSED(A, B)  ((Sint32)((B) - (A)) <= 0)
 
 /**
  * Get the current value of the high resolution counter.

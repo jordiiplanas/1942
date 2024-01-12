@@ -93,6 +93,9 @@
     <ClCompile Include="source\Wave.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\IWaveManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\SceneManager.h">
@@ -208,6 +211,9 @@
     </ClInclude>
     <ClInclude Include="source\Lifes.h">
       <Filter>Header Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="source\IWaveManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

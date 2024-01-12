@@ -12,8 +12,9 @@
 #include "Wave.h"
 #include "ScoreManager.h"
 #include "UiText.h"
+#include "IWaveManager.h"
 
-class GameplayScene : public Scene
+class GameplayScene : public Scene, public IWaveManager
 {
 private:
 	std::vector<Wave*> waves;

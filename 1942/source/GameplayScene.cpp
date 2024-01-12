@@ -40,6 +40,7 @@ void GameplayScene::OnEnter()
     // UI
     scoreUi = new UiText("SCORE: 0", Vector2(60, 30));
     
+    auto a = GetWavesFromFile("caca.txt");
     //ui.push_back(scoreUi);
 }
 
