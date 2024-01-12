@@ -27,6 +27,7 @@
     <ClCompile Include="source\GameplayScene.cpp" />
     <ClCompile Include="source\ImageRenderer.cpp" />
     <ClCompile Include="source\InputManager.cpp" />
+    <ClCompile Include="source\IWaveManager.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\MainMenu.cpp" />
     <ClCompile Include="source\Object.cpp" />
@@ -79,6 +80,7 @@
     <ClInclude Include="source\UiText.h" />
     <ClInclude Include="source\Vector2.h" />
     <ClInclude Include="source\Wave.h" />
+    <ClInclude Include="source\IWaveManager.h" />
     <ClInclude Include="source\WhitePowerUp.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

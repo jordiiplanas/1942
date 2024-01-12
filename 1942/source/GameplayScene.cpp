@@ -14,28 +14,21 @@ void GameplayScene::OnEnter()
 
     //BACKGROUND
     int counter = 0;
-    while (initialPos.y < limitsPos.y)
-    {
-        while (initialPos.x < limitsPos.x)
-        {
-            background.push_back(new Background(Vector2(32, 32), 20));
-            background.back()->SetPosition(initialPos);
-			initialPos.x += 32;
-		}
-		initialPos.x = 0;
-		initialPos.y += 32;
-	}
+    background.push_back(new Background(Vector2(512, 512), 60));
+    background.push_back(new Background(Vector2(512, 512), 60));
+    background[0]->ChangeAnimation("initial");
+    background[1]->SetPosition(Vector2(0, -512));
 
     // WAVES
     Transform* transform = player->GetTransform();
-    Wave* wave1 = new Wave(A, 0.5, 4, transform);
+    Wave* wave1 = new Wave(NORMAL, 0.5, 4, transform);
     wave1->SetInitialPosition(Vector2(300, 0));
-    Wave* wave2 = new Wave(B, 0.5, 4, transform);
+    Wave* wave2 = new Wave(SMALLRED, 0.5, 4, transform);
     wave2->SetInitialPosition(Vector2(-20, rand() % (450 - 50 + 1) + 50));
-    Wave* wave3 = new Wave(C, 0.5, 2, transform);
-    Wave* wave4 = new Wave(D, 1, 1, transform);
-    Wave* wave5 = new Wave(E, 2, 3, transform);
-    Wave* wave6 = new Wave(F, 3, 4, transform);
+    Wave* wave3 = new Wave(MEDIUMYELLOW, 0.5, 2, transform);
+    Wave* wave4 = new Wave(BIGGREEN, 1, 1, transform);
+    Wave* wave5 = new Wave(NORMAL_V, 2, 3, transform);
+    Wave* wave6 = new Wave(NORMAL_CURVE, 3, 4, transform);
     waveIndex = 0;
     waves.push_back(wave1);
     waves.push_back(wave2);
@@ -48,6 +41,8 @@ void GameplayScene::OnEnter()
     scoreUi = new UiText("SCORE: 0", Vector2(60, 30));
     ui.push_back(new UiText("Lifes:", Vector2(40, 480)));
     ui.push_back(new UiText("Rolls:", Vector2(310, 480)));
+    
+    auto a = GetWavesFromFile("caca.txt");
     //ui.push_back(scoreUi);
 }
 

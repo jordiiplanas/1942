@@ -20,7 +20,6 @@ public:
 		renderer = renderers[animID];
 	}
 	
-	
 protected:
 	std::unordered_map<std::string, ImageRenderer*> renderers;
 };

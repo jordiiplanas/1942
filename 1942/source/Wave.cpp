@@ -30,11 +30,11 @@ void Wave::SpawnEnemy()
 	Vector2 curvePlaner = Vector2(rand() % (350 - 100 + 1) + 50, -20);
 	switch (type)
 	{
-	case WaveType::A:
+	case WaveType::NORMAL:
 		enemy = new SmallNormalPlane(STRAIGHT, playerTransform, true);
 		enemy->SetPosition(Vector2(rand() % (450 - 50 + 1) + 50, -20));
 		break;
-	case WaveType::B:
+	case WaveType::SMALLRED:
 		if (initialPosition.x > 256 && initialPosition.y > 256)
 			enemy = new SmallRedPlane(playerTransform, false, true);
 		else if (initialPosition.x > 256 && initialPosition.y < 256)
@@ -47,7 +47,7 @@ void Wave::SpawnEnemy()
 
 		enemy->SetPosition(initialPosition);
 		break;
-	case WaveType::C:
+	case WaveType::MEDIUMYELLOW:
 		if (!mediumSpawned)
 		{
 			enemy = new MediumYellowPlane(playerTransform, true, 300);
@@ -61,14 +61,14 @@ void Wave::SpawnEnemy()
 			mediumSpawned = true;
 		}
 		break;
-	case WaveType::D:
+	case WaveType::BIGGREEN:
 		enemy = new BigGreenPlane(playerTransform);
 		break;
-	case WaveType::E:
+	case WaveType::NORMAL_V:
 		enemy = new SmallNormalPlane(V, playerTransform, true);
 		enemy->SetPosition(initialPosition);
 		break;
-	case WaveType::F:
+	case WaveType::NORMAL_CURVE:
 		if(curvePlaner.x > 256)	
 		enemy = new SmallNormalPlane(CURVE, playerTransform, false);
 		else
@@ -83,7 +83,6 @@ void Wave::SpawnEnemy()
 	//spawnedPlanes.push_back(enemy);
 	SPAWNER.InsertObject(enemy);
 }
-
 void Wave::Reset()
 {
 	spawnedPlanes.clear();
