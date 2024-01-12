@@ -6,10 +6,10 @@
 
 MainMenu::MainMenu()
 {
-    Object* playButton = new Button(Vector2(155, 50));
-    Object* rankButton = new Button(Vector2(155, 150));
-    Object* exitButton = new Button(Vector2(155, 250));
-    Object* muteButton = new Button(Vector2(155, 350));
+    Object* playButton = new Button(Vector2(155, 50), "Gameplay");
+    Object* rankButton = new Button(Vector2(155, 150), "Gameplay");
+    Object* exitButton = new Button(Vector2(155, 250), "Gameplay");
+    Object* muteButton = new Button(Vector2(155, 350), "Gameplay");
     ui.push_back(playButton);
     ui.push_back(rankButton);
     ui.push_back(exitButton);

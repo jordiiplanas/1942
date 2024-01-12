@@ -43,7 +43,7 @@ void GameplayScene::OnEnter()
     ui.push_back(new UiText("Rolls:", Vector2(310, 480)));
     
     auto a = GetWavesFromFile("caca.txt");
-    //ui.push_back(scoreUi);
+    ui.push_back(scoreUi);
 }
 
 void GameplayScene::Update(float dt)
