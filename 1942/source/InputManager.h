@@ -25,6 +25,8 @@ private:
   InputManager& operator =(const InputManager&) = delete;
   
 public:
+    bool mousePressed;
+
 
   inline static InputManager& Instance()
   {

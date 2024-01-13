@@ -23,6 +23,7 @@ private:
 	int levelWaves;
 	Player* player;
 	float levelTime;
+	SDL_Event event;
 	int rolls;
 	UiText* scoreUi;
 	int lives;

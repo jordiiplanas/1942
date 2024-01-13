@@ -26,6 +26,10 @@ protected:
 
 	
 public:
+	SDL_Texture* GetTexture()
+	{
+		return texture;
+	}
 	Renderer(Transform* transform)
 	{
 		this->transform = transform;

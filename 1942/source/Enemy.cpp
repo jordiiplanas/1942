@@ -13,7 +13,6 @@ void EnemyPlane::Update(float dt)
 		return;
 	}
 	GameObject::Update(dt);
-
 }
 
 Object* EnemyPlane::Shoot(Vector2 position)

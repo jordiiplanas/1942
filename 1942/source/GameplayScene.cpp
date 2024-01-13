@@ -39,15 +39,37 @@ void GameplayScene::OnEnter()
 
     // UI
     scoreUi = new UiText("SCORE: 0", Vector2(60, 30));
+    ui.push_back(new UiText("Lifes:", Vector2(40, 480)));
+    ui.push_back(new UiText("Rolls:", Vector2(310, 480)));
     
     auto a = GetWavesFromFile("caca.txt");
-    //ui.push_back(scoreUi);
+    ui.push_back(scoreUi);
 }
 
 void GameplayScene::Update(float dt)
 {
+    bool mousePressed = false;
+    if (mousePressed)
+    {
+        std::cout << "Casa Casita" << std::endl;
+    }
     // INPUTS
+    while (SDL_PollEvent(&event))
+    {
+        if (SDL_MOUSEBUTTONDOWN == event.type)
+        {
+            if (SDL_BUTTON_LEFT == event.button.button)
+            {
+                mousePressed = true;
+                std::cout << "Casa Casita" << std::endl;
+            }
+        }
+        if (event.type == SDL_MOUSEMOTION)
+        {
+            std::cout << "Casa Casita" << std::endl;
 
+        }
+    }
     //TODO : Pause
 	isFinished = inputManager.CheckKeyState(SDLK_ESCAPE, PRESSED);
   

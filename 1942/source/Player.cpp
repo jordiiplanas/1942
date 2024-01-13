@@ -84,13 +84,17 @@ void Player::Update(float deltaTime)
         DieTimer(deltaTime);
         if (isDying) return;
 	}
-
+    if (isRolling)
+    {
+        RollTimer(deltaTime);
+    }
     if (isRespawning)
     {
         timePassed += deltaTime;
         if (timePassed > timeToRespawn)
         {
             isRespawning = false;
+            rolls--;
             timePassed = 0;
             transform->position = initialPosition;
         }
@@ -138,8 +142,11 @@ void Player::ApplyInput(float deltaTime)
     }
     if (inputManager.CheckKeyState(SDLK_j, PRESSED))
     {
-        AUDIOMANAGER.PlayClip(flipSoundID);
-        isRolling = true;
+        if (rolls > 0)
+        {
+            AUDIOMANAGER.PlayClip(flipSoundID);
+            isRolling = true;
+        }       
     }
     if (inputManager.CheckKeyState(SDLK_SPACE, HOLD))
     {
@@ -156,6 +163,7 @@ void Player::ApplyInput(float deltaTime)
     GetRigidbody()->AddForce(inputForce);
     MoveSupportPlanes();
 }
+
 void Player::RollTimer(float deltaTime)
 {
     if (isRolling)
@@ -163,12 +171,16 @@ void Player::RollTimer(float deltaTime)
         timeRolling += deltaTime;
         if (timeRolling > timeToRoll)
         {
+            rolls--;
             isRolling = false;
+            RollsUi.top()->Destroy();
+            RollsUi.pop();
             timeRolling = 0;
         }
         currentAnimation = "roll";
     }
 }
+
 void Player::DieTimer(float deltaTime)
 {
     timePassed += deltaTime;
@@ -195,6 +207,7 @@ void Player::DieTimer(float deltaTime)
         transform->position = Vector2(2000, 2000);
     }
 }
+
 void Player::OnCollisionEnter(Object* other)
 {
     if (isRolling || isDying) return;
