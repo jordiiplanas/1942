@@ -35,10 +35,14 @@ public:
 			return;
 		}
 		
-		/*for (Wave wave : waves)
+		for (Wave* wave : waves)
 		{
-			if (wave.GetStartTime() >= currentTime)
-				wave.Update(dt);
-		}*/
+			if (wave->GetStartTime() <= currentTime)
+				wave->Update(dt);
+		}
+	}
+	inline bool IsFinished()
+	{
+		return isFinished;
 	}
 };

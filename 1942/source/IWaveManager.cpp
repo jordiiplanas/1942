@@ -82,16 +82,16 @@ Stage* IWaveManager::GetStageFromFile(std::string filePath, Transform* transform
 
 std::vector<Stage*> IWaveManager::GetStagesFromFile(std::string filePathPart1, std::string filePathPart2, Transform* transform)
 {
-	std::vector<Stage*> stages2 = std::vector<Stage*>();
+	std::vector<Stage*> stagesList = std::vector<Stage*>();
 	Stage* stage;
 	int i = 1;
 	do
 	{
 		stage = GetStageFromFile(filePathPart1 + std::to_string(i++) + filePathPart2, transform);
 		if (stage != nullptr)
-			stages2.push_back(stage);
+			stagesList.push_back(stage);
 	} while (stage != nullptr);
-	return stages2;
+	return stagesList;
 }
 
 WaveType IWaveManager::GetWaveTypeFromString(std::string waveTypeString)

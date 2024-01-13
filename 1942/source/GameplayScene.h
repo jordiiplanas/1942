@@ -18,7 +18,8 @@ class GameplayScene : public Scene, public IWaveManager
 {
 private:
 	std::vector<Stage*> stages;
-	int waveIndex;
+	Stage* currentStage;
+
 	std::vector<GameObject*> background;
 	int levelWaves;
 	Player* player;

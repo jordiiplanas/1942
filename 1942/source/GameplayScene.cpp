@@ -21,23 +21,13 @@ void GameplayScene::OnEnter()
 
     // WAVES
     Transform* transform = player->GetTransform();
-    Wave* wave1 = new Wave(NORMAL, 0.5, 4, transform);
-    wave1->SetInitialPosition(Vector2(300, 0));
-    Wave* wave2 = new Wave(SMALLRED, 0.5, 4, transform);
-    wave2->SetInitialPosition(Vector2(-20, rand() % (450 - 50 + 1) + 50));
-    Wave* wave3 = new Wave(MEDIUMYELLOW, 0.5, 2, transform);
-    Wave* wave4 = new Wave(BIGGREEN, 1, 1, transform);
-    Wave* wave5 = new Wave(NORMAL_V, 2, 3, transform);
-    Wave* wave6 = new Wave(NORMAL_CURVE, 3, 4, transform);
-    waveIndex = 0;
+    stages = GetStagesFromFile("stage-", "-waves.xml", transform);
+    if (stages.size() > 0) currentStage = stages[0];
 
     // UI
     scoreUi = new UiText("SCORE: 0", Vector2(60, 30));
     ui.push_back(new UiText("Lifes:", Vector2(40, 480)));
     ui.push_back(new UiText("Rolls:", Vector2(310, 480)));
-    
-    stages = GetStagesFromFile("stage-", "-waves.xml", transform);
-
     ui.push_back(scoreUi);
 }
 
@@ -70,17 +60,11 @@ void GameplayScene::Update(float dt)
   
     // WAVES
 
-    /*if (waves.size() > waveIndex)
+    currentStage->Update(dt);
+    if (currentStage->IsFinished())
     {
-        if (!waves[waveIndex]->IsFinished())
-        {
-            waves[waveIndex]->Update(dt);
-        }
-        else
-        {
-            waveIndex++;
-        }
-    }*/
+        // Cambio de escena
+	}
 
     // UPDATE OBJECTS
 
