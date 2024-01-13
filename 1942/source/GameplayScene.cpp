@@ -14,8 +14,8 @@ void GameplayScene::OnEnter()
 
     //BACKGROUND
     int counter = 0;
-    background.push_back(new Background(Vector2(512, 512), 60));
-    background.push_back(new Background(Vector2(512, 512), 60));
+    background.push_back(new Background(Vector2(512, 512), 59));
+    background.push_back(new Background(Vector2(512, 512), 59));
     background[0]->ChangeAnimation("initial");
     background[1]->SetPosition(Vector2(0, -512));
 
@@ -60,7 +60,7 @@ void GameplayScene::Update(float dt)
   
     // WAVES
 
-    currentStage->Update(dt);
+    //currentStage->Update(dt);
     if (currentStage->IsFinished())
     {
         // Cambio de escena

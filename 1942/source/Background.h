@@ -24,9 +24,16 @@ public:
 			{
 				renderer = renderers["idle"];
 			}
-			if (rand() % 4 == 1)
+			if (rand() % 2 == 1)
 			{
-				renderer = renderers["island"];
+				if (rand() % 2 == 1)
+				{
+					renderer = renderers["island1"];
+				}
+				else
+				{
+					renderer = renderers["island2"];
+				}
 			}
 		}
 	}
