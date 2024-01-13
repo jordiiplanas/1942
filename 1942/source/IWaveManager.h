@@ -1,5 +1,5 @@
 #pragma once
-#include "Wave.h"
+#include "Stage.h"
 #include <sstream>
 #include <fstream>
 #include <iostream>
@@ -12,6 +12,10 @@
 
 class IWaveManager
 {
-protected:
+private:
 	std::vector<Wave> GetWavesFromFile(std::string filePath);
+	WaveType GetWaveTypeFromString(std::string waveTypeString);
+protected:
+	Stage* GetStageFromFile(std::string filePath, Transform* transform);
+	std::vector<Stage*> GetStagesFromFile(std::string filePathPart1, std::string filePathPart2, Transform* transform);
 };

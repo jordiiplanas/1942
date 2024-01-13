@@ -9,7 +9,7 @@
 #include "Background.h"
 #include "MediumYellowPlane.h"
 #include "BigGreenPlane.h"
-#include "Wave.h"
+#include "Stage.h"
 #include "ScoreManager.h"
 #include "UiText.h"
 #include "IWaveManager.h"
@@ -17,8 +17,9 @@
 class GameplayScene : public Scene, public IWaveManager
 {
 private:
-	std::vector<Wave*> waves;
-	int waveIndex;
+	std::vector<Stage*> stages;
+	Stage* currentStage;
+
 	std::vector<GameObject*> background;
 	int levelWaves;
 	Player* player;

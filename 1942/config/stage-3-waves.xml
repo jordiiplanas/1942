@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<stage>
+   <totalTime>30</totalTime>
+   <wave>
+      <spawnTime>0</spawnTime>
+      <type pattern="V">normal</type>
+      <amount>5</amount>
+   </wave>
+   <wave>
+      <spawnTime>12</spawnTime>
+      <type>smallred</type>
+      <amount>5</amount>
+   </wave>
+   <wave>
+      <spawnTime>15</spawnTime>
+      <type pattern="CURVE">normal</type>
+      <amount>10</amount>
+   </wave>
+   <wave>
+      <spawnTime>18</spawnTime>
+      <type>mediumyellow</type>
+      <amount>20</amount>
+   </wave>
+   <wave>
+      <spawnTime>24</spawnTime>
+      <type>biggreen</type>
+      <amount>1</amount>
+   </wave>
+</stage>
