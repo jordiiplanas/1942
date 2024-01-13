@@ -32,6 +32,7 @@
     <ClCompile Include="source\MainMenu.cpp" />
     <ClCompile Include="source\Object.cpp" />
     <ClCompile Include="source\Player.cpp" />
+    <ClCompile Include="source\RankingMenu.cpp" />
     <ClCompile Include="source\Renderer.cpp" />
     <ClCompile Include="source\RenderManager.cpp" />
     <ClCompile Include="source\Scene.cpp" />
@@ -64,6 +65,7 @@
     <ClInclude Include="source\Object.h" />
     <ClInclude Include="source\Player.h" />
     <ClInclude Include="source\PowerUp.h" />
+    <ClInclude Include="source\RankingMenu.h" />
     <ClInclude Include="source\Renderer.h" />
     <ClInclude Include="source\RenderManager.h" />
     <ClInclude Include="source\Rigidbody.h" />

@@ -7,9 +7,9 @@ class UiText : public GameObject {
 protected:
     std::string text;
     SDL_Color color;
-    TextRenderer* textRend;
 
 public:
+    TextRenderer* textRend;
 
     UiText(std::string text, Vector2 position) : text(text), GameObject(Vector2(64,64)) {
 
