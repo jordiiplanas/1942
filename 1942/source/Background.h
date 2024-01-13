@@ -20,7 +20,7 @@ public:
 		if (transform->position.y >= 512)
 		{
 			transform->position.y = -512;
-			if (renderer == renderers["island"])
+			if (renderer != renderers["idle"])
 			{
 				renderer = renderers["idle"];
 			}

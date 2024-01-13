@@ -30,19 +30,14 @@ void GameplayScene::OnEnter()
     Wave* wave5 = new Wave(NORMAL_V, 2, 3, transform);
     Wave* wave6 = new Wave(NORMAL_CURVE, 3, 4, transform);
     waveIndex = 0;
-    waves.push_back(wave1);
-    waves.push_back(wave2);
-    waves.push_back(wave3);
-    waves.push_back(wave4);
-    waves.push_back(wave5);
-    waves.push_back(wave6);
 
     // UI
     scoreUi = new UiText("SCORE: 0", Vector2(60, 30));
     ui.push_back(new UiText("Lifes:", Vector2(40, 480)));
     ui.push_back(new UiText("Rolls:", Vector2(310, 480)));
     
-    auto a = GetWavesFromFile("caca.txt");
+    stages = GetStagesFromFile("stage-", "-waves.xml", transform);
+
     ui.push_back(scoreUi);
 }
 
@@ -75,7 +70,7 @@ void GameplayScene::Update(float dt)
   
     // WAVES
 
-    if (waves.size() > waveIndex)
+    /*if (waves.size() > waveIndex)
     {
         if (!waves[waveIndex]->IsFinished())
         {
@@ -85,7 +80,7 @@ void GameplayScene::Update(float dt)
         {
             waveIndex++;
         }
-    }
+    }*/
 
     // UPDATE OBJECTS
 

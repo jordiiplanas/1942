@@ -10,14 +10,16 @@ Wave::Wave(WaveType type, float startTime, int numEnemies, Transform* transform)
 
 void Wave::Update(float deltaTime)
 {
+	if (isFinished) return;
 	if (spawnedEnemies >= numEnemies)
 	{
 		isFinished = true;
-		std::cout << "Ronda terminada waa" << std::endl;
 		return;
 	}
+
 	timePassed += deltaTime;
-	if (timePassed > startTime)
+	
+	if (timePassed > timeBetweenSpawns)
 	{
 		timePassed = 0;
 		spawnedEnemies++;

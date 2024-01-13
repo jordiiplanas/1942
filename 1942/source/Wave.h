@@ -26,12 +26,15 @@ private:
 	float startTime;
 	WaveType type;
 	int numEnemies;
+	float timeBetweenSpawns = 0.2f;
+
 	std::vector<EnemyPlane*> spawnedPlanes;
 	bool isFinished;
 	Transform* playerTransform;
 	bool mediumSpawned = false;
 
 public:
+	//Wave() = default;
 	Wave(WaveType type, float startTime, int numEnemies, Transform* transform);
 
 	void SetInitialPosition(Vector2 position) { initialPosition = position; }
@@ -40,4 +43,7 @@ public:
 	void SpawnEnemy();
 	void Reset();
 	bool IsFinished() { return isFinished; }
+	float GetStartTime() { return startTime; }
+
+
 };
