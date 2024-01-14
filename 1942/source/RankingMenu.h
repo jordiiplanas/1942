@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "AudioManager.h"
 #include "Button.h"
+#include <vector>
 
 
 class RankingMenu : public Scene
@@ -12,6 +13,7 @@ class RankingMenu : public Scene
 private:
     float gameTime = 0;
     int sfxID;
+    int puntuations[10];
 
 public:
     RankingMenu();

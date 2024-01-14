@@ -6,6 +6,8 @@
 #include "AudioManager.h"
 #include "AnimatedImageRenderer.h"
 #include "ScoreManager.h"
+#include <fstream>
+#include <ios>
 
 class EnemyPlane : public GameObject
 {
