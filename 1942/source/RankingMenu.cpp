@@ -2,7 +2,7 @@
 
 RankingMenu::RankingMenu()
 {
-	Object* backButton = new Button(Vector2(50, 450), "MainMenu", "Back");
+	Object* backButton = new LoadSceneButton(Vector2(50, 450), "Back", "MainMenu");
     backButton->SetScale(Vector2(1.4, 1.3));
     dynamic_cast<Button*>(backButton)->ChangeTextPosition(backButton->GetCenteredPosition());
     ui.push_back(backButton);
@@ -36,6 +36,13 @@ RankingMenu::RankingMenu()
 
 void RankingMenu::OnEnter()
 {
+    for (Object* o : ui)
+    {
+        if (dynamic_cast<Button*>(o))
+        {
+            dynamic_cast<Button*>(o)->Reset();
+        }
+    }
 }
 
 void RankingMenu::Update(float dt)
@@ -45,12 +52,14 @@ void RankingMenu::Update(float dt)
         o->Update(dt);
         if (dynamic_cast<Button*>(o))
         {
-            if (dynamic_cast<Button*>(o)->pressed)
-            {
-                isFinished = true;
-                nextScene = dynamic_cast<Button*>(o)->nextScene;
-                dynamic_cast<Button*>(o)->pressed = false;
-            }
+            if (dynamic_cast<Button*>(o)->IsPressed())
+			{
+                if (dynamic_cast<LoadSceneButton*>(o))
+                {
+                    isFinished = true;
+                    nextScene = dynamic_cast<LoadSceneButton*>(o)->GetSceneName();
+                }
+			}
         }
     }
 

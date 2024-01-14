@@ -7,14 +7,15 @@
 class Button : public GameObject
 {
 protected: 
-public:
 	UiText* text;
-
 	bool mouseIn;
-	bool pressed;
-	std::string nextScene;
+	bool pressed = false;
+	bool hasBeenPressed = false;
 
-	Button(Vector2 position, std::string scene, std::string text) : mouseIn(false), pressed(false),nextScene(scene), GameObject(Vector2(128, 32))
+public:
+
+	Button(Vector2 position, std::string text) 
+		: mouseIn(false), pressed(false), GameObject(Vector2(128, 32))
 	{
 		renderers.emplace("idle", new ImageRenderer(transform, Vector2(6, 667), Vector2(61, 12)));
 		renderers.emplace("activate", new ImageRenderer(transform, Vector2(72, 667), Vector2(61, 12)));
@@ -23,8 +24,6 @@ public:
 		this->text = new UiText(text, GetCenteredPosition() + Vector2(40,10));
 		this->text->textRend->SetText(text, 20, { 255,255,255 });
 		SetScale(Vector2(1.6, 1.6));
-
-
 	}
 	void Render() override
 	{
@@ -35,7 +34,12 @@ public:
 	{
 		text->SetPosition(position);
 	}
-	void Update(float dt) override
+	void Reset()
+	{
+		pressed = false;
+		hasBeenPressed = false;
+	}
+	virtual void Update(float dt) override
 	{
 		GameObject::Update(dt);
 
@@ -47,13 +51,32 @@ public:
 		else
 		{
 			mouseIn = false;
+			
 			renderer = renderers["idle"];
 		}
+		if (hasBeenPressed)
+		{
+			pressed = false;
+		}
+		if (!inputManager.mousePressed)
+		{
+			hasBeenPressed = false;
+		}
+		text->Update(dt);
 
-		if (mouseIn && inputManager.mousePressed)
+		if (mouseIn && inputManager.mousePressed && !hasBeenPressed)
 		{
 			pressed = true;
 		}
-		text->Update(dt);		
+	}
+	virtual bool IsPressed()
+	{
+		if (hasBeenPressed) return false;
+		if (pressed)
+		{
+			hasBeenPressed = true;
+			std::cout << "Button pressed" << std::endl;
+		}
+		return pressed;
 	}
 };
