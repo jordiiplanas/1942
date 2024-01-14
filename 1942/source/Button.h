@@ -51,7 +51,6 @@ public:
 		else
 		{
 			mouseIn = false;
-			
 			renderer = renderers["idle"];
 		}
 		if (hasBeenPressed)

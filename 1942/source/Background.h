@@ -18,14 +18,14 @@ public:
 	virtual void Update(float deltaTime) override
 	{
 		Object::Update(deltaTime);
-		if (transform->position.y >= 512)
+		if (transform->position.y >= RENDERMANAGER.GetWindowSize().y)
 		{
-			transform->position.y = -512;
+			transform->position.y = -RENDERMANAGER.GetWindowSize().y;
 			if (renderer != renderers["idle"])
 			{
 				renderer = renderers["idle"];
 			}
-			if (rand() % 2 == 1)
+			if (rand() % 3 == 1)
 			{
 				if (rand() % 2 == 1)
 				{

@@ -27,7 +27,7 @@ public:
 	EnemyPlane(int health, int score, Transform* transformPlayer, Vector2 size ) : health(health), score(score), transformPlayer(transformPlayer), GameObject(size) 
 	{
 		lastShootTime = SDL_GetTicks();
-		deathSoundIndex = AUDIOMANAGER.LoadClip("resources/audios/aaaaaa.mp3");
+		//deathSoundIndex = AUDIOMANAGER.LoadClip("resources/audios/aaaaaa.mp3");
 	}
 	virtual void Update(float dt) override;
 	virtual Object* Shoot(Vector2 position);

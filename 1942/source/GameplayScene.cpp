@@ -84,11 +84,18 @@ void GameplayScene::Update(float dt)
     }
 
     // UPDATE OBJECTS
-
+    std::cout << "Spawned enemies: " << spawnedEnemies << "  Killed Enemies: " << killedEnemies << std::endl;
     for (Object* o : objects)
     {
         if (o->IsPendingDestroy())
         {
+            if (dynamic_cast<EnemyPlane*>(o))
+            {
+                if (dynamic_cast<EnemyPlane*>(o)->GetHealth() <= 0)
+                {
+                    killedEnemies++;
+                }
+            }
             o->Update(dt);
             objects.erase(std::remove(objects.begin(), objects.end(), o), objects.end());
             continue;
@@ -120,7 +127,9 @@ void GameplayScene::Update(float dt)
 
     if (SPAWNER.CanSpawn())
     {
-        objects.push_back(SPAWNER.SpawnObject());
+        Object* o = SPAWNER.SpawnObject();
+        if (dynamic_cast<EnemyPlane*>(o)) spawnedEnemies++;
+        objects.push_back(o);
     }
 }
 

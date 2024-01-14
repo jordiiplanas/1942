@@ -29,6 +29,9 @@ private:
 	UiText* scoreUi;
 	int lives;
 	ScoreManager* score;
+
+	int spawnedEnemies = 0;
+	int killedEnemies = 0;
 public:
 	GameplayScene() : Scene() {
 	};
