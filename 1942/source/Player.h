@@ -7,6 +7,9 @@
 #include "SupportPlane.h"
 #include "AudioManager.h"
 #include "Lifes.h"
+#include "WhitePowerUp.h"
+#include "GrayPowerUp.h"
+#include "GreenPowerUp.h"
 
 class Player : public GameObject
 {

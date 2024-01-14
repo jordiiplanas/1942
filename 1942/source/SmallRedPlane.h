@@ -1,5 +1,9 @@
 #pragma once
 #include "Enemy.h"
+#include "GrayPowerUp.h"
+#include "WhitePowerUp.h"
+#include "GreenPowerUp.h"
+#include "GrayPowerUp.h"
 
 class SmallRedPlane : public EnemyPlane
 {
@@ -14,6 +18,7 @@ protected:
 	float radius = 2.5;
 	float angle = 0;
 	float actualSpeed;
+	bool spawnsPowerUp = false;
 	
 public:
 	SmallRedPlane(Transform* transformPlayer, bool goesRight, bool spinUp) :
@@ -40,9 +45,16 @@ public:
 
 	void Update(float dt) override 
 	{
-
 		actualTime = SDL_GetTicks();
-		EnemyPlane::Update(dt);	
+		EnemyPlane::Update(dt);
+		if (isPendingDestroy)
+		{
+			if (spawnsPowerUp)
+			{
+				SpawnPowerUp();
+			}
+			return;
+		}
 		UpdateMovementPattern(dt);
 		if (isSpinning)
 		{
@@ -81,6 +93,10 @@ public:
 			actualSpeed = rigidbody->GetVelocity().x;
 		}
 	}
+	inline void SetPowerUp()
+	{
+		spawnsPowerUp = true;
+	}
 	void UpdateMovementPattern(float dt) override 
 	{
 		if (transform->position.x > rand() % (400 - 200 + 1) + 200)
@@ -93,5 +109,24 @@ public:
 			isSpinning = false;
 			rigidbody->SetVelocity(Vector2(actualSpeed, 0));
 		}
+	}
+	void SpawnPowerUp()
+	{
+		int random = rand() % 3;
+		PowerUp* powerUp = new PowerUp(Vector2(30,20));
+		switch (random)
+		{
+			case 0:
+				powerUp = new GrayPowerUp();
+				break;
+			case 1:
+				powerUp = new GreenPowerUp();
+				break;
+			case 2:
+				powerUp = new WhitePowerUp();
+				break;
+		}	
+		powerUp->SetPosition(GetPosition());
+		SPAWNER.InsertObject(powerUp);
 	}
 };

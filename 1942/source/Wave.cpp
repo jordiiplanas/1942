@@ -12,22 +12,31 @@ void Wave::Update(float deltaTime)
 {
 	if (isFinished) return;
 	
-	if (type == WaveType::SMALLRED)
+	for (EnemyPlane* enemy : enemyPlanes)
 	{
-		/*if (SPAWNER.GetObjects().size() == 0)
+		if (enemy->GetHealth() <= 0)
 		{
-			isFinished = true;
-			return;
-		}*/
+			enemyPlanes.erase(std::remove(enemyPlanes.begin(), enemyPlanes.end(), enemy), enemyPlanes.end());
+			break;
+		}
 	}
 
-	if (spawnedEnemies >= numEnemies)
+	
+	if (spawnedEnemies <= numEnemies)
 	{
-		isFinished = true;
-		return;
+		timePassed += deltaTime;
 	}
-
-	timePassed += deltaTime;
+	else 
+	{
+		if (type == WaveType::SMALLRED)
+		{
+			if (enemyPlanes.size() == 1)
+			{
+				enemyPlane = enemyPlanes[0];
+				dynamic_cast<SmallRedPlane*>(enemyPlane)->SetPowerUp();
+			}
+		}
+	}
 	
 	if (timePassed > timeBetweenSpawns)
 	{
@@ -92,12 +101,12 @@ void Wave::SpawnEnemy()
 		enemy = new SmallNormalPlane(CURVE, playerTransform, true);
 		break;
 	}
-	//spawnedPlanes.push_back(enemy);
+	enemyPlanes.push_back(enemy);
 	SPAWNER.InsertObject(enemy);
 }
 void Wave::Reset()
 {
-	spawnedPlanes.clear();
+	enemyPlanes.clear();
 	spawnedEnemies = 0;
 	timePassed = 0;
 	isFinished = false;

@@ -22,13 +22,18 @@ private:
 	float timePassed = 0;
 	int spawnedEnemies = 0;
 
+
+	std::vector<EnemyPlane*> enemyPlanes;
+	EnemyPlane* enemyPlane;
+
 	Vector2 initialPosition;
 	float startTime;
 	WaveType type;
+	bool hasSpawnedPowerUp = false;
+	
 	int numEnemies;
 	float timeBetweenSpawns = 0.2f;
 
-	std::vector<EnemyPlane*> spawnedPlanes;
 	bool isFinished;
 	Transform* playerTransform;
 	bool mediumSpawned = false;
