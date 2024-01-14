@@ -134,6 +134,12 @@ void GameplayScene::Update(float dt)
         if (dynamic_cast<EnemyPlane*>(o)) spawnedEnemies++;
         objects.push_back(o);
     }
+
+    if (player->GetLives() <= 0)
+    {
+        isFinished = true;
+        nextScene = "WritePuntuation";
+    }
 }
 
 void GameplayScene::Render()

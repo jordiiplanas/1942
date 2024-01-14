@@ -61,7 +61,7 @@ void SmallNormalPlane::Update(float dt)
 	EnemyPlane::Update(dt);
 	if (isPendingDestroy && !isDying)
 	{
-		AUDIOMANAGER.PlayClip(deathSoundIndex);
+		//AUDIOMANAGER.PlayClip(deathSoundIndex+ 3);
 		isPendingDestroy = false;
 		isDying = true;
 		renderer = renderers["death"];

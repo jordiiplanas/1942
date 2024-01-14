@@ -22,7 +22,7 @@ void WritePuntuation::Update(float dt)
     {
         o->Update(dt);
     }
-
+    std::cout << SCOREMANAGER.GetScore();
     ui.push_back(new UiText(" ", Vector2(250, 320)));
     if (inputManager.TextInputFunction().length() > 1)
     {
@@ -33,6 +33,7 @@ void WritePuntuation::Update(float dt)
       dynamic_cast<UiText*>(ui[2])->textRend->SetText(inputManager.TextInputFunction(), 20, { 255,255,255 });
       if (inputManager.CheckKeyState(SDLK_UP, PRESSED))
       {
+          SavePuntuations();
           isFinished = true;
           nextScene = "MainMenu";
       }
@@ -46,4 +47,38 @@ void WritePuntuation::Render()
     {
         o->Render();
     }
+}
+
+void WritePuntuation::SavePuntuations()
+{
+    std::ofstream myFileOut2;
+    myFileOut2.open("resources/data.dat", std::ios::out | std::ios::binary);
+        myFileOut2.close();
+
+
+    std::ifstream myFileIn("resources/data.dat", std::ios::in | std::ios::binary);
+    if (!myFileIn.is_open())
+    {
+        std::cout << "cant open file read" << std::endl;
+        return;
+    }
+    int inSize = 0;
+    myFileIn.read(reinterpret_cast<char*>(&inSize), sizeof(int));
+    std::vector<int> readVector;
+    readVector.resize(inSize);
+    myFileIn.read(reinterpret_cast<char*> (readVector.data()), sizeof(int) * inSize);
+
+    myFileIn.close();
+    readVector.push_back(SCOREMANAGER.GetScore());
+    std::vector<int> yeyeye{ 2,4,3,2,2 };
+    std::ofstream myFileOut;
+    myFileOut.open("resources/data.dat", std::ios::out | std::ios::binary | std::ios::trunc);
+        if (!myFileOut.is_open())
+        {
+            std::cout << "cant open file write" << std::endl;
+            return;
+        }
+        int sizeWrite = yeyeye.size();
+        myFileOut.write(reinterpret_cast<char*>(&yeyeye), sizeof(int) * sizeWrite);
+        myFileOut.close();
 }

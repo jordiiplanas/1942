@@ -20,5 +20,7 @@ public:
     virtual void OnEnter() override;
     virtual void Update(float dt) override;
     virtual void Render() override;
+    void SavePuntuations();
+
 };
 
