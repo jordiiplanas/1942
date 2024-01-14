@@ -264,7 +264,7 @@
       <Filter>Header Files\View\UI</Filter>
     </ClInclude>
     <ClInclude Include="source\Stage.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Controller</Filter>
     </ClInclude>
     <ClInclude Include="source\EntryScene.h">
       <Filter>Header Files\Controller\Scenes</Filter>

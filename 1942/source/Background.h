@@ -4,6 +4,7 @@
 class Background : public GameObject
 {
 public:
+	bool toEnd = false;
 	Background(Vector2 size, float speed)
 		: GameObject(size) {
 		renderers.emplace("idle", new ImageRenderer(transform, Vector2(640, 0), Vector2(192, 192)));
@@ -24,9 +25,20 @@ public:
 			{
 				renderer = renderers["idle"];
 			}
-			if (rand() % 4 == 1)
+			if (rand() % 2 == 1)
 			{
-				renderer = renderers["island"];
+				if (rand() % 2 == 1)
+				{
+					renderer = renderers["island1"];
+				}
+				else
+				{
+					renderer = renderers["island2"];
+				}
+			}
+			if (toEnd)
+			{
+				renderer = renderers["final"];
 			}
 		}
 	}

@@ -221,5 +221,23 @@ void Player::OnCollisionEnter(Object* other)
 		PlayDeathAnimation();
         other->Destroy();
 	}
+    if (dynamic_cast<PowerUp*>(other))
+    { 
+        SCOREMANAGER.AddScore(100);
+        if (dynamic_cast<WhitePowerUp*>(other))
+        {
+            //KBOOM
+        }
+        else if (dynamic_cast<GreenPowerUp*>(other))
+        {
+            isShootingFourBullets = true;
+        }
+        else
+        {
+            AddSupportPlane();
+        }
+        other->Destroy();
+    }
+
 }
 

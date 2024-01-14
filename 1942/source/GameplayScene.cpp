@@ -14,8 +14,8 @@ void GameplayScene::OnEnter()
 
     //BACKGROUND
     int counter = 0;
-    background.push_back(new Background(Vector2(512, 512), 60));
-    background.push_back(new Background(Vector2(512, 512), 60));
+    background.push_back(new Background(Vector2(512, 512), 59));
+    background.push_back(new Background(Vector2(512, 512), 59));
     background[0]->ChangeAnimation("initial");
     background[1]->SetPosition(Vector2(0, -512));
 
@@ -57,21 +57,33 @@ void GameplayScene::Update(float dt)
     }
     //TODO : Pause
 	isFinished = inputManager.CheckKeyState(SDLK_ESCAPE, PRESSED);
-  
-    // WAVES
 
-    currentStage->Update(dt);
-    if (currentStage->IsFinished())
-    {
-        // Cambio de escena
-	}
-
-    // UPDATE OBJECTS
+    // UPDATE Background
 
     for (Object* o : background)
 	{
 		o->Update(dt);
 	}
+
+    // ENDED GAME updates
+
+    if (isEnded)
+    {
+        player->Update(dt);
+        return;
+    }
+
+    // WAVES
+
+    currentStage->Update(dt);
+    if (currentStage->IsFinished() && !isEnded)
+    {
+        // Cambio de escena
+        EndStage();
+        isEnded = true;
+    }
+
+    // UPDATE OBJECTS
 
     for (Object* o : objects)
     {
@@ -82,8 +94,6 @@ void GameplayScene::Update(float dt)
             continue;
         }
         o->Update(dt);
-        
-
     }
 
     for (Object* o : ui)
@@ -116,9 +126,15 @@ void GameplayScene::Update(float dt)
 
 void GameplayScene::Render()
 {
+    
 	for (Object* o : background)
 	{
 		o->Render();
+	}
+    if (isEnded)
+	{
+		player->Render();
+		return;
 	}
 	for (Object* o : objects)
 	{
@@ -128,5 +144,19 @@ void GameplayScene::Render()
 	{
         o->Render();
 	}
+
+}
+
+void GameplayScene::EndStage()
+{
+    if (background[0]->GetPosition().y < background[1]->GetPosition().y)
+	{
+        dynamic_cast<Background*>(background[1])->toEnd = true;
+	}
+	else
+	{
+        dynamic_cast<Background*>(background[0])->toEnd = true;
+	}
+    // Player animation to center
 
 }

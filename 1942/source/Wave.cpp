@@ -11,13 +11,32 @@ Wave::Wave(WaveType type, float startTime, int numEnemies, Transform* transform)
 void Wave::Update(float deltaTime)
 {
 	if (isFinished) return;
-	if (spawnedEnemies >= numEnemies)
+	
+	for (EnemyPlane* enemy : enemyPlanes)
 	{
-		isFinished = true;
-		return;
+		if (enemy->GetHealth() <= 0)
+		{
+			enemyPlanes.erase(std::remove(enemyPlanes.begin(), enemyPlanes.end(), enemy), enemyPlanes.end());
+			break;
+		}
 	}
 
-	timePassed += deltaTime;
+	
+	if (spawnedEnemies <= numEnemies)
+	{
+		timePassed += deltaTime;
+	}
+	else 
+	{
+		if (type == WaveType::SMALLRED)
+		{
+			if (enemyPlanes.size() == 1)
+			{
+				enemyPlane = enemyPlanes[0];
+				dynamic_cast<SmallRedPlane*>(enemyPlane)->SetPowerUp();
+			}
+		}
+	}
 	
 	if (timePassed > timeBetweenSpawns)
 	{
@@ -82,12 +101,12 @@ void Wave::SpawnEnemy()
 		enemy = new SmallNormalPlane(CURVE, playerTransform, true);
 		break;
 	}
-	//spawnedPlanes.push_back(enemy);
+	enemyPlanes.push_back(enemy);
 	SPAWNER.InsertObject(enemy);
 }
 void Wave::Reset()
 {
-	spawnedPlanes.clear();
+	enemyPlanes.clear();
 	spawnedEnemies = 0;
 	timePassed = 0;
 	isFinished = false;
