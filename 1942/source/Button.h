@@ -24,7 +24,6 @@ public:
 		this->text->textRend->SetText(text, 20, { 255,255,255 });
 		SetScale(Vector2(1.6, 1.6));
 
-
 	}
 	void Render() override
 	{

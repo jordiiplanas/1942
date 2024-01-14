@@ -29,98 +29,113 @@ void GameplayScene::OnEnter()
     ui.push_back(new UiText("Lifes:", Vector2(40, 480)));
     ui.push_back(new UiText("Rolls:", Vector2(310, 480)));
     ui.push_back(scoreUi);
+
 }
 
 void GameplayScene::Update(float dt)
 {
-    bool mousePressed = false;
-    if (mousePressed)
+    if (!playerIsDead)
     {
-        std::cout << "Casa Casita" << std::endl;
-    }
-    // INPUTS
-    while (SDL_PollEvent(&event))
-    {
-        if (SDL_MOUSEBUTTONDOWN == event.type)
-        {
-            if (SDL_BUTTON_LEFT == event.button.button)
-            {
-                mousePressed = true;
-                std::cout << "Casa Casita" << std::endl;
-            }
-        }
-        if (event.type == SDL_MOUSEMOTION)
+        bool mousePressed = false;
+        if (mousePressed)
         {
             std::cout << "Casa Casita" << std::endl;
-
         }
-    }
-    //TODO : Pause
-	isFinished = inputManager.CheckKeyState(SDLK_ESCAPE, PRESSED);
+        // INPUTS
+        while (SDL_PollEvent(&event))
+        {
+            if (SDL_MOUSEBUTTONDOWN == event.type)
+            {
+                if (SDL_BUTTON_LEFT == event.button.button)
+                {
+                    mousePressed = true;
+                    std::cout << "Casa Casita" << std::endl;
+                }
+            }
+            if (event.type == SDL_MOUSEMOTION)
+            {
+                std::cout << "Casa Casita" << std::endl;
 
-    // UPDATE Background
+            }
+        }
+        //TODO : Pause
+        isFinished = inputManager.CheckKeyState(SDLK_ESCAPE, PRESSED);
 
-    for (Object* o : background)
-	{
-		o->Update(dt);
-	}
+        // UPDATE Background
 
-    // ENDED GAME updates
-
-    if (isEnded)
-    {
-        player->Update(dt);
-        return;
-    }
-
-    // WAVES
-
-    currentStage->Update(dt);
-    if (currentStage->IsFinished() && !isEnded)
-    {
-        // Cambio de escena
-        EndStage();
-        isEnded = true;
-    }
-
-    // UPDATE OBJECTS
-
-    for (Object* o : objects)
-    {
-        if (o->IsPendingDestroy())
+        for (Object* o : background)
         {
             o->Update(dt);
-            objects.erase(std::remove(objects.begin(), objects.end(), o), objects.end());
-            continue;
         }
-        o->Update(dt);
-    }
 
-    for (Object* o : ui)
-    {
-        o->Update(dt);
-    }
-    scoreUi->ChangeText("SCORE: " + std::to_string(SCOREMANAGER.GetScore()));
+        // ENDED GAME updates
 
-    // COLLISIONS
-
-    for (Object* o : objects)
-    {
-        for (Object* a : objects)
+        if (isEnded)
         {
-            if (o == a)
-                continue;
-
-            if (o->GetRigidbody()->CheckCollision(a->GetRigidbody()))
-                o->OnCollisionEnter(a);
+            player->Update(dt);
+            return;
         }
+
+        // WAVES
+
+        currentStage->Update(dt);
+        if (currentStage->IsFinished() && !isEnded)
+        {
+            // Cambio de escena
+            EndStage();
+            isEnded = true;
+        }
+
+        // UPDATE OBJECTS
+
+        for (Object* o : objects)
+        {
+            if (o->IsPendingDestroy())
+            {
+                o->Update(dt);
+                objects.erase(std::remove(objects.begin(), objects.end(), o), objects.end());
+                continue;
+            }
+            o->Update(dt);
+        }
+
+        for (Object* o : ui)
+        {
+            o->Update(dt);
+        }
+        scoreUi->ChangeText("SCORE: " + std::to_string(SCOREMANAGER.GetScore()));
+
+        // COLLISIONS
+
+        for (Object* o : objects)
+        {
+            for (Object* a : objects)
+            {
+                if (o == a)
+                    continue;
+
+                if (o->GetRigidbody()->CheckCollision(a->GetRigidbody()))
+                    o->OnCollisionEnter(a);
+            }
+        }
+
+        // SPAWN ELEMENTS
+
+        if (SPAWNER.CanSpawn())
+        {
+            objects.push_back(SPAWNER.SpawnObject());
+        }
+        if (player->GetLives() == 0)
+        {
+            playerIsDead = true;
+        }        
     }
+  
+    else
+    {        
 
-    // SPAWN ELEMENTS
-
-    if (SPAWNER.CanSpawn())
-    {
-        objects.push_back(SPAWNER.SpawnObject());
+        isFinished = true;
+        nextScene = "WritePuntuation";
     }
 }
 
@@ -144,7 +159,10 @@ void GameplayScene::Render()
 	{
         o->Render();
 	}
-
+    for (Object* o : deadUi)
+    {
+        o->Render();
+    }
 }
 
 void GameplayScene::EndStage()

@@ -14,6 +14,7 @@
 #include "GameplayScene.h"
 #include "RankingMenu.h"
 #include "EntryScene.h"
+#include "WritePuntuation.h"
 
 int main(int argc, char* argv[])
 {
@@ -24,7 +25,8 @@ int main(int argc, char* argv[])
 	SCENEMANAGER.AddScene("Gameplay", new GameplayScene());
 	SCENEMANAGER.AddScene("Ranking", new RankingMenu());
 	SCENEMANAGER.AddScene("EntryScene", new EntryScene());
-	SCENEMANAGER.SetCurrentScene("EntryScene");
+	SCENEMANAGER.AddScene("WritePuntuation", new WritePuntuation());
+	SCENEMANAGER.SetCurrentScene("WritePuntuation");
 	SCENEMANAGER.GetCurrentScene()->OnEnter();
 
 	

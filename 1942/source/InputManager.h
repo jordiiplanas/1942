@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <SDL.h>
 #include <unordered_map>
+#include <string>
 
 #define inputManager InputManager::Instance()
 
@@ -26,6 +27,8 @@ private:
   
 public:
     bool mousePressed;
+    std::string textInput;
+    bool canText = false;
 
 
   inline static InputManager& Instance()
@@ -39,6 +42,15 @@ public:
   inline bool GetQuitEvent() { return quitEvent; }
   inline int GetMouseX() { return mouseX; }
   inline int GetMouseY() { return mouseY; }
+  void ReturnChar()
+  {
+      textInput.pop_back();
+  }
+  std::string TextInputFunction()
+  {
+      return textInput;
+  }
+  
 };
 
 

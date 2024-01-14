@@ -61,12 +61,12 @@ public:
 		};
 		std::vector<Vector2> deathDeltas
 		{
-			Vector2(0,0), Vector2(32,0), Vector2(64,0), Vector2(96,0), Vector2(128,0), Vector2(160,0)
+			Vector2(0,0), Vector2(30,0), Vector2(61,0), Vector2(94,0), Vector2(118,0), Vector2(151,0)
 		};
 		std::vector<Vector2> rollDeltas
 		{
-			Vector2(0,32), Vector2(32,32), Vector2(64,32), Vector2(96,32), Vector2(128,32), Vector2(160,32), Vector2(192,32), Vector2(224,32)
-			, Vector2(0,64), Vector2(32,64)
+			Vector2(0,0), Vector2(32,0), Vector2(64,0), Vector2(96,0), Vector2(128,0), Vector2(160,0), Vector2(192,0), Vector2(224,0), Vector2(-3, 26), Vector2(29,26)
+			
 		};
 		for (int i = 0; i < lives; i++)
 		{
@@ -101,8 +101,8 @@ public:
 		}
 		renderers.emplace("right", new AnimatedImageRenderer(transform, Vector2(0, 0), Vector2(32, 32), rightDeltas, false, 20));
 		renderers.emplace("left", new AnimatedImageRenderer(transform, Vector2(0, 0), Vector2(32, 32), leftDeltas, false, 20));
-		renderers.emplace("death", new AnimatedImageRenderer(transform, Vector2(0,112), Vector2(32, 32), deathDeltas, false, 20));
-		renderers.emplace("roll", new AnimatedImageRenderer(transform, Vector2(0, 0), Vector2(32, 32), rollDeltas, false, 20));
+		renderers.emplace("death", new AnimatedImageRenderer(transform, Vector2(4,115), Vector2(32, 32), deathDeltas, true, 20));
+		renderers.emplace("roll", new AnimatedImageRenderer(transform, Vector2(3, 34), Vector2(32, 32), rollDeltas, false, 20));
 		renderer = renderers["idle"];
 		rigidbody->SetLinearDrag(10);
 		shootSoundID = AUDIOMANAGER.LoadClip("resources/audios/Piu.mp3");
@@ -113,7 +113,7 @@ public:
 		initialPosition = position;
 		SetPosition(position);
 	}
-
+	int GetLives() { return lives; }
 	void OnCollisionEnter(Object* other) override;
 	bool IsDying() { return isDying; }
 	void PlayDeathAnimation();

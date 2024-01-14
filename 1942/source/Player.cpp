@@ -6,8 +6,9 @@ void Player::PlayDeathAnimation()
 {
     if (isDying) return;
     AUDIOMANAGER.PlayClip(deathSoundID);
-	renderer = renderers["death"];
 	isDying = true;
+    renderer = renderers["death"];
+
 }
 
 void Player::Shoot()
@@ -129,20 +130,23 @@ void Player::ApplyInput(float deltaTime)
     if (inputManager.CheckKeyState(SDLK_a, HOLD) && GetPosition().x > 15)
     {
         inputForce.x -= 1;
+        if (!isDying && !isRolling)
         currentAnimation = "left";
     }
     else if (inputManager.CheckKeyState(SDLK_d, HOLD) && GetPosition().x < 450)
     {
         inputForce.x += 1;
+        if (!isDying && !isRolling)
         currentAnimation = "right";
     }
     else
     {
+        if(!isDying && !isRolling)
         currentAnimation = "idle";
     }
     if (inputManager.CheckKeyState(SDLK_j, PRESSED))
     {
-        if (rolls > 0)
+        if (rolls > 0 && !isRolling)
         {
             AUDIOMANAGER.PlayClip(flipSoundID);
             isRolling = true;
@@ -184,8 +188,9 @@ void Player::RollTimer(float deltaTime)
 void Player::DieTimer(float deltaTime)
 {
     timePassed += deltaTime;
-    if (timePassed > timeToDie)
+    if (timePassed > timeToDie && lives > 0)
     {
+
         LifesUi.top()->Destroy();
         LifesUi.pop();
         lives--;
@@ -193,12 +198,12 @@ void Player::DieTimer(float deltaTime)
         if (leftSupportPlane != nullptr) leftSupportPlane->PlayDeathAnimation();
         if (rightSupportPlane != nullptr) rightSupportPlane->PlayDeathAnimation();
         isDying = false;
-        if (lives == 0)
+        /*if (lives == 0)
         {
             isPendingDestroy = true;
             isDying = false;
             return;
-        }
+        }*/
         timePassed = 0;
 
         currentAnimation = "idle";

@@ -21,16 +21,18 @@ private:
 	Stage* currentStage;
 	bool isEnded = false;
 	std::vector<GameObject*> background;
+	std::vector<UiText*> deadUi;
 	int levelWaves;
 	Player* player;
 	float levelTime;
+	bool playerIsDead;
 	SDL_Event event;
 	int rolls;
 	UiText* scoreUi;
 	int lives;
 	ScoreManager* score;
 public:
-	GameplayScene() : Scene() {
+	GameplayScene() :playerIsDead(false), Scene() {
 	};
 
 	void OnEnter() override;

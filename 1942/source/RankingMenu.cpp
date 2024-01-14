@@ -53,7 +53,6 @@ void RankingMenu::Update(float dt)
             }
         }
     }
-
 }
 
 void RankingMenu::Render()

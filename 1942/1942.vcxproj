@@ -42,6 +42,7 @@
     <ClCompile Include="source\SupportPlane.cpp" />
     <ClCompile Include="source\TextRenderer.cpp" />
     <ClCompile Include="source\Wave.cpp" />
+    <ClCompile Include="source\WritePuntuation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LevelLoader.h" />
@@ -88,6 +89,7 @@
     <ClInclude Include="source\Wave.h" />
     <ClInclude Include="source\IWaveManager.h" />
     <ClInclude Include="source\WhitePowerUp.h" />
+    <ClInclude Include="source\WritePuntuation.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
