@@ -10,6 +10,7 @@
 #include "WhitePowerUp.h"
 #include "GrayPowerUp.h"
 #include "GreenPowerUp.h"
+#include "SuperKiller.h"
 
 class Player : public GameObject
 {

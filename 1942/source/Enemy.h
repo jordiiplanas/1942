@@ -6,6 +6,7 @@
 #include "AudioManager.h"
 #include "AnimatedImageRenderer.h"
 #include "ScoreManager.h"
+#include "SuperKiller.h"
 #include <fstream>
 #include <ios>
 

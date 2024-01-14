@@ -149,6 +149,7 @@ void Player::ApplyInput(float deltaTime)
             Shoot();
         }
     }
+
     inputForce.Normalize();
     inputForce = inputForce * 50;
     GetRigidbody()->AddForce(inputForce);
@@ -236,7 +237,7 @@ void Player::OnCollisionEnter(Object* other)
         SCOREMANAGER.AddScore(100);
         if (dynamic_cast<WhitePowerUp*>(other))
         {
-            //KBOOM
+            SPAWNER.InsertObject(new SuperKiller(0.2f));
         }
         else if (dynamic_cast<GreenPowerUp*>(other))
         {

@@ -37,7 +37,11 @@ Object* EnemyPlane::Shoot(Vector2 position)
 
 void EnemyPlane::OnCollisionEnter(Object* other)
 {
-
+	if (dynamic_cast<SuperKiller*>(other))
+	{
+		health = 0;
+		other->Destroy();
+	}
 	if (dynamic_cast<Bullet*>(other))
 	{
 		health--;
