@@ -20,7 +20,8 @@ public:
 		spawnLeft(spawnLeft), startSpin(startSpin), EnemyPlane(1, 100, transformPlayer, Vector2(32, 32))
 	{
 		transform->position = Vector2(100, 0);
-		GetRigidbody()->SetLinearDrag(2);		
+		GetRigidbody()->SetLinearDrag(2);
+		SetRotation(180);
 		renderers.emplace("idle", new ImageRenderer(transform, Vector2(7, 507), Vector2(31, 30)));
 		renderer = renderers["idle"];
 		direction = Vector2(0, 4);

@@ -102,6 +102,10 @@ public:
 		SetPosition(position);
 	}
 	int GetLives() { return lives; }
+	void Heal()
+	{
+		lives = 3;
+	}
 	void OnCollisionEnter(Object* other) override;
 	bool IsDying() { return isDying; }
 	void PlayDeathAnimation();

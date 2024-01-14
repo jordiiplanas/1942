@@ -5,33 +5,45 @@ void GameplayScene::OnEnter()
     isPaused = false;
     nextScene = "MainMenu";
 
-    player = new Player(Vector2(250, 350));
-    SPAWNER.InsertObject(player);
+    if (!hasAlreadyStarted)
+    {
 
-    AUDIOMANAGER.PlayMusic(AUDIOMANAGER.LoadMusic("resources/audios/musiquita.mp3"));
+        player = new Player(Vector2(250, 350));
+        SPAWNER.InsertObject(player);
 
-    Vector2 initialPos = Vector2(0, -64);
-    Vector2 limitsPos = Vector2(512, 512);
+        AUDIOMANAGER.PlayMusic(AUDIOMANAGER.LoadMusic("resources/audios/musiquita.mp3"));
 
-    //BACKGROUND
-    int counter = 0;
-    background.push_back(new Background(Vector2(512, 512), 59));
-    background.push_back(new Background(Vector2(512, 512), 59));
-    background[0]->ChangeAnimation("initial");
-    background[1]->SetPosition(Vector2(0, -512));
+        Vector2 initialPos = Vector2(0, -64);
+        Vector2 limitsPos = Vector2(512, 512);
+
+        //BACKGROUND
+        int counter = 0;
+        background.push_back(new Background(Vector2(512, 512), 59));
+        background.push_back(new Background(Vector2(512, 512), 59));
+        background[0]->ChangeAnimation("initial");
+        background[1]->SetPosition(Vector2(0, -512));
+        // UI
+        scoreUi = new UiText("SCORE: 0", Vector2(60, 30));
+        ui.push_back(new UiText("Lifes:", Vector2(40, 480)));
+        ui.push_back(new UiText("Rolls:", Vector2(310, 480)));
+        ui.push_back(scoreUi);
+    }
+    else
+    {
+        player->ShowStatsUI();
+    }
+
+
+    Transform* transform = player->GetTransform();
 
     // WAVES
-    Transform* transform = player->GetTransform();
     stages = GetStagesFromFile("stage-", "-waves.xml", transform);
     if (stages.size() > 0) currentStage = stages[0];
     currentStageIndex = 0;
 
-    // UI
-    scoreUi = new UiText("SCORE: 0", Vector2(60, 30));
-    ui.push_back(new UiText("Lifes:", Vector2(40, 480)));
-    ui.push_back(new UiText("Rolls:", Vector2(310, 480)));
-    ui.push_back(scoreUi);
+    hasAlreadyStarted = true;
 }
+
 
 void GameplayScene::Update(float dt)
 {
@@ -127,6 +139,8 @@ void GameplayScene::Update(float dt)
 
     if (player->GetLives() <= 0)
     {
+        Reset();
+        player->Heal();
         isFinished = true;
         nextScene = "WritePuntuation";
     }
@@ -200,5 +214,7 @@ void GameplayScene::NextStage()
 	else
 	{
 		// SCORE SCENE
+        isFinished = true;
+        nextScene = "WritePuntuations";
 	}
 }
