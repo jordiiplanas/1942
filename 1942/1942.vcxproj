@@ -56,6 +56,7 @@
     <ClInclude Include="source\Enemy.h" />
     <ClInclude Include="source\EnemyBullet.h" />
     <ClInclude Include="source\EntryScene.h" />
+    <ClInclude Include="source\ExitButton.h" />
     <ClInclude Include="source\GameObject.h" />
     <ClInclude Include="source\GameplayScene.h" />
     <ClInclude Include="source\GrayPowerUp.h" />
@@ -63,8 +64,10 @@
     <ClInclude Include="source\ImageRenderer.h" />
     <ClInclude Include="source\InputManager.h" />
     <ClInclude Include="source\Lifes.h" />
+    <ClInclude Include="source\LoadSceneButton.h" />
     <ClInclude Include="source\MainMenu.h" />
     <ClInclude Include="source\MediumYellowPlane.h" />
+    <ClInclude Include="source\MuteButton.h" />
     <ClInclude Include="source\Object.h" />
     <ClInclude Include="source\Player.h" />
     <ClInclude Include="source\PowerUp.h" />

@@ -69,3 +69,10 @@ void RenderManager::LoadGameTexture()
 
 	SDL_FreeSurface(surface);
 }
+
+Vector2 RenderManager::GetWindowSize()
+{
+	int w, h;
+	SDL_GetWindowSize(window, &w, &h);
+	return Vector2(w, h);
+}

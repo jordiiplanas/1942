@@ -99,8 +99,19 @@ void GameplayScene::Update(float dt)
             o->Update(dt);
         }
 
-        for (Object* o : ui)
+    // UPDATE OBJECTS
+    std::cout << "Spawned enemies: " << spawnedEnemies << "  Killed Enemies: " << killedEnemies << std::endl;
+    for (Object* o : objects)
+    {
+        if (o->IsPendingDestroy())
         {
+            if (dynamic_cast<EnemyPlane*>(o))
+            {
+                if (dynamic_cast<EnemyPlane*>(o)->GetHealth() <= 0)
+                {
+                    killedEnemies++;
+                }
+            }
             o->Update(dt);
         }
         scoreUi->ChangeText("SCORE: " + std::to_string(SCOREMANAGER.GetScore()));
@@ -121,14 +132,15 @@ void GameplayScene::Update(float dt)
 
         // SPAWN ELEMENTS
 
-        if (SPAWNER.CanSpawn())
-        {
-            objects.push_back(SPAWNER.SpawnObject());
-        }
         if (player->GetLives() == 0)
         {
             playerIsDead = true;
         }        
+    if (SPAWNER.CanSpawn())
+    {
+        Object* o = SPAWNER.SpawnObject();
+        if (dynamic_cast<EnemyPlane*>(o)) spawnedEnemies++;
+        objects.push_back(o);
     }
   
     else

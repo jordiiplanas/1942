@@ -119,21 +119,21 @@ void Player::Update(float deltaTime)
 void Player::ApplyInput(float deltaTime)
 {
     Vector2 inputForce = Vector2(0, 0);
-    if (inputManager.CheckKeyState(SDLK_w, HOLD) && GetPosition().y > 15)
+    if (inputManager.CheckKeyState(SDLK_w, HOLD) && GetPosition().y > GetSize().y/2)
     {
         inputForce.y -= 1;
     }
-    else if (inputManager.CheckKeyState(SDLK_s, HOLD) && GetPosition().y < 470)
+    else if (inputManager.CheckKeyState(SDLK_s, HOLD) && GetPosition().y < RENDERMANAGER.GetWindowSize().y - GetSize().y*2)
     {
         inputForce.y += 1;
     }
-    if (inputManager.CheckKeyState(SDLK_a, HOLD) && GetPosition().x > 15)
+    if (inputManager.CheckKeyState(SDLK_a, HOLD) && GetPosition().x > GetSize().x / 2)
     {
         inputForce.x -= 1;
         if (!isDying && !isRolling)
         currentAnimation = "left";
     }
-    else if (inputManager.CheckKeyState(SDLK_d, HOLD) && GetPosition().x < 450)
+    else if (inputManager.CheckKeyState(SDLK_d, HOLD) && GetPosition().x < RENDERMANAGER.GetWindowSize().x - GetSize().x * 2)
     {
         inputForce.x += 1;
         if (!isDying && !isRolling)

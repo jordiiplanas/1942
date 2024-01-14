@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <SDL.h>
 #include <unordered_map>
 #include <string>
@@ -42,6 +42,7 @@ public:
   inline bool GetQuitEvent() { return quitEvent; }
   inline int GetMouseX() { return mouseX; }
   inline int GetMouseY() { return mouseY; }
+  inline void SetQuitEvent(bool value) { quitEvent = value; }
   void ReturnChar()
   {
       textInput.pop_back();

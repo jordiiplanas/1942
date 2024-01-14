@@ -6,10 +6,10 @@
 
 MainMenu::MainMenu()
 {
-    Object* playButton = new Button(Vector2(155, 50), "Gameplay", "Play");
-    Object* rankButton = new Button(Vector2(155, 150), "Ranking", "Ranking");
-    Object* exitButton = new Button(Vector2(155, 250), "Gameplay", "Exit");
-    Object* muteButton = new Button(Vector2(155, 350), "Gameplay", "Mute");
+    Object* playButton = new LoadSceneButton(Vector2(155, 50), "Play", "Gameplay");
+    Object* rankButton = new LoadSceneButton(Vector2(155, 150), "Ranking", "Ranking");
+    Object* exitButton = new ExitButton(Vector2(155, 250), "Exit");
+    Object* muteButton = new MuteButton(Vector2(155, 350), "Mute");
     ui.push_back(playButton);
     ui.push_back(rankButton);
     ui.push_back(exitButton);
@@ -24,6 +24,13 @@ MainMenu::~MainMenu()
 void MainMenu::OnEnter()
 {
     nextScene = "Gameplay";
+    for (Object* o : ui)
+	{
+		if (dynamic_cast<Button*>(o))
+		{
+			dynamic_cast<Button*>(o)->Reset();
+		}
+	}
 }
 
 
@@ -37,15 +44,21 @@ void MainMenu::Update(float dt)
     for (Object* o : ui)
     {
         o->Update(dt);
-        if (dynamic_cast<Button*>(o))
+        if (dynamic_cast<Button*>(o)->IsPressed())
         {
-            if (dynamic_cast<Button*>(o)->pressed)
+            if (dynamic_cast<MuteButton*>(o))
+            {
+                dynamic_cast<MuteButton*>(o)->Mute();
+            }
+            if (dynamic_cast<LoadSceneButton*>(o))
             {
                 isFinished = true;
-                nextScene = dynamic_cast<Button*>(o)->nextScene;
-                dynamic_cast<Button*>(o)->pressed = false;
-
+                nextScene = dynamic_cast<LoadSceneButton*>(o)->GetSceneName();
             }
+            if (dynamic_cast<ExitButton*>(o))
+			{
+                dynamic_cast<ExitButton*>(o)->Exit();
+			}
         }
     }
 
