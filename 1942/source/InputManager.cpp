@@ -34,10 +34,28 @@ void InputManager::Listen()
     case SDL_QUIT:
       quitEvent = true;
       break;
+    case SDL_MOUSEBUTTONDOWN:
+        if(sdl_event.button.button)
+        mousePressed = true;
+        break;
+    case SDL_MOUSEBUTTONUP:
+        if (sdl_event.button.button)
+        mousePressed = false;
+        break;
+    case SDL_TEXTINPUT:
+        {
+        if (sdl_event.key.keysym.sym == SDLK_SPACE)
+        {
+
+        }
+        else if(canText && textInput.length() < 3 )
+        textInput += sdl_event.text.text;
+        }
     }
   }
   SDL_GetMouseState(&mouseX, &mouseY);
 }
+
 
 bool InputManager::CheckKeyState(Sint32 key, KeyState state)
 {

@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <assert.h>
+#include "Vector2.h"
 
 #define RENDERMANAGER RenderManager::Instance()
 
@@ -14,6 +15,7 @@ private:
 	SDL_Renderer* renderer;
 
 	SDL_Texture* gameTexture;
+	SDL_Texture* presentationTexture;
 
 public:
 	inline static RenderManager& Instance() 
@@ -28,13 +30,14 @@ public:
 	void Init();
 	SDL_Renderer* GetRenderer() { return renderer; }
 	inline SDL_Texture* GetGameTexture() { return gameTexture; }
+	inline SDL_Texture* GetPresentationTexture() { return presentationTexture; }
+	Vector2 GetWindowSize();
 
 private:
 
 	void InitSDL();
 	void CreateWindowAndRenderer();
 	void LoadGameTexture();
-
 };
 
 

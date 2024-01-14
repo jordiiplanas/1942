@@ -9,29 +9,46 @@
 #include "Background.h"
 #include "MediumYellowPlane.h"
 #include "BigGreenPlane.h"
-#include "Wave.h"
+#include "Stage.h"
 #include "ScoreManager.h"
 #include "UiText.h"
+#include "IWaveManager.h"
 
-class GameplayScene : public Scene
+class GameplayScene : public Scene, public IWaveManager
 {
 private:
-	std::vector<Wave*> waves;
-	int waveIndex;
-	std::vector<Object*> background;
+	bool hasAlreadyStarted = false;
+	std::vector<Stage*> stages;
+	Stage* currentStage;
+	int currentStageIndex;
+	bool isEnded = false;
+	std::vector<GameObject*> background;
+	std::vector<UiText*> deadUi;
 	int levelWaves;
 	Player* player;
 	float levelTime;
+	bool playerIsDead;
+	SDL_Event event;
 	int rolls;
 	UiText* scoreUi;
 	int lives;
 	ScoreManager* score;
+
+	bool isPaused = false;
+
+	int spawnedEnemies = 0;
+	int killedEnemies = 0;
 public:
-	GameplayScene() : Scene() {
+	GameplayScene() :playerIsDead(false), Scene() {
 	};
 
 	void OnEnter() override;
 	void Update(float dt) override;
 	void Render() override;
+	void EndStage();
+	
+	void Reset();
+
+	void NextStage();
 	
 };

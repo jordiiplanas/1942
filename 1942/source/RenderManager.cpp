@@ -50,7 +50,7 @@ void RenderManager::CreateWindowAndRenderer()
 	{
 		throw SDL_GetError();
 	}
-	SDL_SetRenderDrawColor(renderer, 50, 50, 255, 255);
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
 }
 
@@ -58,9 +58,21 @@ void RenderManager::LoadGameTexture()
 {
 	SDL_Surface* surface = IMG_Load("resources/1942.png");
 	assert(surface);
+	SDL_Surface* surface2 = IMG_Load("resources/Dance.png");
+	assert(surface2);
+
 
 	gameTexture = SDL_CreateTextureFromSurface(renderer, surface);
 	assert(gameTexture);
+	presentationTexture = SDL_CreateTextureFromSurface(renderer, surface2);
+	assert(presentationTexture);
 
 	SDL_FreeSurface(surface);
+}
+
+Vector2 RenderManager::GetWindowSize()
+{
+	int w, h;
+	SDL_GetWindowSize(window, &w, &h);
+	return Vector2(w, h);
 }

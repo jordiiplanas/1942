@@ -6,7 +6,6 @@
 #include <string>
 
 #include "Transform.h"
-#include "Vector2.h"
 #include "RenderManager.h"
 
 
@@ -26,6 +25,10 @@ protected:
 
 	
 public:
+	SDL_Texture* GetTexture()
+	{
+		return texture;
+	}
 	Renderer(Transform* transform)
 	{
 		this->transform = transform;

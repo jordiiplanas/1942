@@ -2,93 +2,110 @@
 
 void GameplayScene::OnEnter()
 {
+    isPaused = false;
     nextScene = "MainMenu";
-    
-    player = new Player(Vector2(250, 350));
-    SPAWNER.InsertObject(player);
 
-    AUDIOMANAGER.PlayMusic(AUDIOMANAGER.LoadMusic("resources/audios/musiquita.mp3"));
-    
-    Vector2 initialPos = Vector2(0, -64);
-    Vector2 limitsPos = Vector2(512, 512);
-
-    //BACKGROUND
-    int counter = 0;
-    while (initialPos.y < limitsPos.y)
+    if (!hasAlreadyStarted)
     {
-        while (initialPos.x < limitsPos.x)
-        {
-            background.push_back(new Background(Vector2(32, 32), 20));
-            background.back()->SetPosition(initialPos);
-			initialPos.x += 32;
-		}
-		initialPos.x = 0;
-		initialPos.y += 32;
-	}
+
+        player = new Player(Vector2(250, 350));
+        SPAWNER.InsertObject(player);
+
+        AUDIOMANAGER.PlayMusic(AUDIOMANAGER.LoadMusic("resources/audios/musiquita.mp3"));
+
+        Vector2 initialPos = Vector2(0, -64);
+        Vector2 limitsPos = Vector2(512, 512);
+
+        //BACKGROUND
+        int counter = 0;
+        background.push_back(new Background(Vector2(512, 512), 59));
+        background.push_back(new Background(Vector2(512, 512), 59));
+        background[0]->ChangeAnimation("initial");
+        background[1]->SetPosition(Vector2(0, -512));
+        // UI
+        scoreUi = new UiText("SCORE: 0", Vector2(60, 30));
+        ui.push_back(new UiText("Lifes:", Vector2(40, 480)));
+        ui.push_back(new UiText("Rolls:", Vector2(310, 480)));
+        ui.push_back(scoreUi);
+    }
+    else
+    {
+        player->ShowStatsUI();
+    }
+
+
+    Transform* transform = player->GetTransform();
 
     // WAVES
-    Transform* transform = player->GetTransform();
-    Wave* wave1 = new Wave(A, 0.5, 4, transform);
-    wave1->SetInitialPosition(Vector2(300, 0));
-    Wave* wave2 = new Wave(B, 0.5, 4, transform);
-    wave2->SetInitialPosition(Vector2(-20, rand() % (450 - 50 + 1) + 50));
-    Wave* wave3 = new Wave(C, 0.5, 2, transform);
-    Wave* wave4 = new Wave(D, 1, 1, transform);
-    Wave* wave5 = new Wave(E, 2, 3, transform);
-    Wave* wave6 = new Wave(F, 3, 4, transform);
-    waveIndex = 0;
-    waves.push_back(wave1);
-    waves.push_back(wave2);
-    waves.push_back(wave3);
-    waves.push_back(wave4);
-    waves.push_back(wave5);
-    waves.push_back(wave6);
+    stages = GetStagesFromFile("stage-", "-waves.xml", transform);
+    if (stages.size() > 0) currentStage = stages[0];
+    currentStageIndex = 0;
 
-    // UI
-    scoreUi = new UiText("SCORE: 0", Vector2(60, 30));
-    
-    //ui.push_back(scoreUi);
+    hasAlreadyStarted = true;
 }
+
 
 void GameplayScene::Update(float dt)
 {
-    // INPUTS
 
-    //TODO : Pause
-	isFinished = inputManager.CheckKeyState(SDLK_ESCAPE, PRESSED);
-  
+    if (inputManager.CheckKeyState(SDLK_ESCAPE, PRESSED)) isPaused = !isPaused;
+    if (isPaused) return;
+
+    // UPDATE Background
+
+    for (Object* o : background)
+    {
+        o->Update(dt);
+    }
+
+    // ENDED GAME updates
+
+    if (isEnded)
+    {
+        player->Update(dt);
+        for (auto back : background)
+        {
+            if (dynamic_cast<Background*>(back)->hasChangedToEnd)
+            {
+                if (back->GetPosition().y >= 0)
+                {
+                    //END
+                    NextStage();
+                }
+            }
+        }
+       
+        return;
+    }
+
     // WAVES
 
-    if (waves.size() > waveIndex)
+    currentStage->Update(dt);
+    if (currentStage->IsFinished() && !isEnded)
     {
-        if (!waves[waveIndex]->IsFinished())
-        {
-            waves[waveIndex]->Update(dt);
-        }
-        else
-        {
-            waveIndex++;
-        }
+        // Cambio de escena
+        EndStage();
+        isEnded = true;
     }
 
     // UPDATE OBJECTS
-
-    for (Object* o : background)
-	{
-		o->Update(dt);
-	}
-
+    std::cout << "Spawned enemies: " << spawnedEnemies << "  Killed Enemies: " << killedEnemies << std::endl;
     for (Object* o : objects)
     {
         if (o->IsPendingDestroy())
         {
+            if (dynamic_cast<EnemyPlane*>(o))
+            {
+                if (dynamic_cast<EnemyPlane*>(o)->GetHealth() <= 0)
+                {
+                    killedEnemies++;
+                }
+            }
             o->Update(dt);
             objects.erase(std::remove(objects.begin(), objects.end(), o), objects.end());
             continue;
         }
         o->Update(dt);
-        
-
     }
 
     for (Object* o : ui)
@@ -115,23 +132,89 @@ void GameplayScene::Update(float dt)
 
     if (SPAWNER.CanSpawn())
     {
-        objects.push_back(SPAWNER.SpawnObject());
+        Object* o = SPAWNER.SpawnObject();
+        if (dynamic_cast<EnemyPlane*>(o)) spawnedEnemies++;
+        objects.push_back(o);
+    }
+
+    if (player->GetLives() <= 0)
+    {
+        Reset();
+        player->Heal();
+        isFinished = true;
+        nextScene = "WritePuntuation";
     }
 }
 
 void GameplayScene::Render()
 {
-	for (Object* o : background)
-	{
-		o->Render();
-	}
-	for (Object* o : objects)
-	{
-		o->Render();
-	}
-    for (Object* o : ui)
-	{
-        o->Render();
-	}
 
+    for (Object* o : background)
+    {
+        o->Render();
+    }
+    if (isEnded)
+    {
+        player->Render();
+        return;
+    }
+    for (Object* o : objects)
+    {
+        o->Render();
+    }
+    for (Object* o : ui)
+    {
+        o->Render();
+    }
+
+}
+
+void GameplayScene::EndStage()
+{
+    if (background[0]->GetPosition().y < background[1]->GetPosition().y)
+    {
+        dynamic_cast<Background*>(background[1])->toEnd = true;
+    }
+    else
+    {
+        dynamic_cast<Background*>(background[0])->toEnd = true;
+	}
+}
+
+void GameplayScene::Reset()
+{
+    for (Object* o : objects)
+	{
+        if (dynamic_cast<Player*>(o)) continue;
+		o->Destroy();
+	}
+	objects.clear();
+    objects.push_back(player);
+	isEnded = false;
+    SPAWNER.CleanList();
+	background[0]->SetPosition(Vector2(0, -512));
+	background[1]->SetPosition(Vector2(0, 0));
+	dynamic_cast<Background*>(background[0])->hasChangedToEnd=false;
+    dynamic_cast<Background*>(background[0])->toEnd=false;
+    dynamic_cast<Background*>(background[1])->hasChangedToEnd=false;
+    dynamic_cast<Background*>(background[1])->toEnd = false;
+    player->ShowStatsUI();
+    background[0]->ChangeAnimation("idle");
+	background[1]->ChangeAnimation("initial");
+
+}
+
+void GameplayScene::NextStage()
+{
+    if (stages.size() > ++currentStageIndex)
+	{
+		currentStage = stages[currentStageIndex];
+        Reset();
+	}
+	else
+	{
+		// SCORE SCENE
+        isFinished = true;
+        nextScene = "WritePuntuations";
+	}
 }

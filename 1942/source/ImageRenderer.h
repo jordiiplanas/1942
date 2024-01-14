@@ -6,7 +6,10 @@ class ImageRenderer : public Renderer
 
 public:
 	virtual void Update(float dt) override {}
-
+	void SetTexture(SDL_Texture* A)
+	{
+		texture = A;
+	}
 	virtual void Reset() {};
 	ImageRenderer(Transform* transform, Vector2 sourceOffset, Vector2 sourceSize) 
 		: Renderer(transform) 

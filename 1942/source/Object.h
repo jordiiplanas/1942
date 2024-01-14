@@ -19,7 +19,7 @@ public:
 	~Object();
 
 	// Constructor
-	void Render();
+	virtual void Render();
 
 	// Setters
 	void SetPosition(Vector2 position);

@@ -6,6 +6,9 @@
 #include "AudioManager.h"
 #include "AnimatedImageRenderer.h"
 #include "ScoreManager.h"
+#include "SuperKiller.h"
+#include <fstream>
+#include <ios>
 
 class EnemyPlane : public GameObject
 {
@@ -30,4 +33,5 @@ public:
 	virtual void Update(float dt) override;
 	virtual Object* Shoot(Vector2 position);
 	virtual void OnCollisionEnter(Object* other) override;
+	inline int GetHealth() { return health; }
 };

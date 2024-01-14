@@ -24,13 +24,16 @@
     <ClCompile Include="source\Bullet.cpp" />
     <ClCompile Include="source\Enemy.cpp" />
     <ClCompile Include="source\EnemyBullet.cpp" />
+    <ClCompile Include="source\EntryScene.cpp" />
     <ClCompile Include="source\GameplayScene.cpp" />
     <ClCompile Include="source\ImageRenderer.cpp" />
     <ClCompile Include="source\InputManager.cpp" />
+    <ClCompile Include="source\IWaveManager.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\MainMenu.cpp" />
     <ClCompile Include="source\Object.cpp" />
     <ClCompile Include="source\Player.cpp" />
+    <ClCompile Include="source\RankingMenu.cpp" />
     <ClCompile Include="source\Renderer.cpp" />
     <ClCompile Include="source\RenderManager.cpp" />
     <ClCompile Include="source\Scene.cpp" />
@@ -39,6 +42,7 @@
     <ClCompile Include="source\SupportPlane.cpp" />
     <ClCompile Include="source\TextRenderer.cpp" />
     <ClCompile Include="source\Wave.cpp" />
+    <ClCompile Include="source\WritePuntuation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LevelLoader.h" />
@@ -48,8 +52,11 @@
     <ClInclude Include="source\Background.h" />
     <ClInclude Include="source\BigGreenPlane.h" />
     <ClInclude Include="source\Bullet.h" />
+    <ClInclude Include="source\Button.h" />
     <ClInclude Include="source\Enemy.h" />
     <ClInclude Include="source\EnemyBullet.h" />
+    <ClInclude Include="source\EntryScene.h" />
+    <ClInclude Include="source\ExitButton.h" />
     <ClInclude Include="source\GameObject.h" />
     <ClInclude Include="source\GameplayScene.h" />
     <ClInclude Include="source\GrayPowerUp.h" />
@@ -57,11 +64,15 @@
     <ClInclude Include="source\ImageRenderer.h" />
     <ClInclude Include="source\InputManager.h" />
     <ClInclude Include="source\Lifes.h" />
+    <ClInclude Include="source\LoadSceneButton.h" />
     <ClInclude Include="source\MainMenu.h" />
     <ClInclude Include="source\MediumYellowPlane.h" />
+    <ClInclude Include="source\MuteButton.h" />
     <ClInclude Include="source\Object.h" />
     <ClInclude Include="source\Player.h" />
     <ClInclude Include="source\PowerUp.h" />
+    <ClInclude Include="source\Presentation.h" />
+    <ClInclude Include="source\RankingMenu.h" />
     <ClInclude Include="source\Renderer.h" />
     <ClInclude Include="source\RenderManager.h" />
     <ClInclude Include="source\Rigidbody.h" />
@@ -71,6 +82,8 @@
     <ClInclude Include="source\SmallNormalPlane.h" />
     <ClInclude Include="source\SmallRedPlane.h" />
     <ClInclude Include="source\Spawner.h" />
+    <ClInclude Include="source\Stage.h" />
+    <ClInclude Include="source\SuperKiller.h" />
     <ClInclude Include="source\SupportPlane.h" />
     <ClInclude Include="source\TextRenderer.h" />
     <ClInclude Include="source\TimeManager.h" />
@@ -78,7 +91,9 @@
     <ClInclude Include="source\UiText.h" />
     <ClInclude Include="source\Vector2.h" />
     <ClInclude Include="source\Wave.h" />
+    <ClInclude Include="source\IWaveManager.h" />
     <ClInclude Include="source\WhitePowerUp.h" />
+    <ClInclude Include="source\WritePuntuation.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

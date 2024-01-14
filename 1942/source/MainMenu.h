@@ -4,6 +4,10 @@
 #include "Enemy.h"
 #include "Player.h"
 #include "AudioManager.h"
+#include "LoadSceneButton.h"
+#include "MuteButton.h"
+#include "ExitButton.h"
+
 
 class MainMenu : public Scene
 {

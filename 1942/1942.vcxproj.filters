@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
@@ -22,6 +22,27 @@
     <Filter Include="Header Files\View">
       <UniqueIdentifier>{b4a8219b-dd09-4143-b3ec-c914e1b4f6aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Controller\Managers">
+      <UniqueIdentifier>{ae93b09c-6f9c-481c-9e4e-276741f01b91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Controller\Scenes">
+      <UniqueIdentifier>{1e34c7ea-9466-40df-93db-345632a378fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\View\Enemies">
+      <UniqueIdentifier>{4c61921f-543c-4061-8a37-2f682ebcc04e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\View\PowerUps">
+      <UniqueIdentifier>{cd8f5a1f-fdef-4a83-a5af-3e2bf7d474ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\View\Basics">
+      <UniqueIdentifier>{ddc50253-0f31-451b-8705-48a11f40c5f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\View\Player">
+      <UniqueIdentifier>{fa5efc12-0ace-4cbf-a0b5-3756b4730603}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\View\UI">
+      <UniqueIdentifier>{127e4a25-6488-4d1a-9bae-71043af706e7}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\Controller">
       <UniqueIdentifier>{e75a9ff2-b6b7-4ade-8b3a-930984b65b36}</UniqueIdentifier>
     </Filter>
@@ -31,91 +52,94 @@
     <Filter Include="Source Files\View">
       <UniqueIdentifier>{e181b2d3-6c24-4eed-b1b7-21186ae3e7f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Controller\Managers">
+      <UniqueIdentifier>{2f76f31f-0d6a-48e8-bfab-2947b776c0f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Controller\Scenes">
+      <UniqueIdentifier>{c9d772f8-563a-4fda-9820-7100e04bba45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\View\Basics">
+      <UniqueIdentifier>{bf8e66d3-f85e-4744-bd3b-a59a747d8746}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\View\Enemies">
+      <UniqueIdentifier>{3bd5cc5a-4870-41f2-9ca8-4300b80ef62a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\View\Player">
+      <UniqueIdentifier>{de7d34cc-5aac-461d-9d5a-31a001d15a80}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\AudioManager.cpp">
-      <Filter>Source Files\Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Bullet.cpp">
-      <Filter>Source Files\View</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Enemy.cpp">
-      <Filter>Source Files\View</Filter>
-    </ClCompile>
-    <ClCompile Include="source\GameplayScene.cpp">
-      <Filter>Source Files\Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="source\ImageRenderer.cpp">
-      <Filter>Source Files\View</Filter>
-    </ClCompile>
     <ClCompile Include="source\InputManager.cpp">
-      <Filter>Source Files\Controller</Filter>
+      <Filter>Source Files\Controller\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="source\MainMenu.cpp">
-      <Filter>Source Files\Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Object.cpp">
-      <Filter>Source Files\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Player.cpp">
-      <Filter>Source Files\View</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Renderer.cpp">
-      <Filter>Source Files\View</Filter>
+    <ClCompile Include="source\IWaveManager.cpp">
+      <Filter>Source Files\Controller\Managers</Filter>
     </ClCompile>
     <ClCompile Include="source\RenderManager.cpp">
-      <Filter>Source Files\View</Filter>
+      <Filter>Source Files\Controller\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="source\Scene.cpp">
+    <ClCompile Include="source\AudioManager.cpp">
+      <Filter>Source Files\Controller\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="source\GameplayScene.cpp">
+      <Filter>Source Files\Controller\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\MainMenu.cpp">
+      <Filter>Source Files\Controller\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\RankingMenu.cpp">
+      <Filter>Source Files\Controller\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Wave.cpp">
       <Filter>Source Files\Controller</Filter>
     </ClCompile>
     <ClCompile Include="source\Spawner.cpp">
       <Filter>Source Files\Controller</Filter>
     </ClCompile>
+    <ClCompile Include="source\Scene.cpp">
+      <Filter>Source Files\Controller\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Object.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ImageRenderer.cpp">
+      <Filter>Source Files\View\Basics</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Renderer.cpp">
+      <Filter>Source Files\View\Basics</Filter>
+    </ClCompile>
     <ClCompile Include="source\TextRenderer.cpp">
-      <Filter>Source Files\View</Filter>
+      <Filter>Source Files\View\Basics</Filter>
     </ClCompile>
-    <ClCompile Include="source\SmallNormalPlane.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\BigGreenPlane.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="source\Enemy.cpp">
+      <Filter>Source Files\View\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="source\EnemyBullet.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\View\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SmallNormalPlane.cpp">
+      <Filter>Source Files\View\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="source\BigGreenPlane.cpp">
+      <Filter>Source Files\View\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Player.cpp">
+      <Filter>Source Files\View\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Bullet.cpp">
+      <Filter>Source Files\View\Player</Filter>
     </ClCompile>
     <ClCompile Include="source\SupportPlane.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\View\Player</Filter>
     </ClCompile>
-    <ClCompile Include="source\Wave.cpp">
+    <ClCompile Include="source\EntryScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\SceneManager.h">
-      <Filter>Header Files\Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="source\TimeManager.h">
-      <Filter>Header Files\Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="source\RenderManager.h">
-      <Filter>Header Files\Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="source\InputManager.h">
-      <Filter>Header Files\Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="source\AudioManager.h">
-      <Filter>Header Files\Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="source\GameplayScene.h">
-      <Filter>Header Files\Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Scene.h">
-      <Filter>Header Files\Controller</Filter>
-    </ClInclude>
     <ClInclude Include="source\Spawner.h">
       <Filter>Header Files\Controller</Filter>
     </ClInclude>
@@ -124,30 +148,6 @@
     </ClInclude>
     <ClInclude Include="source\Object.h">
       <Filter>Header Files\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Bullet.h">
-      <Filter>Header Files\View</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Enemy.h">
-      <Filter>Header Files\View</Filter>
-    </ClInclude>
-    <ClInclude Include="source\ImageRenderer.h">
-      <Filter>Header Files\View</Filter>
-    </ClInclude>
-    <ClInclude Include="source\AnimatedImageRenderer.h">
-      <Filter>Header Files\View</Filter>
-    </ClInclude>
-    <ClInclude Include="source\MainMenu.h">
-      <Filter>Header Files\Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Renderer.h">
-      <Filter>Header Files\View</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Player.h">
-      <Filter>Header Files\View</Filter>
-    </ClInclude>
-    <ClInclude Include="source\TextRenderer.h">
-      <Filter>Header Files\View</Filter>
     </ClInclude>
     <ClInclude Include="source\Rigidbody.h">
       <Filter>Header Files\Model</Filter>
@@ -164,50 +164,113 @@
     <ClInclude Include="source\Background.h">
       <Filter>Header Files\View</Filter>
     </ClInclude>
-    <ClInclude Include="source\PowerUp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\GrayPowerUp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\WhitePowerUp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\GreenPowerUp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\SupportPlane.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\SmallNormalPlane.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\SmallRedPlane.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\MediumYellowPlane.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\BigGreenPlane.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="LevelLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\EnemyBullet.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Controller</Filter>
     </ClInclude>
     <ClInclude Include="source\Wave.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AudioManager.h">
+      <Filter>Header Files\Controller\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="source\InputManager.h">
+      <Filter>Header Files\Controller\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="source\IWaveManager.h">
+      <Filter>Header Files\Controller\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="source\RenderManager.h">
+      <Filter>Header Files\Controller\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SceneManager.h">
+      <Filter>Header Files\Controller\Managers</Filter>
     </ClInclude>
     <ClInclude Include="source\ScoreManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Controller\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="source\UiText.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="source\TimeManager.h">
+      <Filter>Header Files\Controller\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="source\GameplayScene.h">
+      <Filter>Header Files\Controller\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\MainMenu.h">
+      <Filter>Header Files\Controller\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\RankingMenu.h">
+      <Filter>Header Files\Controller\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Scene.h">
+      <Filter>Header Files\Controller\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\BigGreenPlane.h">
+      <Filter>Header Files\View\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Enemy.h">
+      <Filter>Header Files\View\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="source\EnemyBullet.h">
+      <Filter>Header Files\View\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="source\MediumYellowPlane.h">
+      <Filter>Header Files\View\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SmallNormalPlane.h">
+      <Filter>Header Files\View\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SmallRedPlane.h">
+      <Filter>Header Files\View\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="source\GrayPowerUp.h">
+      <Filter>Header Files\View\PowerUps</Filter>
+    </ClInclude>
+    <ClInclude Include="source\GreenPowerUp.h">
+      <Filter>Header Files\View\PowerUps</Filter>
+    </ClInclude>
+    <ClInclude Include="source\PowerUp.h">
+      <Filter>Header Files\View\PowerUps</Filter>
+    </ClInclude>
+    <ClInclude Include="source\WhitePowerUp.h">
+      <Filter>Header Files\View\PowerUps</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ImageRenderer.h">
+      <Filter>Header Files\View\Basics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AnimatedImageRenderer.h">
+      <Filter>Header Files\View\Basics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Renderer.h">
+      <Filter>Header Files\View\Basics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\TextRenderer.h">
+      <Filter>Header Files\View\Basics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Player.h">
+      <Filter>Header Files\View\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SupportPlane.h">
+      <Filter>Header Files\View\Player</Filter>
     </ClInclude>
     <ClInclude Include="source\Lifes.h">
-      <Filter>Header Files\View</Filter>
+      <Filter>Header Files\View\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Bullet.h">
+      <Filter>Header Files\View\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="source\UiText.h">
+      <Filter>Header Files\View\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Button.h">
+      <Filter>Header Files\View\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Stage.h">
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="source\EntryScene.h">
+      <Filter>Header Files\Controller\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Presentation.h">
+      <Filter>Header Files\View\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

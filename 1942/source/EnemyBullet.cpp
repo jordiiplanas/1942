@@ -12,8 +12,10 @@ EnemyBullet::EnemyBullet(float speed, Vector2 size, Vector2 direction)
 
 void EnemyBullet::Update(float deltaTime)
 {
-	if (transform->position.y >= 500 || transform->position.y <= 0
-		|| transform->position.x > 500 || transform->position.x < 0)
+	if (transform->position.x > RENDERMANAGER.GetWindowSize().x + transform->size.x
+		|| transform->position.x < -transform->size.x
+		|| transform->position.y > RENDERMANAGER.GetWindowSize().y + transform->size.y
+		|| transform->position.y < -transform->size.y)
 	{
 		Destroy();
 		return;

@@ -12,6 +12,9 @@
 #include "AABB.h"
 #include "MainMenu.h"
 #include "GameplayScene.h"
+#include "RankingMenu.h"
+#include "EntryScene.h"
+#include "WritePuntuation.h"
 
 int main(int argc, char* argv[])
 {
@@ -20,14 +23,16 @@ int main(int argc, char* argv[])
 
 	SCENEMANAGER.AddScene("MainMenu", new MainMenu());
 	SCENEMANAGER.AddScene("Gameplay", new GameplayScene());
-	SCENEMANAGER.SetCurrentScene("MainMenu");
+	SCENEMANAGER.AddScene("Ranking", new RankingMenu());
+	SCENEMANAGER.AddScene("EntryScene", new EntryScene());
+	SCENEMANAGER.AddScene("WritePuntuation", new WritePuntuation());
+	SCENEMANAGER.SetCurrentScene("EntryScene");
 	SCENEMANAGER.GetCurrentScene()->OnEnter();
 
 	
 	while (!inputManager.GetQuitEvent())
 	{
 		TIME.Update();
-
 		if (TIME.ShouldUpdateGame())
 		{
 			inputManager.Listen();
