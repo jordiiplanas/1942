@@ -7,8 +7,11 @@ WritePuntuation::WritePuntuation()
 
 void WritePuntuation::OnEnter()
 {
+    ui.push_back(new UiText(" ", Vector2(250, 100)));
+    dynamic_cast<UiText*>(ui[0])->textRend->SetText(std::to_string(SCOREMANAGER.GetScore()), 20, {255,255,255});
+
     ui.push_back(new UiText(" ", Vector2(250, 160)));
-    dynamic_cast<UiText*>(ui[0])->textRend->SetText("Whats your username: ", 20, { 255,255,255 });
+    dynamic_cast<UiText*>(ui[1])->textRend->SetText("Whats your username: ", 20, { 255,255,255 });
     inputManager.canText = true;
 
 }
@@ -27,7 +30,7 @@ void WritePuntuation::Update(float dt)
         {
             inputManager.ReturnChar();
         }
-      dynamic_cast<UiText*>(ui[1])->textRend->SetText(inputManager.TextInputFunction(), 20, { 255,255,255 });
+      dynamic_cast<UiText*>(ui[2])->textRend->SetText(inputManager.TextInputFunction(), 20, { 255,255,255 });
       if (inputManager.CheckKeyState(SDLK_UP, PRESSED))
       {
           isFinished = true;

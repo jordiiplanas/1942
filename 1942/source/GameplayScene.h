@@ -17,6 +17,7 @@
 class GameplayScene : public Scene, public IWaveManager
 {
 private:
+	bool isPaused;
 	std::vector<Stage*> stages;
 	Stage* currentStage;
 	bool isEnded = false;

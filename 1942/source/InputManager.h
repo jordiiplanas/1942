@@ -21,6 +21,7 @@ private:
   bool quitEvent;
   int mouseX;
   int mouseY;
+  int puntuation;
   InputManager() : quitEvent(false), mouseX(0), mouseY(0) {};
   InputManager(const InputManager&) = delete;
   InputManager& operator =(const InputManager&) = delete;
@@ -43,6 +44,13 @@ public:
   inline int GetMouseX() { return mouseX; }
   inline int GetMouseY() { return mouseY; }
   inline void SetQuitEvent(bool value) { quitEvent = value; }
+  void SavePuntuation(int points) {
+      puntuation = points;
+  }
+  int GetPuntuation()
+  {
+      return puntuation;
+  }
   void ReturnChar()
   {
       textInput.pop_back();

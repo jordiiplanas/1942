@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
 	SCENEMANAGER.AddScene("Ranking", new RankingMenu());
 	SCENEMANAGER.AddScene("EntryScene", new EntryScene());
 	SCENEMANAGER.AddScene("WritePuntuation", new WritePuntuation());
-	SCENEMANAGER.SetCurrentScene("WritePuntuation");
+	SCENEMANAGER.SetCurrentScene("EntryScene");
 	SCENEMANAGER.GetCurrentScene()->OnEnter();
 
 	
