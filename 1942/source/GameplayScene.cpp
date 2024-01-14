@@ -2,7 +2,8 @@
 
 void GameplayScene::OnEnter()
 {
-    isPaused = false;
+    if (hasAlreadyStarted) return;
+    hasAlreadyStarted = true;
     nextScene = "MainMenu";
 
     player = new Player(Vector2(250, 350));

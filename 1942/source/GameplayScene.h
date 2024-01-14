@@ -33,6 +33,9 @@ private:
 	int lives;
 	ScoreManager* score;
 
+	bool hasAlreadyStarted = false;
+	bool isPaused = false;
+
 	int spawnedEnemies = 0;
 	int killedEnemies = 0;
 public:
