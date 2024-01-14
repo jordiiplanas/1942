@@ -11,6 +11,16 @@ Wave::Wave(WaveType type, float startTime, int numEnemies, Transform* transform)
 void Wave::Update(float deltaTime)
 {
 	if (isFinished) return;
+	
+	if (type == WaveType::SMALLRED)
+	{
+		/*if (SPAWNER.GetObjects().size() == 0)
+		{
+			isFinished = true;
+			return;
+		}*/
+	}
+
 	if (spawnedEnemies >= numEnemies)
 	{
 		isFinished = true;

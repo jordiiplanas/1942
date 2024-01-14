@@ -4,6 +4,7 @@
 class Background : public GameObject
 {
 public:
+	bool toEnd = false;
 	Background(Vector2 size, float speed)
 		: GameObject(size) {
 		renderers.emplace("idle", new ImageRenderer(transform, Vector2(640, 0), Vector2(192, 192)));
@@ -34,6 +35,10 @@ public:
 				{
 					renderer = renderers["island2"];
 				}
+			}
+			if (toEnd)
+			{
+				renderer = renderers["final"];
 			}
 		}
 	}
