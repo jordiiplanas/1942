@@ -13,6 +13,7 @@
 #include "MainMenu.h"
 #include "GameplayScene.h"
 #include "RankingMenu.h"
+#include "EntryScene.h"
 
 int main(int argc, char* argv[])
 {
@@ -22,7 +23,8 @@ int main(int argc, char* argv[])
 	SCENEMANAGER.AddScene("MainMenu", new MainMenu());
 	SCENEMANAGER.AddScene("Gameplay", new GameplayScene());
 	SCENEMANAGER.AddScene("Ranking", new RankingMenu());
-	SCENEMANAGER.SetCurrentScene("MainMenu");
+	SCENEMANAGER.AddScene("EntryScene", new EntryScene());
+	SCENEMANAGER.SetCurrentScene("EntryScene");
 	SCENEMANAGER.GetCurrentScene()->OnEnter();
 
 	

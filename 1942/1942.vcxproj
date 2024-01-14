@@ -24,6 +24,7 @@
     <ClCompile Include="source\Bullet.cpp" />
     <ClCompile Include="source\Enemy.cpp" />
     <ClCompile Include="source\EnemyBullet.cpp" />
+    <ClCompile Include="source\EntryScene.cpp" />
     <ClCompile Include="source\GameplayScene.cpp" />
     <ClCompile Include="source\ImageRenderer.cpp" />
     <ClCompile Include="source\InputManager.cpp" />
@@ -53,6 +54,7 @@
     <ClInclude Include="source\Button.h" />
     <ClInclude Include="source\Enemy.h" />
     <ClInclude Include="source\EnemyBullet.h" />
+    <ClInclude Include="source\EntryScene.h" />
     <ClInclude Include="source\GameObject.h" />
     <ClInclude Include="source\GameplayScene.h" />
     <ClInclude Include="source\GrayPowerUp.h" />
@@ -65,6 +67,7 @@
     <ClInclude Include="source\Object.h" />
     <ClInclude Include="source\Player.h" />
     <ClInclude Include="source\PowerUp.h" />
+    <ClInclude Include="source\Presentation.h" />
     <ClInclude Include="source\RankingMenu.h" />
     <ClInclude Include="source\Renderer.h" />
     <ClInclude Include="source\RenderManager.h" />
