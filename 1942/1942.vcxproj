@@ -83,6 +83,7 @@
     <ClInclude Include="source\SmallRedPlane.h" />
     <ClInclude Include="source\Spawner.h" />
     <ClInclude Include="source\Stage.h" />
+    <ClInclude Include="source\SuperKiller.h" />
     <ClInclude Include="source\SupportPlane.h" />
     <ClInclude Include="source\TextRenderer.h" />
     <ClInclude Include="source\TimeManager.h" />

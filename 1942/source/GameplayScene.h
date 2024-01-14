@@ -19,6 +19,7 @@ class GameplayScene : public Scene, public IWaveManager
 private:
 	std::vector<Stage*> stages;
 	Stage* currentStage;
+	int currentStageIndex;
 	bool isEnded = false;
 	std::vector<GameObject*> background;
 	std::vector<UiText*> deadUi;
@@ -32,7 +33,6 @@ private:
 	int lives;
 	ScoreManager* score;
 
-	bool hasAlreadyStarted = false;
 	bool isPaused = false;
 
 	int spawnedEnemies = 0;
@@ -45,5 +45,9 @@ public:
 	void Update(float dt) override;
 	void Render() override;
 	void EndStage();
+
+	void Reset();
+
+	void NextStage();
 	
 };

@@ -14,8 +14,8 @@ void EnemyPlane::Update(float dt)
 	}
 	if (transform->position.x > RENDERMANAGER.GetWindowSize().x + transform->size.x
 		|| transform->position.x < -transform->size.x
-		|| transform->position.y > RENDERMANAGER.GetWindowSize().y + transform->size.y
-		|| transform->position.y < -transform->size.y)
+		|| transform->position.y > RENDERMANAGER.GetWindowSize().y + transform->size.y*5
+		|| transform->position.y < -transform->size.y - 200)
 	{
 		Destroy();
 		return;
@@ -37,7 +37,11 @@ Object* EnemyPlane::Shoot(Vector2 position)
 
 void EnemyPlane::OnCollisionEnter(Object* other)
 {
-
+	if (dynamic_cast<SuperKiller*>(other))
+	{
+		health = 0;
+		other->Destroy();
+	}
 	if (dynamic_cast<Bullet*>(other))
 	{
 		health--;

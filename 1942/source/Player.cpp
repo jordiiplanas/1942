@@ -101,15 +101,6 @@ void Player::Update(float deltaTime)
         }
     }
 
-	/*if (isDying)
-	{
-		timeToDie -= deltaTime;
-		if (timeToDie <= 0)
-		{
-			isPendingDestroy = true;
-		}
-	}*/
-
     ApplyInput(deltaTime);
 
     ChangeAnimation(currentAnimation);
@@ -162,6 +153,7 @@ void Player::ApplyInput(float deltaTime)
             Shoot();
         }
     }
+
     inputForce.Normalize();
     inputForce = inputForce * 50;
     GetRigidbody()->AddForce(inputForce);
@@ -182,6 +174,25 @@ void Player::RollTimer(float deltaTime)
             timeRolling = 0;
         }
         currentAnimation = "roll";
+    }
+}
+
+void Player::ShowStatsUI()
+{
+    for (int i = 0; i < lives; i++)
+    {
+        if (i == 0)
+        {
+            Object* a = new Lifes(Vector2(70, 475));
+            LifesUi.push(a);
+            SPAWNER.InsertObject(LifesUi.top());
+        }
+        else
+        {
+            Object* b = new Lifes(Vector2(LifesUi.top()->GetPosition() + Vector2(20, 0)));
+            LifesUi.push(b);
+            SPAWNER.InsertObject(LifesUi.top());
+        }
     }
 }
 
@@ -231,7 +242,7 @@ void Player::OnCollisionEnter(Object* other)
         SCOREMANAGER.AddScore(100);
         if (dynamic_cast<WhitePowerUp*>(other))
         {
-            //KBOOM
+            SPAWNER.InsertObject(new SuperKiller(0.2f));
         }
         else if (dynamic_cast<GreenPowerUp*>(other))
         {

@@ -21,6 +21,7 @@ public:
 		static Spawner spawner;
 		return spawner;
 	}
+	void CleanList();
 	void InsertObject(Object* object);
 	bool CanSpawn() { return canSpawn; }
 	Object* SpawnObject();

@@ -10,6 +10,7 @@
 #include "WhitePowerUp.h"
 #include "GrayPowerUp.h"
 #include "GreenPowerUp.h"
+#include "SuperKiller.h"
 
 class Player : public GameObject
 {
@@ -68,21 +69,8 @@ public:
 			Vector2(0,0), Vector2(32,0), Vector2(64,0), Vector2(96,0), Vector2(128,0), Vector2(160,0), Vector2(192,0), Vector2(224,0), Vector2(-3, 26), Vector2(29,26)
 			
 		};
-		for (int i = 0; i < lives; i++)
-		{
-			if (i == 0)
-			{
-				Object* a = new Lifes(Vector2(70, 475));
-				LifesUi.push(a);
-				SPAWNER.InsertObject(LifesUi.top());
-			}
-			else
-			{
-				Object* b = new Lifes(Vector2(LifesUi.top()->GetPosition() + Vector2(20, 0)));
-				LifesUi.push(b);
-				SPAWNER.InsertObject(LifesUi.top());
-			}				
-		}
+		
+		ShowStatsUI();
 
 		for (int i = 0; i < rolls; i++)
 		{
@@ -126,4 +114,5 @@ public:
 	void DieTimer(float deltaTime);
 	void ApplyInput(float deltaTime);
 	void RollTimer(float deltaTime);
+	void ShowStatsUI();
 };

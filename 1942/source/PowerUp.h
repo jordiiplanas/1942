@@ -16,6 +16,7 @@ public:
 		if (transform->position.y > 520)
 		{
 			Destroy();
+			return;
 		}
 		Object::Update(dt);
 

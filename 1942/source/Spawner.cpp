@@ -6,6 +6,16 @@ void Spawner::InsertObject(Object* object)
 	canSpawn = true;
 }
 
+void Spawner::CleanList()
+{
+	while (!objectsToSpawn.empty())
+	{
+		objectsToSpawn.pop();
+	}
+	canSpawn = false;
+
+}
+
 Object* Spawner::SpawnObject()
 {
 	if (canSpawn)
