@@ -2,6 +2,8 @@
 
 void GameplayScene::OnEnter()
 {
+    if (hasAlreadyStarted) return;
+    hasAlreadyStarted = true;
     nextScene = "MainMenu";
     
     player = new Player(Vector2(250, 350));
@@ -33,6 +35,8 @@ void GameplayScene::OnEnter()
 
 void GameplayScene::Update(float dt)
 {
+    if (inputManager.CheckKeyState(SDLK_ESCAPE, PRESSED)) isPaused = !isPaused;
+    if (isPaused) return;
     bool mousePressed = false;
     if (mousePressed)
     {
@@ -56,7 +60,6 @@ void GameplayScene::Update(float dt)
         }
     }
     //TODO : Pause
-	isFinished = inputManager.CheckKeyState(SDLK_ESCAPE, PRESSED);
 
     // UPDATE Background
 
