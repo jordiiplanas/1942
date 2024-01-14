@@ -53,7 +53,7 @@ void Wave::SpawnEnemy()
 	{
 	case WaveType::NORMAL:
 		enemy = new SmallNormalPlane(STRAIGHT, playerTransform, true);
-		enemy->SetPosition(Vector2(rand() % (450 - 50 + 1) + 50, -20));
+		enemy->SetPosition(Vector2(rand() % (450 - 50 + 1) + 50, 0));
 		break;
 	case WaveType::SMALLRED:
 		if (initialPosition.x > 256 && initialPosition.y > 256)

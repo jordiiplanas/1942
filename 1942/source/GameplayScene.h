@@ -30,7 +30,6 @@ private:
 	int lives;
 	ScoreManager* score;
 
-	bool hasAlreadyStarted = false;
 	bool isPaused = false;
 
 	int spawnedEnemies = 0;

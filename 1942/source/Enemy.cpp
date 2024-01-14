@@ -14,8 +14,8 @@ void EnemyPlane::Update(float dt)
 	}
 	if (transform->position.x > RENDERMANAGER.GetWindowSize().x + transform->size.x
 		|| transform->position.x < -transform->size.x
-		|| transform->position.y > RENDERMANAGER.GetWindowSize().y + transform->size.y
-		|| transform->position.y < -transform->size.y)
+		|| transform->position.y > RENDERMANAGER.GetWindowSize().y + transform->size.y*5
+		|| transform->position.y < -transform->size.y - 200)
 	{
 		Destroy();
 		return;
