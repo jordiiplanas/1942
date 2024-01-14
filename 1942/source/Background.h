@@ -5,6 +5,7 @@ class Background : public GameObject
 {
 public:
 	bool toEnd = false;
+	bool hasChangedToEnd = false;
 	Background(Vector2 size, float speed)
 		: GameObject(size) {
 		renderers.emplace("idle", new ImageRenderer(transform, Vector2(640, 0), Vector2(192, 192)));
@@ -39,6 +40,7 @@ public:
 			if (toEnd)
 			{
 				renderer = renderers["final"];
+				hasChangedToEnd = true;
 			}
 		}
 	}

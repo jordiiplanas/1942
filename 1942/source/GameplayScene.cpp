@@ -24,6 +24,7 @@ void GameplayScene::OnEnter()
     Transform* transform = player->GetTransform();
     stages = GetStagesFromFile("stage-", "-waves.xml", transform);
     if (stages.size() > 0) currentStage = stages[0];
+    currentStageIndex = 0;
 
     // UI
     scoreUi = new UiText("SCORE: 0", Vector2(60, 30));
@@ -34,31 +35,9 @@ void GameplayScene::OnEnter()
 
 void GameplayScene::Update(float dt)
 {
+
     if (inputManager.CheckKeyState(SDLK_ESCAPE, PRESSED)) isPaused = !isPaused;
     if (isPaused) return;
-    bool mousePressed = false;
-    if (mousePressed)
-    {
-        std::cout << "Casa Casita" << std::endl;
-    }
-    // INPUTS
-    while (SDL_PollEvent(&event))
-    {
-        if (SDL_MOUSEBUTTONDOWN == event.type)
-        {
-            if (SDL_BUTTON_LEFT == event.button.button)
-            {
-                mousePressed = true;
-                std::cout << "Casa Casita" << std::endl;
-            }
-        }
-        if (event.type == SDL_MOUSEMOTION)
-        {
-            std::cout << "Casa Casita" << std::endl;
-
-        }
-    }
-    //TODO : Pause
 
     // UPDATE Background
 
@@ -72,6 +51,18 @@ void GameplayScene::Update(float dt)
     if (isEnded)
     {
         player->Update(dt);
+        for (auto back : background)
+        {
+            if (dynamic_cast<Background*>(back)->hasChangedToEnd)
+            {
+                if (back->GetPosition().y >= 0)
+                {
+                    //END
+                    NextStage();
+                }
+            }
+        }
+       
         return;
     }
 
@@ -168,6 +159,40 @@ void GameplayScene::EndStage()
 	{
         dynamic_cast<Background*>(background[0])->toEnd = true;
 	}
-    // Player animation to center
+}
 
+void GameplayScene::Reset()
+{
+    for (Object* o : objects)
+	{
+        if (dynamic_cast<Player*>(o)) continue;
+		o->Destroy();
+	}
+	objects.clear();
+    objects.push_back(player);
+	isEnded = false;
+    SPAWNER.CleanList();
+	background[0]->SetPosition(Vector2(0, -512));
+	background[1]->SetPosition(Vector2(0, 0));
+	dynamic_cast<Background*>(background[0])->hasChangedToEnd=false;
+    dynamic_cast<Background*>(background[0])->toEnd=false;
+    dynamic_cast<Background*>(background[1])->hasChangedToEnd=false;
+    dynamic_cast<Background*>(background[1])->toEnd = false;
+    player->ShowStatsUI();
+    background[0]->ChangeAnimation("idle");
+	background[1]->ChangeAnimation("initial");
+
+}
+
+void GameplayScene::NextStage()
+{
+    if (stages.size() > ++currentStageIndex)
+	{
+		currentStage = stages[currentStageIndex];
+        Reset();
+	}
+	else
+	{
+		// SCORE SCENE
+	}
 }

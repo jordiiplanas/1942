@@ -6,6 +6,7 @@ Wave::Wave(WaveType type, float startTime, int numEnemies, Transform* transform)
 	this->startTime = startTime;
 	this->numEnemies = numEnemies;
 	this->playerTransform = transform;
+	RandomizeInitialPosition();
 }
 
 void Wave::Update(float deltaTime)
@@ -110,4 +111,33 @@ void Wave::Reset()
 	spawnedEnemies = 0;
 	timePassed = 0;
 	isFinished = false;
+}
+
+void Wave::RandomizeInitialPosition()
+{
+	switch (type)
+	{
+		case WaveType::NORMAL:
+			initialPosition = Vector2(rand() % (450 - 50 + 1) + 50, 0);
+			break;
+		case WaveType::SMALLRED:
+			if (rand() % 2 == 1)
+			{
+				initialPosition = Vector2(0, rand() % (450 - 50 + 1) + 50);
+			}
+			else
+			{
+				initialPosition = Vector2(512, rand() % (450 - 50 + 1) + 50);
+			}
+			break;
+		case WaveType::MEDIUMYELLOW:
+			initialPosition = Vector2(rand() % (450 - 50 + 1) + 50, 0);
+			break;
+		case WaveType::NORMAL_V:
+			initialPosition = Vector2(rand() % (450 - 50 + 1) + 50, 0);
+			break;
+		case WaveType::NORMAL_CURVE:
+			initialPosition = Vector2(rand() % (450 - 50 + 1) + 50, 0);
+			break;
+	}
 }

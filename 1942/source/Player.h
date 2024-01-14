@@ -68,21 +68,8 @@ public:
 			Vector2(0,32), Vector2(32,32), Vector2(64,32), Vector2(96,32), Vector2(128,32), Vector2(160,32), Vector2(192,32), Vector2(224,32)
 			, Vector2(0,64), Vector2(32,64)
 		};
-		for (int i = 0; i < lives; i++)
-		{
-			if (i == 0)
-			{
-				Object* a = new Lifes(Vector2(70, 475));
-				LifesUi.push(a);
-				SPAWNER.InsertObject(LifesUi.top());
-			}
-			else
-			{
-				Object* b = new Lifes(Vector2(LifesUi.top()->GetPosition() + Vector2(20, 0)));
-				LifesUi.push(b);
-				SPAWNER.InsertObject(LifesUi.top());
-			}				
-		}
+		
+		ShowStatsUI();
 
 		for (int i = 0; i < rolls; i++)
 		{
@@ -126,4 +113,5 @@ public:
 	void DieTimer(float deltaTime);
 	void ApplyInput(float deltaTime);
 	void RollTimer(float deltaTime);
+	void ShowStatsUI();
 };

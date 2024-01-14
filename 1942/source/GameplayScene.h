@@ -19,6 +19,7 @@ class GameplayScene : public Scene, public IWaveManager
 private:
 	std::vector<Stage*> stages;
 	Stage* currentStage;
+	int currentStageIndex;
 	bool isEnded = false;
 	std::vector<GameObject*> background;
 	int levelWaves;
@@ -42,5 +43,9 @@ public:
 	void Update(float dt) override;
 	void Render() override;
 	void EndStage();
+
+	void Reset();
+
+	void NextStage();
 	
 };

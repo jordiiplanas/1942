@@ -49,6 +49,6 @@ public:
 	void Reset();
 	bool IsFinished() { return isFinished; }
 	float GetStartTime() { return startTime; }
-
+	void RandomizeInitialPosition();
 
 };
