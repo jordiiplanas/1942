@@ -9,6 +9,7 @@ class Button : public GameObject
 protected: 
 public:
 	UiText* text;
+
 	bool mouseIn;
 	bool pressed;
 	std::string nextScene;
@@ -30,6 +31,10 @@ public:
 		GameObject::Render();
 		text->Render();
 	}
+	void ChangeTextPosition(Vector2 position)
+	{
+		text->SetPosition(position);
+	}
 	void Update(float dt) override
 	{
 		GameObject::Update(dt);
@@ -47,8 +52,7 @@ public:
 
 		if (mouseIn && inputManager.mousePressed)
 		{
-			SCENEMANAGER.SetCurrentScene(nextScene);
-			SCENEMANAGER.GetCurrentScene()->OnEnter();
+			pressed = true;
 		}
 		text->Update(dt);		
 	}

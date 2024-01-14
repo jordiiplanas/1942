@@ -37,6 +37,16 @@ void MainMenu::Update(float dt)
     for (Object* o : ui)
     {
         o->Update(dt);
+        if (dynamic_cast<Button*>(o))
+        {
+            if (dynamic_cast<Button*>(o)->pressed)
+            {
+                isFinished = true;
+                nextScene = dynamic_cast<Button*>(o)->nextScene;
+                dynamic_cast<Button*>(o)->pressed = false;
+
+            }
+        }
     }
 
 }

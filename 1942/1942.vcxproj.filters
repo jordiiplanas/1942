@@ -135,6 +135,9 @@
     <ClCompile Include="source\SupportPlane.cpp">
       <Filter>Source Files\View\Player</Filter>
     </ClCompile>
+    <ClCompile Include="source\EntryScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Spawner.h">
@@ -262,6 +265,12 @@
     </ClInclude>
     <ClInclude Include="source\Stage.h">
       <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="source\EntryScene.h">
+      <Filter>Header Files\Controller\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Presentation.h">
+      <Filter>Header Files\View\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

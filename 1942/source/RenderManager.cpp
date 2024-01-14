@@ -58,9 +58,14 @@ void RenderManager::LoadGameTexture()
 {
 	SDL_Surface* surface = IMG_Load("resources/1942.png");
 	assert(surface);
+	SDL_Surface* surface2 = IMG_Load("resources/Dance.png");
+	assert(surface2);
+
 
 	gameTexture = SDL_CreateTextureFromSurface(renderer, surface);
 	assert(gameTexture);
+	presentationTexture = SDL_CreateTextureFromSurface(renderer, surface2);
+	assert(presentationTexture);
 
 	SDL_FreeSurface(surface);
 }
